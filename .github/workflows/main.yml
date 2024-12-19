@@ -19,10 +19,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Install node 17
+      - name: Install node 19
         uses: actions/setup-node@v4
         with:
-          node-version: 17.x
+          node-version: 19.x
       - name: Install NPM Dependencies
         run: npm i
       - name: Build Project
