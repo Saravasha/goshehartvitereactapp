@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with: 
+          fetch-depth: 2
       - name: Install node 19
         uses: actions/setup-node@v4
         with:
@@ -45,11 +47,12 @@ jobs:
           name: production-files
           path: ./dist
       - name: 📂 Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@master
         with:
           server: ${{ secrets.SERVER }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.ZIGISECRET }}
           # server-dir: ${{ secrets.DIRECTORY }}
           protocol: ${{ secrets.PROTOCOL }}
+          local-dir: dist/
           server-dir: ./public_html/
