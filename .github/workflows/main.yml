@@ -52,4 +52,4 @@ jobs:
           password: ${{ secrets.ZIGISECRET }}
           # server-dir: ${{ secrets.DIRECTORY }}
           protocol: ${{ secrets.PROTOCOL }}
-          server-dir: ./public_html/dist
+          server-dir: ./public_html/
