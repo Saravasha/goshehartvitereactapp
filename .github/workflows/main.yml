@@ -52,7 +52,7 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
     - name: 📂 Deploy to cPanel
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ${{ secrets.SERVER }}
         username: ${{ secrets.USERNAME }}
