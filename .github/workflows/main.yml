@@ -18,9 +18,9 @@ jobs:
     # Steps
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install node 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 16.x
       - name: Install NPM Dependencies
@@ -28,7 +28,7 @@ jobs:
       - name: Build Project
         run: npm run build
       - name: Upload artifact in order to deploy
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: production-files
           path: ./dist
@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: production-files
           path: ./dist
@@ -50,6 +50,6 @@ jobs:
           server: ${{ secrets.SERVER }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.ZIGISECRET }}
-          server-dir: ${{ secrets.DIRECTORY }}
+          # server-dir: ${{ secrets.DIRECTORY }}
           protocol: ${{ secrets.PROTOCOL }}
-          publish-dir: ./public_html/dist
+          server-dir: ./public_html/dist
