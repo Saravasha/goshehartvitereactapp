@@ -57,6 +57,6 @@ jobs:
         server: ${{ secrets.SERVER }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.ZIGISECRET }}
-        protocol: ${{ secrets.PROTOCOL }}
+ #       protocol: ${{ secrets.PROTOCOL }}
  #       local-dir: dist/
 #        server-dir: ${{ secrets.DIRECTORY }}
