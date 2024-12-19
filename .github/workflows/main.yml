@@ -50,4 +50,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.ZIGISECRET }}
           local-dir: dist/
-          server-dir: public_html/
+          server-dir: ${{ secrets.DIRECTORY }}
