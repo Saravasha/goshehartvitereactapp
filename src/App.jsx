@@ -25,6 +25,7 @@ function App() {
           <strong>Views: </strong>
           <strong>Downloads: </strong>
           <strong>Likes: </strong>
+          <strong>BINGO</strong>
           </li>
         </ul>
       </div>
