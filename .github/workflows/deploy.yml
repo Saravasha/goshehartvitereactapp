@@ -20,7 +20,7 @@ jobs:
           ref: main
           token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
       - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@v2
+        uses: chrnorm/deployment-action@main
         id: deployment
         with:
           token: '${{ github.token }}'
@@ -47,7 +47,7 @@ jobs:
             pm2 restart chatg --update-env
       - name: Update deployment Status (success)
         if: success()
-        uses: chrnorm/deployment-status@v2
+        uses: chrnorm/deployment-status@main
         with:
           token: '${{ github.token }}'
           environment-url: ${{ vars.MY_APP }}
@@ -56,7 +56,7 @@ jobs:
       
       - name: Update deployment status (failure)
         if: failure()
-        uses: chrnorm/deployment-status@v2
+        uses: chrnorm/deployment-status@main
         with:
           token: '${{ github.token }}'
           environment-url: ${{ vars.MY_APP }}
