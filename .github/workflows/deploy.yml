@@ -12,6 +12,9 @@ jobs:
     name: Deploy project with Nginx
     runs-on: ubuntu-latest
     steps:
+      #  npm --help
+      #  ls -a  
+      #  mkdir /var/www/html/zigiplz
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
         with:
@@ -30,7 +33,3 @@ jobs:
             npm run build
             cp -r dist/* /var/www/html
             echo "zigi plz"
-          comment: > 
-            npm --help
-            ls -a  
-            mkdir /var/www/html/zigiplz
