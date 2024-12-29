@@ -31,5 +31,5 @@ jobs:
             npm install
             npm run build
             cp -r dist/* /var/www/html
-            mkdir /var/www/html zigiplz
+            mkdir /var/www/html/zigiplz
             echo "zigi plz"
