@@ -26,13 +26,6 @@ jobs:
       
     - name: Build NPM Assets 
       run: npm run build
-
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
       
     - name: Deploy using SSH
       uses: appleboy/ssh-action@v1.2.0
@@ -46,6 +39,7 @@ jobs:
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
           cd /home/react-app/goshehartvitereactapp/
+          ls -al
           ls -al ~/.ssh
           git pull origin main
           git status
