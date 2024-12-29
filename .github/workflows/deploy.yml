@@ -13,28 +13,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Checkout Code
-      uses: actions/checkout@v3
-      #  npm --help
-      #  ls -a  
-      #  mkdir /var/www/html/zigiplz
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
+        
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
     - name: Install NPM Dependencies
       run: npm install
+      
     - name: Build NPM Assets 
       run: npm run build
+      
     - name: Deploy using SSH
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v1.2.0
       with:
         host: ${{ secrets.HOST }}
         username:  ${{ secrets.USERNAME }}
         key:  ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
         passphrase: ${{ secrets.PASSPHRASE }}
-        port: 22
         script: | 
           cd /home/react-app/goshehartvitereactapp/
           export NVM_DIR=~/.nvm
