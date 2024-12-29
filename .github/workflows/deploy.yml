@@ -23,13 +23,14 @@ jobs:
           script: | 
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            npm --help
             cd /home/react-app/goshehartvitereactapp/
-            ls -a
             git pull origin main
             git status
             npm install
             npm run build
             cp -r dist/* /var/www/html
-            mkdir /var/www/html/zigiplz
             echo "zigi plz"
+          comment: > 
+            npm --help
+            ls -a  
+            mkdir /var/www/html/zigiplz
