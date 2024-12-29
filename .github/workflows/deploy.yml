@@ -22,6 +22,7 @@ jobs:
           port: 22
           script: | 
             cd /home/react-app/goshehartvitereactapp/
+            ls -a
             git pull origin main
             git status
             npm install
