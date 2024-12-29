@@ -36,6 +36,7 @@ jobs:
         port: ${{ secrets.PORT }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: | 
+          gh auth status
           ls -al ~/.ssh
           ssh -T git@github.com
           cd /home/react-app/goshehartvitereactapp/
