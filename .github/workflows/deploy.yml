@@ -36,12 +36,10 @@ jobs:
         port: ${{ secrets.PORT }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: | 
-          gh auth status
-          ls -al ~/.ssh
-          ssh -T git@github.com
-          cd /home/react-app/goshehartvitereactapp/
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
+          cd /home/react-app/goshehartvitereactapp/
+          ls -al ~/.ssh
           git pull origin main
           git status
           cp -r dist/* /var/www/html
