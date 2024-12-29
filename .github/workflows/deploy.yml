@@ -1,56 +1,21 @@
-# Triggers
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-    - Stage
+#Sample CD file
+name: Deploy to server or Storage Box
+on: push
 jobs:
-  build:
-    name: Deploy project with Nginx
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-        
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Set up SSH key
+        run: |
+          env
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p 22 -t id_rsa ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-    - name: Install NPM Dependencies
-      run: npm install
-      
-    - name: Build NPM Assets 
-      run: npm run build
-
-    - name: Setup SSH for the runner
-      run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_rsa.pub
-        chmod 600 ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa.pub
-        ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-  
-    - name: Deploy using SSH
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.HOST }}
-        username:  ${{ secrets.USERNAME }}
-        key:  ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.PORT }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        script: | 
-          export NVM_DIR=~/.nvm
-          source ~/.nvm/nvm.sh
-          cd /home/react-app/goshehartvitereactapp/
-          ls -al
-          ls -al ~/.ssh
-          git pull origin main
-          git status
-          cp -r dist/* /var/www/html
-          echo "zigi plz"
+      - name: Deploy to server or Storage Box
+        run: |
+          rsync -azP -e "ssh -i $HOME/.ssh/id_rsa -p 22" ./dist ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/var/www/html/
