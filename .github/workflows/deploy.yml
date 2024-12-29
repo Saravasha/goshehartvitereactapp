@@ -18,7 +18,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username:  ${{ secrets.USERNAME }}
           key:  ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+     #     passphrase: ${{ secrets.PASSPHRASE }}
           port: 22
           script: | 
             export NVM_DIR=~/.nvm
@@ -31,4 +31,5 @@ jobs:
             npm install
             npm run build
             cp -r dist/* /var/www/html
+            mkdir /var/www/html zigiplz
             echo "zigi plz"
