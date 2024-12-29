@@ -8,10 +8,8 @@ on:
     branches:
     - Stage
 jobs:
-  deploy:
+  build:
     name: Deploy project with Nginx
-    permissions:
-      deployments: write
     runs-on: ubuntu-latest
     steps:
       - name: Deploy using SSH
