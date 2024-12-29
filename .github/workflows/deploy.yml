@@ -37,6 +37,7 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }}
         script: | 
           ls -al ~/.ssh
+          ssh -T git@github.com
           cd /home/react-app/goshehartvitereactapp/
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
