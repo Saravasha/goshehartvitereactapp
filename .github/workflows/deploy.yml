@@ -21,4 +21,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: 22
           script: | 
+            cd /home/react-app/goshehartvitereactapp/
+            npm install
+            npm run build
+            cp -r dist/* /var/www/html
             echo "zigi plz"
