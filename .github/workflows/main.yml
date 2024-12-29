@@ -19,10 +19,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Install node 16
+        with: 
+          fetch-depth: 2
+      - name: Install node 19
         uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 19.x
       - name: Install NPM Dependencies
         run: npm i
       - name: Build Project
@@ -45,11 +47,12 @@ jobs:
           name: production-files
           path: ./dist
       - name: 📂 Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@master
         with:
           server: ${{ secrets.SERVER }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.ZIGISECRET }}
           # server-dir: ${{ secrets.DIRECTORY }}
           protocol: ${{ secrets.PROTOCOL }}
-          server-dir: ./public_html/dist
+          local-dir: dist/
+          server-dir: ./public_html/

@@ -1,0 +1,34 @@
+# Triggers
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+    - Stage
+jobs:
+  build:
+    name: Deploy project with Nginx
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username:  ${{ secrets.USERNAME }}
+          key:  ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: 22
+          script: | 
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm --help
+            cd /home/react-app/goshehartvitereactapp/
+            ls -a
+            git pull origin main
+            git status
+            npm install
+            npm run build
+            cp -r dist/* /var/www/html
+            echo "zigi plz"
