@@ -21,8 +21,4 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: 22
           script: | 
-            cd /home/react-app/goshehartvitereactapp/
-            git pull origin main
-            git status
-            npm install --only=prod
-            npm build
+            echo "zigi plz"
