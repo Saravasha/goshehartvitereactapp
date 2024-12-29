@@ -22,6 +22,8 @@ jobs:
           port: 22
           script: | 
             cd /home/react-app/goshehartvitereactapp/
+            git pull origin main
+            git status
             npm install
             npm run build
             cp -r dist/* /var/www/html
