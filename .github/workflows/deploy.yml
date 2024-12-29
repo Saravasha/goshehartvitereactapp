@@ -12,10 +12,12 @@ jobs:
         run: |
           env
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p 22 -t id_rsa ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p 22 -t ed25519 ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to server or Storage Box
         run: |
-          rsync -azP -e "ssh -i $HOME/.ssh/id_rsa -p 22" ./dist ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/var/www/html/
+          rsync -azP -e "ssh -i $HOME/.ssh/id_ed25519 -p 22" ./dist ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/var/www/html/
+
+
