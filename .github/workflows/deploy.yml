@@ -1,23 +1,25 @@
-#Sample CD file
-name: Deploy to server or Storage Box
-on: push
+# Triggers
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+    - Stage
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up SSH key
-        run: |
-          env
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p 22 -t ed25519 ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-
-      - name: Deploy to server or Storage Box
-        run: |
-          rsync -azP -e "ssh -i $HOME/.ssh/id_ed25519 -p 22" ./dist ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/var/www/html/
-
-
+    - uses: actions/checkout@v3
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@7.0.1
+      with:
+        switches: -avzr --delete
+        legacy_allow_rsa_hostkeys: "true"
+        path: src/
+        remote_path: ${{ secrets.DESTINATION_FOLDER }}
+        remote_host: ${{ secrets.HOST }}
+        remote_port: ${{ secrets.PORT }}
+        remote_user: ${{ secrets.USERNAME }}
+        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        remote_key_pass: ${{ secrets.PASSPHRASE }}
