@@ -12,25 +12,33 @@ jobs:
     name: Deploy project with Nginx
     runs-on: ubuntu-latest
     steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v3
       #  npm --help
       #  ls -a  
       #  mkdir /var/www/html/zigiplz
-      - name: Deploy using SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username:  ${{ secrets.USERNAME }}
-          key:  ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          port: 22
-          script: | 
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            cd /home/react-app/goshehartvitereactapp/
-            touch zigi
-            git pull origin main
-            git status
-            npm install
-            npm run build
-            cp -r dist/* /var/www/html
-            echo "zigi plz"
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install NPM Dependencies
+      run: npm install, npm run build
+      
+    - name: Deploy using SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username:  ${{ secrets.USERNAME }}
+        key:  ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        port: 22
+        script: | 
+          cd /home/react-app/goshehartvitereactapp/
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          git pull origin main
+          git status
+          cp -r dist/* /var/www/html
+          echo "zigi plz"
