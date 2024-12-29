@@ -26,7 +26,16 @@ jobs:
       
     - name: Build NPM Assets 
       run: npm run build
-      
+
+    - name: Setup SSH for the runner
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_rsa.pub
+        chmod 600 ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa.pub
+        ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+  
     - name: Deploy using SSH
       uses: appleboy/ssh-action@v1.2.0
       with:
