@@ -14,51 +14,16 @@ jobs:
       deployments: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: 'actions/checkout@v2'
-        with:
-          ref: main
-          token: ${{ secrets.PAT }}
-      - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@main
-        id: deployment
-        with:
-          token: '${{ github.token }}'
-          environment-url: ${{ vars.MY_APP }}
-          environment: production
-      - name: Set up SSH Key and Deploy my App on Server
-        # run: |
+      - name: Deploy using SSH
         uses: appleboy/ssh-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          host: ${{secrets.HOST}}
+          username:  ${{secrets.USERNAME}}
+          key:  ${{secrets.SSH_PRIVATE_KEY}}
           port: 22
-          script: |
-            git config --global url."https://${{ secrets.PAT }}:@github.com"
-            cd {{ secret.DIRECTORY }}
+          script: | 
+            cd /home/react-app/goshehartvitereactapp/
             git pull origin main
-            npm ci
-            npm run build
-            cp -r dist/* /var/www/html
-            pm2 restart chatg --update-env
-      - name: Update deployment Status (success)
-        if: success()
-        uses: chrnorm/deployment-status@main
-        with:
-          token: '${{ github.token }}'
-          environment-url: ${{ vars.MY_APP }}
-          state: 'success'
-          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
-      
-      - name: Update deployment status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@main
-        with:
-          token: '${{ github.token }}'
-          environment-url: ${{ vars.MY_APP }}
-          state: 'failure'
-          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+            git status
+            npm install --only=prod
+            npm build
