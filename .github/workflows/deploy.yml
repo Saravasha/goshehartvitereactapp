@@ -18,6 +18,7 @@ jobs:
           host: ${{secrets.HOST}}
           username:  ${{secrets.USERNAME}}
           key:  ${{secrets.SSH_PRIVATE_KEY}}
+          passphrase: ${{secrets.PASSPHRASE}}
           port: 22
           script: | 
             cd /home/react-app/goshehartvitereactapp/
