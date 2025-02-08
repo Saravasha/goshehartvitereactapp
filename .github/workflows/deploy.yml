@@ -17,8 +17,8 @@ jobs:
       - name: Copy folder content recursively to vps
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: build
-          remote: /var/www/html/build
+          local: dist
+          remote: /var/www/html/dist
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
