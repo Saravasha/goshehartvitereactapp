@@ -14,17 +14,11 @@ jobs:
     runs-on: self-hosted
    # runs-on: ubuntu-latest
     steps:
-    - name: Deploy using SSH
     - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      #  host: ${{ secrets.HOST }}
-      #  username:  ${{ secrets.USERNAME }}
-      #  key:  ${{ secrets.SSH_PRIVATE_KEY }}
-      #  passphrase: ${{ secrets.PASSPHRASE }}
-      #  port: ${{ secrets.PORT }} 
-      # uses: actions/setup-node@v1
-    - name: Run script
     - run: |
         npm i
         npm run build
