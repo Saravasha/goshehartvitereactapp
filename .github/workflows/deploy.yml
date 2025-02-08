@@ -11,6 +11,7 @@ jobs:
   build:
     name: Deploy project with Nginx
     runs-on: ubuntu-latest
+   # runs-on: self-hosted
     steps:
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
