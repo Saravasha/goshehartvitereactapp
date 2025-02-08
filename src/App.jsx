@@ -18,7 +18,7 @@ function App() {
       <span>sdpfsdkfsdokfosdkfosdf</span>
       <div className="px-6 py-4">
         <div className="font-bold text-purple-500 text-xl mb-2">
-          Photo by JOhn Donh wwwwws
+          Photo by JOhn Donh wwwwws wwwwääää why isnt this working
         </div>
         <ul>
           <li>
