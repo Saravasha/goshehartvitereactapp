@@ -18,7 +18,7 @@ function App() {
       <span>sdpfsdkfsdokfosdkfosdf</span>
       <div className="px-6 py-4">
         <div className="font-bold text-purple-500 text-xl mb-2">
-          Photo by JOhn Donh wwww
+          Photo by JOhn Donh wwwww
         </div>
         <ul>
           <li>
