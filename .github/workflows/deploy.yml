@@ -23,7 +23,7 @@ jobs:
         npm i
         npm run build
         cd ..
-        pm2 stop 0
-        pm2 start 0
+        pm2 stop goshehartreactviteapp
+        pm2 start goshehartreactviteapp
         pm2 save
         service nginx restart
