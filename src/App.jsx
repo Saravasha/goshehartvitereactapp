@@ -18,7 +18,7 @@ function App() {
       <span>sdpfsdkfsdokfosdkfosdf</span>
       <div className="px-6 py-4">
         <div className="font-bold text-purple-500 text-xl mb-2">
-          Photo by JOhn Donh
+          Photo by JOhn Donh wwww
         </div>
         <ul>
           <li>
@@ -27,6 +27,7 @@ function App() {
           <strong>Likes: </strong>
           <strong>BINGO</strong>
           <strong>we added something new &copy;</strong>
+          <strong>we added something new EH???? &copy;</strong>
           </li>
         </ul>
       </div>
