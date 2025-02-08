@@ -24,6 +24,9 @@ jobs:
       #  passphrase: ${{ secrets.PASSPHRASE }}
       #  port: ${{ secrets.PORT }} 
       # uses: actions/setup-node@v1
+    - name: Run script
     - run: |
         npm i
         npm run build
+
+# every step must define a `uses` or `run` key
