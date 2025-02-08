@@ -1,4 +1,5 @@
-name: Deployment
+# Triggers
+
 on:
   push:
     branches:
@@ -7,22 +8,53 @@ on:
     branches:
     - Stage
 jobs:
-  Explore-GitHub-Actions:
+  build:
+    name: Deploy project with Nginx
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install NPM Dependencies
+      run: npm install
+      
+    - name: Build NPM Assets 
+      run: npm run build
+
+    web-deploy:
+      name: 🚀 Deploy Website Every Commit
+      runs-on: ubuntu-latest
+      steps:
+      - name: 🚚 Get Latest Code
+        uses: actions/checkout@v3
+      
+      - name: 📂 Sync Files
+        uses: SamKirkland/web-deploy@v1
         with:
-          node-version: '12.x'
-      - run: npm ci
-      - run: npm run build --if-present        
-      - name: Copy folder content recursively to vps
-        uses: garygrossgarten/github-action-scp@release
+          target-server: ${{ secrets.HOST  }}
+        remote-user: ${{ secrets.USER }}
+        private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        destination-path: ${{ secrets.DESTINATION_FOLDER }}
+        
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@v1.2.0
         with:
-          local: dist
-          remote: /var/www/html/dist
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          username:  ${{ secrets.USERNAME }}
+          key:  ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: | 
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd /home/react-app/goshehartvitereactapp/
+            ls -al
+            ls -al ~/.ssh
+            cp -r dist/* /var/www/html
+            echo "zigi plz"
