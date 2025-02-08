@@ -22,5 +22,10 @@ jobs:
     - run: |
         npm i
         npm run build
+        cd ..
+        pm2 stop 0
+        pm2 start 0
+        pm2 save
+        service nginx restart
 
 # every step must define a `uses` or `run` key
