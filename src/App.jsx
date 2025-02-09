@@ -20,6 +20,7 @@ function App() {
         <div className="font-bold text-purple-500 text-xl mb-2">
           Photo by JOhn Donh wwwwws wwwwääää why isnt this working
           addding more stuff for test
+          adding another line to see changes
         </div>
         <ul>
           <li>
