@@ -22,6 +22,7 @@ jobs:
     - run: |
         npm i
         npm run build
+        pwd
         cd ..
         pwd
         ls -a
