@@ -23,6 +23,7 @@ jobs:
         npm i
         npm run build
         cd ..
+        ls -a
         cp ./dist* /var/www/html
         pm2 stop goshehartreactviteapp
         pm2 start goshehartreactviteapp
