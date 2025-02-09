@@ -22,8 +22,8 @@ jobs:
     - run: |
         npm i
         npm run build
-        ls -a
-        cp -a dist/ /var/www/html
+        ls -a 
+        cp -a dist/. /var/www/html
         cd ..
         pm2 stop goshehartreactviteapp
         pm2 start goshehartreactviteapp
