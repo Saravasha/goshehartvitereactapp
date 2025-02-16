@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
     branches:
-    - Stage
+    - stage
     
 jobs:
   build:
