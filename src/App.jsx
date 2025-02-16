@@ -21,6 +21,8 @@ function App() {
           Photo by JOhn Donh wwwwws wwwwääää why isnt this working
           addding more stuff for test
           adding another line to see changes
+          stuff, dotnet is on the way
+          stuff, dotnet is on the way
 
           adding some extra shiz
         </div>
