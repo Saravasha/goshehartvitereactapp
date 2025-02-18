@@ -20,13 +20,15 @@ function App() {
       <span>sdpfsdkfsdokfosdkfosdf</span>
       <div className="px-6 py-4">
         <div className="font-bold text-purple-500 text-xl mb-2">
-          Photo by JOhn Donh wwwwws wwwwääää why isnt this working
+          <p>Photo by JOhn Donh wwwwws wwwwääää why isnt this working
           addding more stuff for test
           adding another line to see changes
           stuff, dotnet is on the way
           stuff, dotnet is on the way
 more stuff
+wwwwwwwwwwwwwwwwwwwwwwwwwwwww
           adding some extra shiz
+          </p>
         </div>
         <ul>
           <li>
