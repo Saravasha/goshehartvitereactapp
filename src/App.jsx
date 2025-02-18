@@ -15,6 +15,8 @@ function App() {
       <img src="https://picsum.photos/400/400" alt="" id="2" className="w-2"/>
       <img src="https://picsum.photos/500/500" alt="" id="3" className="w-3"/>
       <img src="https://picsum.photos/600/600" alt="" id="4" className="w-4"/>
+      <img src="https://picsum.photos/600/600" alt="" id="5" className="w-4"/>
+      <span>bingowwwwwwwwwwwwwwwwwwwwwww</span>
       <span>sdpfsdkfsdokfosdkfosdf</span>
       <div className="px-6 py-4">
         <div className="font-bold text-purple-500 text-xl mb-2">
