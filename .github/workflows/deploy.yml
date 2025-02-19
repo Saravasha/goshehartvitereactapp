@@ -33,4 +33,5 @@ jobs:
         pm2 start goshehartreactviteapp
         pm2 save
     - name: Starting NGNIX 
-    - run: service nginx restart
+    - run: |
+        service nginx restart
