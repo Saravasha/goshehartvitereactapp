@@ -20,18 +20,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: NPM Build
-    - run: |
+      run: |
         npm i
         npm run build
         ls -a 
         cp -a dist/. /var/www/html
         cd ..
     - name: PM2 Syncing
-    - run: |
+      run: |
         pm2 resurrect
         pm2 stop goshehartreactviteapp
         pm2 start goshehartreactviteapp
         pm2 save
     - name: Starting NGNIX 
-    - run: |
+      run: |
         service nginx restart
