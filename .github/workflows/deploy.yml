@@ -25,6 +25,7 @@ jobs:
         ls -a 
         cp -a dist/. /var/www/html
         cd ..
+        pm2 ressurect
         pm2 stop goshehartreactviteapp
         pm2 start goshehartreactviteapp
         pm2 save
