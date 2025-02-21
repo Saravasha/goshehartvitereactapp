@@ -7,7 +7,7 @@ export default function ComingSoon() {
     <>
     <div className="flex justify-center items-center">
 
-      <img src="./src/static/comingsoonimg2.jpg" className="h-screen w-screen bg-cover bg-no-repeat"/>
+      <img src="./comingsoonimg2.jpg" className="h-screen w-screen bg-cover bg-no-repeat"/>
       <div className="absolute top-2 left-2 ">
         <span className="text-9xl  text-red-50 hover:text-red-300 ">Gosheh Art</span>
       </div>
