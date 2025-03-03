@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function ImagesGetter() {
     const [assets, setAssets] = useState([]);
-    // state = {
-    //     people: []
-    // }
-
-
     useEffect(() => {
         // Perform actions here that you want to execute after the component mounts
-        axios.get('https://localhost:7033/api/react/').then(result => {
-            const assets = result.data;
-            setAssets([assets]);
-            console.log("assets = ", assets);
+        console.log("App environment = ", `${import.meta.env.MODE}`);
+        
+        if (`${import.meta.env.MODE}` == "development") {
+            axios.get('https:localhost:7033/api/react/asset').then(result => {
+                // 'https://localhost:7033/api/react/asset')
+                const assets = result.data;
+                setAssets([assets]);
+                console.log("assets = ", assets);
+            })
+        } else {
+            axios.get(`${import.meta.env.DOTNET_API_URL}`).then(result => {
+                // 'https://localhost:7033/api/react/asset')
+                const assets = result.data;
+                setAssets([assets]);
+                console.log("assets = ", assets);
+            })
+        }
 
-            console.log("asset name = ", assets.name);
-            
-        })
         
     }, [])
 

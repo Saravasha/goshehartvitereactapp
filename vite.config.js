@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/',
   plugins: [react()],
+  'process.env': {
+    DOTNET_API_URL: process.env.DOTNET_API_URL || 'https://admin.goshehart.se/api/react/asset',
+  }
 })
