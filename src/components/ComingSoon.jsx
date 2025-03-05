@@ -16,7 +16,8 @@ export default function ComingSoon() {
       </div>
       <div className=" absolute border-1 bottom-2 left-2">
         <span className="text-red-50 hover:text-red-500 text-4xl">&copy; Gosheh Art {currentYear}</span>
-      </div> 
+      </div>
+      <p>Itam</p> 
     </div>
     </>
   );
