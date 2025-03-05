@@ -28,6 +28,7 @@ jobs:
         cd ..
     - name: PM2 Syncing
       run: |
+        export PM2_HOME=/root/.pm2
         pm2 resurrect
         pm2 stop goshehartreactviteapp
         pm2 start goshehartreactviteapp
