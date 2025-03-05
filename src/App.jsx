@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      {/* <Header></Header> */}
+      {/* <Header></Header> test */}
       <ComingSoon></ComingSoon>
       <ImagesGetter></ImagesGetter>
       {/* <Footer></Footer> */}
