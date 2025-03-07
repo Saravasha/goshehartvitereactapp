@@ -9,7 +9,7 @@ export default function ImagesGetter() {
         console.log("App environment = ", `${import.meta.env.MODE}`);
         
         if (`${import.meta.env.MODE}` == "development") {
-            axios.get('https:localhost:7033/api/react/asset').then(result => {
+            axios.get('http://localhost:5283/api/react/asset').then(result => {
                 // 'https://localhost:7033/api/react/asset')
                 const assets = result.data;
                 setAssets([assets]);
