@@ -5,6 +5,8 @@ import axios from "axios";
 export default function ImagesGetter() {
     const [assets, setAssets] = useState([]);
     const apiUrl = import.meta.env.VITE_DOTNET_API_URL_TARGET; 
+    console.log(apiUrl);
+    
     useEffect(() => {
         // Perform actions here that you want to execute after the component mounts
         console.log("App environment = ", `${import.meta.env.MODE}`);
