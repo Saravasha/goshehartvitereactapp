@@ -4,6 +4,7 @@ import Header from "./layout/Header.jsx"
 import ComingSoon from "./components/ComingSoon.jsx"
 import ImagesGetter from "./components/ImagesGetter.jsx"
 import Navbar from "./layout/Navbar.jsx"
+
 // import './assets/main.css'
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
   return (
     <>
       <Header></Header>
-      {/* <Navbar></Navbar> */}
+      <Navbar></Navbar>
       <ComingSoon></ComingSoon>
       <ImagesGetter></ImagesGetter>
       <Footer></Footer>
