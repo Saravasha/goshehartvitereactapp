@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function ImagesGetter() {
+export default function ImagesGetterComponent() {
     const [assets, setAssets] = useState([]);
     const apiUrl = import.meta.env.VITE_DOTNET_ASSET_API_URL_TARGET; 
     const directApi = import.meta.env.VITE_DOTNET_API_TARGET;
