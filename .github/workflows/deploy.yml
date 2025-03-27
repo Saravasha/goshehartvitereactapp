@@ -1,12 +1,12 @@
 # Triggers
-name: deploy goshehartvitereactapp
+name: Deploy goshehartvitereactapp (Frontend)
 on:
   push:
     branches:
       - main
   pull_request:
     branches:
-    - Stage
+    - stage
     
 jobs:
   build:
@@ -19,11 +19,20 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: |
+    - name: NPM Build
+      run: |
         npm i
         npm run build
+        ls -a 
+        cp -a dist/. /var/www/html
         cd ..
-        pm2 stop 0
-        pm2 start 0
+    - name: PM2 Syncing
+      run: |
+        export PM2_HOME=/root/.pm2
+        pm2 resurrect
+        pm2 stop goshehartreactviteapp
+        pm2 start goshehartreactviteapp
         pm2 save
+    - name: Starting NGNIX 
+      run: |
         service nginx restart
