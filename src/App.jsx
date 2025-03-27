@@ -1,38 +1,38 @@
-import { useState } from 'react'
-import FooterLayout from "./layout/FooterLayout.jsx"
-import HeaderLayout from "./layout/HeaderLayout.jsx"
-import ComingSoonComponent from "./components/ComingSoonComponent.jsx"
-import ImagesGetterComponent from "./components/ImagesGetterComponent.jsx"
-import NavbarLayout from "./layout/NavbarLayout.jsx"
-import AssetsGetterApi from "./api/AssetsGetterApi.jsx"
-import PagesGetterApi from './api/PagesGetterApi.jsx' 
-import SidebarLayout from './layout/SidebarLayout.jsx'
+import { useState } from "react";
+import Footer from "./components/layout/Footer.jsx";
+import Header from "./components/layout/Header.jsx";
+import ComingSoon from "./components/ComingSoon.jsx";
+import Navbar from "./components/layout/Navbar.jsx";
+import Main from "./components/layout/Main.jsx";
 
-// import './assets/main.css'
+// import PagesGetterApi from "./components/api/PagesGetterApi.jsx";
+import Sidebar from "./components/layout/Sidebar.jsx";
+import ArtGallery from "./components/features/ArtGallery.jsx";
+
+import "./assets/main.css";
 
 function App() {
-  const [count, setCount] = useState(0)
   console.log("App environment = ", `${import.meta.env.MODE}`);
 
   return (
     <>
-      
       {/* <AssetsGetter> */}
-        <HeaderLayout />
-        <PagesGetterApi>
-          <NavbarLayout />
-        </PagesGetterApi>
-        <SidebarLayout/>
-        <ComingSoonComponent />
-        <FooterLayout />
-        {/* <ImagesGetter></ImagesGetter> */}
+      <Header />
+      {/* <PagesGetterApi>
+      </PagesGetterApi> */}
+      <Navbar />
+      <Sidebar>
+        <ArtGallery />
+      </Sidebar>
+      <Main></Main>
+      {/* <PageBuilder></PageBuilder> */}
+      <ComingSoon />
+      <Footer />
+      {/* <ImagesGetter></ImagesGetter> */}
 
       {/* </AssetsGetter> */}
-
     </>
-
-  
-  )
+  );
 }
 
-export default App
+export default App;
