@@ -1,0 +1,82 @@
+/* .PagesContainer > p > img {
+  width: 100% !important;
+  height: 100% !important;
+  /* align-items: center; */
+/* display: flex; */
+/* margin: 1rem; */
+.PageContainer > p > img,
+.ContentContainer > p > img {
+  width: 100% !important;
+  height: 100% !important;
+  /* margin: 1rem; */
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  /* padding: 1rem; */
+  background-color: aqua;
+  margin: 0rem;
+  gap: 1rem;
+  border: solid 4px black;
+}
+
+.PageContainer > p,
+.ContentContainer > p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: solid 4px gold;
+  background-color: aquamarine;
+  margin: 0rem;
+}
+
+.ContentContainer {
+  margin: 0rem;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.PageTitle {
+  border: solid 4px black;
+  padding-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.PageContainer {
+  border: double 4px black;
+}
+
+.ContentTitle {
+  border: dashed 4px red;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  /* margin-left: 0; */
+  margin: 0;
+}
+
+.ContentContainer {
+  border: dotted 4px red;
+  margin-top: 1rem;
+}
+
+/* div {
+  width: 100% !important;
+} */
+
+/* [&>*]:w-full [&>*]:justify-center [&>*]:items-center [&>*]:align-self-center [&>*]:flex */
+
+/* [&>*]:w-full */
+
+/* [&>*]:w-full [&>*]:justify-center [&>*]:items-center [&>*]:align-self-center [&>*]:flex [&>*]:flex-col */
+/* 
+[&>*]:w-full [&>*]:justify-center [&>*]:items-center [&>*]:align-self-center [&>*]:flex [&>*]:flex-col [&>*]:gap-4 [&>*]:m-4 [&>*]:my-4 [&>*]:mx-4 [&>*]:px-8 [&>*]:py-8 */
+/* 
+[&>*]:w-full [&>*]:justify-center [&>*]:items-center [&>*]:align-self-center [&>*]:flex [&>*]:flex-col [&>*]:gap-4 [&>*]:m-4 [&>*]:my-4 [&>*]:mx-4 [&>*]:px-8 [&>*]:py-8   */
+
+/* [style="width"] {
+  width: 100% !important;
+} */

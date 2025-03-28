@@ -1,13 +1,12 @@
 import React from "react";
 
 export default function ComingSoon() {
-  let currentYear = new Date().getFullYear();
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="ComingSoon flex justify-center items-center m-4 rounded shadow">
         <img
           src="./comingsoonimg2.jpg"
-          className="h-screen w-screen bg-cover bg-no-repeat"
+          className="h-screen w-screen bg-cover bg-no-repeat rounded shadow"
           alt="ph"
         />
         <div className="absolute top-2 left-2 ">

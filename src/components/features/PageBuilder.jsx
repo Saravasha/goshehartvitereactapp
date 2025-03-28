@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useApi from "../api/useApi";
 import DOMPurify from "dompurify";
+import "./PageBuilder.css";
 
 export default function PageBuilder() {
   var { pages } = useApi();
@@ -9,30 +10,43 @@ export default function PageBuilder() {
 
   const Pages = () => {
     return (
-      <div className="Container m-4 gap-4 justify-center items-center grid grid-cols-* grid-rows- bg-gradient-to-r from-yellow-600 to-red-600  rounded shadow-sm ">
+      <div className="Pages text-8xl justify-center [&_*]justify-center [&_*]items-center items-center flex flex-col flex-grow rounded shadow-sm p-4 ">
         {pages.map((page) => (
-          <div className="grid gap-4 " id={page.title} key={page.id}>
-            <h1 className="Title text-4xl  grid gap-4 justify-center align-self-center ">
+          <div
+            className="Page flex flex-col gap-4 rounded shadow-sm bg-gradient-to-r from-gray-300 to-slate-100 text-4xl font-thin w-full [&_*]:w-full border-black border-4 flex-grow m-9 mb-96 h-full p-4 "
+            id={page.title}
+            key={page.id}
+          >
+            {/* //{" "} */}
+            {/* <div className=" "> */}
+            <h2 className="PageTitle text-8xl justify-center items-center flex drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin text-white flex-grow w-full h-full">
+              {/* &#123; Page.Header &#125; :  */}
               {page.title}
-            </h1>
+            </h2>
+            {/* </div> */}
+            {/* page container */}
             <div
-              className="Container w-screen-4xl max-h-lvh m-4 grid gap-4 items-center justify-center "
+              className="PageContainer text-4xl max-w-full gap-4 justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-4 p-4"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(page.container),
               }}
             ></div>
-            <div className="Contents text-2xl m-4  gap-4 grid grid-cols-1 grid-rows-1 ">
+            <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
               {page.contents.map((content) => (
                 <div
-                  className="grid grid-cols-1 m-4 gap-4 grid-rows-1 "
+                  // className="Content flex flex-col bg-blue-500  justify-center items-center  "
                   key={content.id}
                   id={content.id}
                 >
-                  <h2 className="flex text-1xl items-center justify-center  ">
+                  {/* <div "> */}
+                  <h3 className="ContentTitle text-6xl justify-center items-center flex m-4 flex-grow w-full p-4">
+                    {/* &#123; Content.Header &#125; :  */}
                     {content.title}
-                  </h2>
+                  </h3>
+                  {/* </div> */}
+                  {/* content container */}
                   <div
-                    className="Container text-2xl flex grid-cols-1 items-center justify-center bg-white "
+                    className="ContentContainer text-4xl flex flex-col gap-4  justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(content.container),
                     }}
@@ -48,17 +62,16 @@ export default function PageBuilder() {
 
   useEffect(() => {
     pages = pages.map((page) => page.contents);
-    console.log("inside effect = ", pages);
   }, []);
 
   return (
-    <>
-      <div id="pagesbody grid">
-        <h1 className="text-8xl grid grid-rows-2 items-center justify-center rounded shadow">
+    <div id="PagesBody ">
+      <div className="PagesBodyTitle text-8xl flex flex-row  rounded shadow border-white  items-center justify-center p-10 m-4 flex-grow ">
+        <h1 className="font-thin text-red-50 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] ">
           Pages
         </h1>
-        <Pages className="border-black rounded shadow" />
       </div>
-    </>
+      <Pages />
+    </div>
   );
 }
