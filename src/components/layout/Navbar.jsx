@@ -7,9 +7,7 @@ import GetRandomAsset from "../features/GetRandomAsset";
 import useApi from "../api/useApi";
 
 export default function Navbar() {
-  var { assets, pages } = useApi();
-  console.log("pages = ", pages);
-  console.log("assets = ", assets);
+  var { pages } = useApi();
 
   const MappingPages = () => {
     return (

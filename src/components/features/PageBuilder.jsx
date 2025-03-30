@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import useApi from "../api/useApi";
 import DOMPurify from "dompurify";
 import "./PageBuilder.css";
