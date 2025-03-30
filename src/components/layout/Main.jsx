@@ -1,8 +1,7 @@
 import React from "react";
 import PageBuilder from "../features/PageBuilder";
+import GetRandomAsset from "../features/GetRandomAsset";
 
-function Main() {
+export default function Main() {
   return <PageBuilder />;
 }
-
-export default Main;

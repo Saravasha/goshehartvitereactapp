@@ -6,8 +6,6 @@ import "./PageBuilder.css";
 export default function PageBuilder() {
   var { pages } = useApi();
 
-  console.log("pages in pagebuilder", pages);
-
   const Pages = () => {
     return (
       <div className="Pages text-8xl justify-center [&_*]justify-center [&_*]items-center items-center flex flex-col flex-grow rounded shadow-sm p-4 ">
@@ -17,13 +15,9 @@ export default function PageBuilder() {
             id={page.title}
             key={page.id}
           >
-            {/* //{" "} */}
-            {/* <div className=" "> */}
             <h2 className="PageTitle text-8xl justify-center items-center flex drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin text-white flex-grow w-full h-full">
-              {/* &#123; Page.Header &#125; :  */}
               {page.title}
             </h2>
-            {/* </div> */}
             {/* page container */}
             <div
               className="PageContainer text-4xl max-w-full gap-4 justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-4 p-4"
@@ -33,17 +27,10 @@ export default function PageBuilder() {
             ></div>
             <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
               {page.contents.map((content) => (
-                <div
-                  // className="Content flex flex-col bg-blue-500  justify-center items-center  "
-                  key={content.id}
-                  id={content.id}
-                >
-                  {/* <div "> */}
+                <div key={content.id} id={content.id}>
                   <h3 className="ContentTitle text-6xl justify-center items-center flex m-4 flex-grow w-full p-4">
-                    {/* &#123; Content.Header &#125; :  */}
                     {content.title}
                   </h3>
-                  {/* </div> */}
                   {/* content container */}
                   <div
                     className="ContentContainer text-4xl flex flex-col gap-4  justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
