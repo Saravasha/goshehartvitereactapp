@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { Suspense } from "react";
 import Footer from "./components/layout/Footer.jsx";
 import Header from "./components/layout/Header.jsx";
 import ComingSoon from "./components/ComingSoon.jsx";

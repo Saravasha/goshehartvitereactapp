@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import PageBuilder from "../features/PageBuilder";
 import GetRandomAsset from "../features/GetRandomAsset";
 

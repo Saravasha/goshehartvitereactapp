@@ -5,7 +5,7 @@ export default function ComingSoon() {
     <>
       <div className="ComingSoon flex justify-center items-center m-4 rounded shadow">
         <img
-          src="./comingsoonimg2.jpg"
+          src="/comingsoonimg2.jpg"
           className="h-screen w-screen bg-cover bg-no-repeat rounded shadow"
           alt="ph"
         />

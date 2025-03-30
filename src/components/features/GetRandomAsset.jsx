@@ -1,24 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import useApi from "../api/useApi";
 
 export default function GetRandomAsset() {
-  const { assets, directApi } = useApi();
-  const [randomImage, setRandomImage] = useState();
+  const { assets, directApi, loading } = useApi();
+  // console.log(assets);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!assets || assets.length === 0) {
+    return <div>No images available</div>;
+  }
+  // const [randomImage, setRandomImage] = useState();
   const randomIndex = Math.floor(Math.random() * assets.length);
-  const randomImageFromArray = assets[randomIndex];
+  const randomImage = assets[randomIndex];
 
-  useEffect(() => {
-    setRandomImage(randomImageFromArray);
-  }, []);
+  // useEffect(() => {
+  //   // assets = assets.map((asset) => asset.imageUrl);
+  //   // setRandomImage(randomImageFromArray);
+  //   // GetImage();
+  // }, []);
 
   return (
-    <div>
-      <img
-        className="RandomAsset"
-        alt={randomImage.name}
-        src={directApi + randomImage.imageUrl}
-      ></img>
-    </div>
+    <>
+      <div>
+        <Suspense fallback="Loading...">
+          <img src={directApi + randomImage.imageUrl}></img>
+        </Suspense>
+      </div>
+    </>
   );
 }

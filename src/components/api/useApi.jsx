@@ -1,37 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function useApi() {
+const useApi = () => {
+  // const ApiContext = useContext();
   const [assets, setAssets] = useState([]);
   const [pages, setPages] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+
   const assetUrl = import.meta.env.VITE_DOTNET_ASSET_API_URL_TARGET;
   const pageUrl = import.meta.env.VITE_DOTNET_PAGE_API_URL_TARGET;
   const directApi = import.meta.env.VITE_DOTNET_API_TARGET;
 
   // Assets
   useEffect(() => {
-    const assetsGetter = async () => {
-      await axios.get(assetUrl).then((result) => {
-        setAssets(result.data);
-      });
-    };
-    if (assetUrl) {
-      assetsGetter();
+    async function AssetsGetter() {
+      await axios
+        .get(assetUrl)
+        .then((result) => {
+          setAssets(result.data);
+          setLoading(false);
+          console.log(assets);
+          console.log(loading);
+        })
+        .catch((error) => {
+          console.error("Assets:error fetching data", error);
+          setLoading(false);
+        });
+      // };
+      // if (assetUrl) {
+      // }
     }
-  }, [assetUrl]);
+    AssetsGetter();
+  }, []);
 
   // Pages
   useEffect(() => {
-    const pagesGetter = async () => {
-      await axios.get(pageUrl).then((result) => {
-        setPages(result.data);
-      });
-    };
-    if (pageUrl) {
-      pagesGetter();
+    async function PagesGetter() {
+      // };
+      await axios
+        .get(pageUrl)
+        .then((result) => {
+          setPages(result.data);
+          console.log(pages);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Pages:error fetching data", error);
+          setLoading(false);
+        });
+      // if (pageUrl) {
+      // }
     }
-  }, [pageUrl]);
+    // assetsGetter();
+    PagesGetter();
 
-  return { assets, pages, directApi };
-}
+    // }, [pageUrl]);
+  }, []);
+
+  return { assets, pages, directApi, loading };
+};
+
+export default useApi;
