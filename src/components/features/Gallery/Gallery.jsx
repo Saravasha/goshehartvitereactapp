@@ -8,11 +8,20 @@ export default function Gallery() {
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="grid  max-w-screen grid-flow-col ">
-          <h1 className=" text-6xl font-thin m-4">Art Gallery</h1>
-          <div>
+        <div className=" container max-w-screen grid grid-col-3 ">
+          <div className="border-black border-2">
+            <h1 className=" text-6xl font-thin m-4 mx-auto flex align-center justify-center  ">
+              Art Gallery
+            </h1>
+          </div>
+          <div className="gap-4 grid grid-cols-3  p-4">
             {assets.map((asset) => (
-              <Asset key={asset.id} image={asset} directApi={directApi} />
+              <Asset
+                key={asset.id}
+                image={asset}
+                categories={asset.categories}
+                directApi={directApi}
+              />
             ))}
           </div>
         </div>
