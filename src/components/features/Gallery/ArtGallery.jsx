@@ -1,5 +1,5 @@
 import React from "react";
-import useApi from "../api/useApi";
+import useApi from "../../api/useApi";
 
 const ArtGallery = () => {
   const { assets, directApi } = useApi();

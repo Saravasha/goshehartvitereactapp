@@ -1,6 +1,6 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import ArtGallery from "../features/ArtGallery";
+import ArtGallery from "../features/Gallery/ArtGallery";
 
 export default function SidebarComponent() {
   return (
