@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const useApi = () => {
-  // const ApiContext = useContext();
   const [assets, setAssets] = useState([]);
   const [pages, setPages] = useState([]);
 
@@ -28,9 +27,6 @@ const useApi = () => {
           console.error("Assets:error fetching data", error);
           setLoading(false);
         });
-      // };
-      // if (assetUrl) {
-      // }
     }
     AssetsGetter();
   }, []);
@@ -38,7 +34,6 @@ const useApi = () => {
   // Pages
   useEffect(() => {
     async function PagesGetter() {
-      // };
       await axios
         .get(pageUrl)
         .then((result) => {
@@ -50,13 +45,8 @@ const useApi = () => {
           console.error("Pages:error fetching data", error);
           setLoading(false);
         });
-      // if (pageUrl) {
-      // }
     }
-    // assetsGetter();
     PagesGetter();
-
-    // }, [pageUrl]);
   }, []);
 
   return { assets, pages, directApi, loading };
