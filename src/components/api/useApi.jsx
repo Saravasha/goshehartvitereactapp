@@ -6,7 +6,7 @@ const useApi = () => {
   const [assets, setAssets] = useState([]);
   const [pages, setPages] = useState([]);
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const assetUrl = import.meta.env.VITE_DOTNET_ASSET_API_URL_TARGET;
   const pageUrl = import.meta.env.VITE_DOTNET_PAGE_API_URL_TARGET;
@@ -21,7 +21,7 @@ const useApi = () => {
           setAssets(result.data);
           setLoading(false);
           console.log(assets);
-          console.log(loading);
+          console.log(isLoading);
         })
         .catch((error) => {
           console.error("Assets:error fetching data", error);
@@ -49,7 +49,7 @@ const useApi = () => {
     PagesGetter();
   }, []);
 
-  return { assets, pages, directApi, loading };
+  return { assets, pages, directApi, isLoading };
 };
 
 export default useApi;
