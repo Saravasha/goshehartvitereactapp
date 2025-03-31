@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 import "./PageBuilder.css";
 
 export default function PageBuilder() {
-  var { pages } = useApi();
+  var { pages, isLoading } = useApi();
 
   const Pages = () => {
     return (
@@ -55,10 +55,10 @@ export default function PageBuilder() {
     <div id="PagesBody ">
       <div className="PagesBodyTitle text-8xl flex flex-row  rounded shadow border-white  items-center justify-center p-10 m-4 flex-grow ">
         <h1 className="font-thin text-red-50 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] ">
-          Pages
+          {isLoading ? "Loading" : "Pages"}
         </h1>
       </div>
-      <Pages />
+      <div>{isLoading ? <h1>Loading...</h1> : <Pages />}</div>
     </div>
   );
 }
