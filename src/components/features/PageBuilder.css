@@ -20,7 +20,9 @@
 }
 
 .PageContainer > p,
-.ContentContainer > p {
+.PageContainer > *,
+.ContentContainer > p,
+.ContentContainer > * {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
