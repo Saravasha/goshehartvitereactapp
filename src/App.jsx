@@ -10,7 +10,7 @@ import Sidebar from "./components/layout/Sidebar.jsx";
 import ArtGallery from "./components/features/Gallery/ArtGallery.jsx";
 import GetRandomAsset from "./components/features/GetRandomAsset.jsx";
 
-import "./assets/main.css";
+// import "./assets/main.css";
 import Gallery from "./components/features/Gallery/Gallery.jsx";
 
 function App() {
