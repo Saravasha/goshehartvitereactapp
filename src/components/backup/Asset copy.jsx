@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-
-import Gallery from "./Gallery";
-import ArtGallery from "./ArtGallery";
-import Modal from "./Modal";
+import React from "react";
 
 const Asset = ({ image, categories, directApi }) => {
   return (
-    <>
-      {/* <div className="Asset sm:max-w-sm md:max-w-md lg:max-w-lg  rounded shadow-lg bg-inherit  border-black border-4 h-full m-4 break-inside-auto overflow-auto  " */}
+    <div
+      className="Asset sm:max-w-sm md:max-w-md lg:max-w-lg  rounded shadow-lg bg-inherit  border-black border-4 h-full m-4 break-inside-auto overflow-auto  "
+      key={image.id}
+    >
       <img
         className="Asset-Image w-full bg-white border-black border-b-4  shadow-lg p-4 "
         alt={image.name}
@@ -33,8 +31,7 @@ const Asset = ({ image, categories, directApi }) => {
           })}
         </div>
       </div>
-      {/* </div> */}
-    </>
+    </div>
   );
 };
 export default Asset;

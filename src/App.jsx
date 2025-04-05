@@ -8,6 +8,7 @@ import Main from "./components/layout/Main.jsx";
 // import PagesGetterApi from "./components/api/PagesGetterApi.jsx";
 import Sidebar from "./components/layout/Sidebar.jsx";
 import ArtGallery from "./components/features/Gallery/ArtGallery.jsx";
+import ArtGallery2 from "./components/features/Gallery/ArtGallery copy.jsx";
 import GetRandomAsset from "./components/features/GetRandomAsset.jsx";
 
 // import "./assets/main.css";
@@ -22,10 +23,10 @@ function App() {
       <Navbar />
       <GetRandomAsset />
       <Sidebar>
-        <ArtGallery />
+        <ArtGallery2 />
       </Sidebar>
       <Main></Main>
-      <Gallery />
+      <ArtGallery />
       <ComingSoon />
       <Footer />
     </>
