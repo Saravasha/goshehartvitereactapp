@@ -15,7 +15,9 @@ export default function GetRandomAsset() {
     <>
       <div>
         {isLoading ? (
-          <h1>Loading...</h1>
+          <h1 className="font-thin align-center justify-center flex mx-auto p-4">
+            Loading...
+          </h1>
         ) : (
           <img src={directApi + randomImage.imageUrl}></img>
         )}
