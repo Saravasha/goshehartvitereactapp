@@ -4,7 +4,27 @@ import DOMPurify from "dompurify";
 import "./PageBuilder.css";
 
 export default function PageBuilder() {
-  var { pages, isLoading } = useApi();
+  var { pages, isLoading, directApi } = useApi();
+  console.log("pages in PageBuilder() = ", pages);
+
+  const prependApiUrlToImages = (htmlContent) => {
+    // Create a temporary DOM element to parse the HTML
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlContent;
+
+    // Find all <img> tags and prepend the API URL to their src
+    const images = tempDiv.querySelectorAll("img");
+    images.forEach((img) => {
+      const setSrc = img.getAttribute("src");
+      if (setSrc && !setSrc.startsWith("http") && !setSrc.startsWith("https")) {
+        // Ensure directApi doesn't have a trailing slash
+        img.src = `${directApi.replace(/\/$/, "")}${
+          setSrc.startsWith("/") ? "" : "/"
+        }${setSrc}`;
+      }
+    });
+    return tempDiv.innerHTML;
+  };
 
   const Pages = () => {
     return (
@@ -22,9 +42,13 @@ export default function PageBuilder() {
             <div
               className="PageContainer text-4xl max-w-full gap-4 justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-4 p-4"
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(page.container),
+                __html: DOMPurify.sanitize(
+                  prependApiUrlToImages(page.container)
+                ),
               }}
-            ></div>
+            >
+              {/* {console.log("pagecontainer = ", page.container)} */}
+            </div>
             <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
               {page.contents.map((content) => (
                 <div key={content.id} id={content.id}>
@@ -35,7 +59,9 @@ export default function PageBuilder() {
                   <div
                     className="ContentContainer text-4xl flex flex-col gap-4  justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
                     dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(content.container),
+                      __html: DOMPurify.sanitize(
+                        prependApiUrlToImages(content.container)
+                      ),
                     }}
                   ></div>
                 </div>

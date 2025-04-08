@@ -5,10 +5,13 @@ const Modal = ({
   handleRotationLeft,
   handleRotationRight,
   setClickedImage,
+  clickedAsset,
+  setClickedAsset,
 }) => {
   const handleClick = (e) => {
     if (e.target.classList.contains("dismiss")) {
       setClickedImage(null);
+      // setClickedAsset(null);
     }
   };
 
@@ -17,6 +20,7 @@ const Modal = ({
     function handleEscapeKey(e) {
       if (e.code === "Escape") {
         setClickedImage(null);
+        // setClickedAsset(null);
       }
     }
 
@@ -38,15 +42,47 @@ const Modal = ({
 
   return (
     <div
-      className="ModalContainer overlay flexbox dismiss fixed left-0 top-0  w-full m-0   p-0 bg-black h-full overflow-hidden"
+      className="ModalContainer overlay  dismiss fixed flex   m-0 p-0  left-0 top-0  w-full   bg-black h-full"
       onClick={handleClick}
     >
-      <div className="align-center justify-center flex w-full h-full ">
-        <img
-          src={clickedImage}
-          alt="bigger picture"
-          className=" py-auto px-10 "
-        ></img>
+      <div className="ModalAsset  absolute top-0 flex align-center justify-center w-full h-full ">
+        <div className="flex relative  flex-col ">
+          {/* modal title */}
+          <div className=" flex relative  justify-center align-center">
+            <h1 className="Modal-Title m-4 flex-col flex relative    hover:animate-pulse text-1xl shadow-2xl rounded font-thin text-white">
+              {clickedAsset.name}
+            </h1>
+          </div>
+
+          <div className="    relative h-1/2   flex justify-center align-center  ">
+            <img
+              className=" Modal-Image   relative     "
+              src={clickedImage}
+              alt="bigger picture"
+            ></img>
+          </div>
+
+          <div className="Modal-Description  relative flex align-center justify-center   ">
+            <p className="   flex  align-center justify-center m-4 font-thin text-inherit text-shadow-2xs hover:animate-pulse text-4xl  px-10  ">
+              {clickedAsset.description}
+            </p>
+          </div>
+
+          <div className="Modal-Categories    align-center justify-center flex  rounded-full bg-transparent   font-thin text-black text-sm   ">
+            {/* {console.log("clickedAsset = ", clickedAsset)} */}
+            {clickedAsset.categories.map((category) => {
+              return (
+                <div
+                  key={category.id}
+                  className="  bg-gray-200  inline-block align-center justify-center rounded-full p-3 text-sm font-semibold  border-black  border-1 hover:bg-red-500 text-black m-1 "
+                >
+                  {/* {console.log(category.id)} */}
+                  {category.name}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* <div className="overlay dismiss w-full"> */}
@@ -94,7 +130,6 @@ const Modal = ({
         />
       </svg>
     </div>
-    // </div>
   );
 };
 

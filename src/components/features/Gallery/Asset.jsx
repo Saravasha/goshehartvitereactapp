@@ -12,6 +12,7 @@ const Asset = ({ image, categories, directApi }) => {
         className="Asset-Image w-full bg-white border-black border-b-4  shadow-lg p-4 "
         alt={image.name}
         src={directApi + image.imageUrl}
+        loading="lazy"
       ></img>
       <div className="Asset-Title m-4 flex align-center justify-center text-2xl font-semibold text-black ">
         {image.name}

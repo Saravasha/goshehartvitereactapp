@@ -12,10 +12,10 @@ export default function Navbar() {
   const MappingPages = () => {
     return (
       <div className="text-sm lg:flex-grow">
-        {pages.map((page) => (
+        {pages.map((page, index) => (
           <a
             href={page.title}
-            key={page.title}
+            key={index}
             className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-white hover:text-white mr-4"
           >
             {page.title}

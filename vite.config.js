@@ -21,5 +21,7 @@ export default defineConfig({
       "http://localhost:5283/api/react/page",
     DOTNET_API_URL:
       process.env.VITE_DOTNET_API_TARGET || "https://admin.goshehart.se/",
+    DOTNET_API_URL_DEV:
+      process.env.VITE_DOTNET_API_TARGET || "http://localhost:5283/",
   },
 });
