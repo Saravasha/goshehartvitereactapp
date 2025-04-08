@@ -21,10 +21,10 @@ function App() {
     <>
       <Header />
       <Navbar />
-      <GetRandomAsset />
-      <Sidebar>
+      {/* <GetRandomAsset /> */}
+      {/* <Sidebar>
         <ArtGallery2 />
-      </Sidebar>
+      </Sidebar> */}
       <Main></Main>
       <ArtGallery />
       <ComingSoon />

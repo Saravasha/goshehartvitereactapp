@@ -20,8 +20,8 @@ const useApi = () => {
         .then((result) => {
           setAssets(result.data);
           setLoading(false);
-          console.log(assets);
-          console.log(isLoading);
+          console.log("assetsFromApi = ", assets);
+          console.log("isLoadingFromAssetsApi = ", isLoading);
         })
         .catch((error) => {
           console.error("Assets:error fetching data", error);
@@ -38,15 +38,23 @@ const useApi = () => {
         .get(pageUrl)
         .then((result) => {
           setPages(result.data);
-          console.log(pages);
           setLoading(false);
+          console.log("pagesFromApi = ", pages);
+          console.log("isLoadingFromPagesApi = ", isLoading);
         })
         .catch((error) => {
           console.error("Pages:error fetching data", error);
           setLoading(false);
         });
     }
+    if (!pages) {
+      console.log("pages is null");
+    } else {
+      console.log("pages is not null, it's = ", pages);
+    }
+
     PagesGetter();
+    console.log(pages);
   }, []);
 
   return { assets, pages, directApi, isLoading };

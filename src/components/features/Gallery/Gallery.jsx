@@ -7,10 +7,12 @@ import Modal from "./Modal";
 const Gallery = ({ assets, directApi, isLoading }) => {
   const [clickedImage, setClickedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState();
+  const [clickedAsset, setClickedAsset] = useState(null);
 
   const handleClick = (asset) => {
     setCurrentIndex(asset.id);
     setClickedImage(directApi + asset.imageUrl);
+    setClickedAsset(asset);
   };
 
   const handleRotationRight = () => {
@@ -19,6 +21,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
       setCurrentIndex(0);
       const newUrl = directApi + assets[0].imageUrl;
       setClickedImage(newUrl);
+      setClickedAsset(assets[0]);
       return;
     }
     const newIndex = currentIndex + 1;
@@ -28,6 +31,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
     const newItem = directApi + newUrl[0].imageUrl;
     setClickedImage(newItem);
     setCurrentIndex(newIndex);
+    setClickedAsset(newUrl[0]);
   };
 
   const handleRotationLeft = () => {
@@ -36,6 +40,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
       setCurrentIndex(totalLength - 1);
       const newUrl = directApi + assets[totalLength - 1].imageUrl;
       setClickedImage(newUrl);
+      setClickedAsset(assets[totalLength - 1]);
       return;
     }
     const newIndex = currentIndex - 1;
@@ -45,6 +50,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
     const newItem = directApi + newUrl[0].imageUrl;
     setClickedImage(newItem);
     setCurrentIndex(newIndex);
+    setClickedAsset(newUrl[0]);
   };
 
   return (
@@ -55,7 +61,8 @@ const Gallery = ({ assets, directApi, isLoading }) => {
         </h1>
       ) : (
         <div>
-          <div className="Gallery sm:align-center sm:justify-center gap-4 m-4 p-4 2xl:columns-5 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 ">
+          <div className="Gallery sm:align-center sm:justify-center gap-4 m-4 p-4  columns-4">
+            {/* 2xl:columns-5 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 */}
             <>
               {assets.map((asset) => (
                 // Asset Wrapper abstracted to parent component for easier onClick handling. Asset <div> wrapper uncommented to what change was made.
@@ -82,6 +89,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
           handleRotationLeft={handleRotationLeft}
           handleRotationRight={handleRotationRight}
           setClickedImage={setClickedImage}
+          clickedAsset={clickedAsset}
         />
       )}
     </div>
