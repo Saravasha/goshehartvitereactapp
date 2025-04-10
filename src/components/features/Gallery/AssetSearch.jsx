@@ -16,11 +16,11 @@ const AssetSearch = ({ searchAsset }) => {
           onChange={(e) => searchAsset(e)}
           className="w-full max-w-sm"
         > */}
-        <div className="flex align-center border-b-1 border-white py-2">
+        <div className="flex align-center border-b-1 border-black py-2">
           <input
             onChange={(e) => searchAsset(e)}
             type="text"
-            className="font-thin bg-transparent border-none w-full text-black  py-1   focus:outline-none"
+            className="font-thin bg-transparent border-none shadows-lg rounded w-1/1 text-black  py-1   focus:outline-none"
             placeholder="Search Gallery for an Asset by ..."
             onSubmit={() => handleSubmit()}
           />

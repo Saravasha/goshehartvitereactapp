@@ -14,7 +14,6 @@ export default function ImagesGetter() {
     axios.get(apiUrl).then((result) => {
       const assets = result.data;
       setAssets(assets);
-      console.log("assets = ", assets);
     });
   }, []);
 

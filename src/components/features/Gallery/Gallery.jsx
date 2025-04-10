@@ -54,33 +54,36 @@ const Gallery = ({ assets, directApi, isLoading }) => {
   };
 
   return (
-    <div className="Gallery border-black bg-red-500 border-1 rounded shadow-lg m-4 grid">
+    <>
       {isLoading ? (
         <h1 className="font-thin align-center justify-center flex mx-auto p-4">
           Loading...
         </h1>
       ) : (
-        <div>
-          <div className="Gallery sm:align-center sm:justify-center gap-4 m-4 p-4  columns-4">
-            {/* 2xl:columns-5 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 */}
-            <>
-              {assets.map((asset) => (
-                // Asset Wrapper abstracted to parent component for easier onClick handling. Asset <div> wrapper uncommented to what change was made.
-                <div
-                  className="Asset sm:max-w-sm md:max-w-md lg:max-w-lg  rounded shadow-lg bg-inherit  border-black border-4 h-full m-4 break-inside-auto overflow-auto  "
-                  key={asset.id}
-                  onClick={() => handleClick(asset)}
-                >
-                  <Asset
-                    key={asset.id}
-                    image={asset}
-                    categories={asset.categories}
-                    directApi={directApi}
-                  />
-                </div>
-              ))}
-            </>
-          </div>
+        // sm:align-center sm:justify-center columns-3 2xl:columns-2 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1
+        <div className="Gallery   align-center justify-center columns-3  gap-4 m-4 p-4    bg-inherit  rounded shadow-lg  ">
+          {/* <div> */}
+          {/* <> */}
+          {/* 2xl:columns-5 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 */}
+          {assets.map((asset) => (
+            // Asset Wrapper abstracted to parent component for easier onClick handling. Asset <div> wrapper uncommented to what change was made.
+            <div
+              //border-black border-4 h-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-lx 2xl:max-w-2xl
+              className="Asset 
+                rounded shadow-lg  hover:shadow-2xl   flex  justify-center align-center m-4 break-inside-auto overflow-auto  "
+              key={asset.id}
+              onClick={() => handleClick(asset)}
+            >
+              <Asset
+                key={asset.id}
+                image={asset}
+                categories={asset.categories}
+                directApi={directApi}
+              />
+            </div>
+          ))}
+          {/* </> */}
+          {/* // </div> */}
         </div>
       )}
       {clickedImage && (
@@ -92,7 +95,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
           clickedAsset={clickedAsset}
         />
       )}
-    </div>
+    </>
   );
 };
 

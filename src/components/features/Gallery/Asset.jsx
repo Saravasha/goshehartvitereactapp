@@ -4,19 +4,19 @@ import Gallery from "./Gallery";
 import ArtGallery from "./ArtGallery";
 import Modal from "./Modal";
 
-const Asset = ({ image, categories, directApi }) => {
+const Asset = ({ image, directApi }) => {
   return (
     <>
       {/* <div className="Asset sm:max-w-sm md:max-w-md lg:max-w-lg  rounded shadow-lg bg-inherit  border-black border-4 h-full m-4 break-inside-auto overflow-auto  " */}
       <img
-        className="Asset-Image w-full bg-white border-black border-b-4  shadow-lg p-4 "
+        // className="Asset-Image w-full bg-white border-black border-b-4  shadow-lg p-4 "
         alt={image.name}
         src={directApi + image.imageUrl}
         loading="lazy"
       ></img>
-      <div className="Asset-Title m-4 flex align-center justify-center text-2xl font-semibold text-black ">
+      {/* <h2 className="Asset-Title m-4 flex align-center justify-center  font-semibold text-black text-wrap ">
         {image.name}
-      </div>
+      </h2>
       <div className="Description flex align-center justify-center border-black border-4 m-4 font-thin text-black text-xl p-4">
         {image.description}
       </div>
@@ -32,8 +32,8 @@ const Asset = ({ image, categories, directApi }) => {
               </div>
             );
           })}
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       {/* </div> */}
     </>
   );

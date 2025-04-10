@@ -6,17 +6,20 @@
 /* margin: 1rem; */
 .PageContainer > p > img,
 .ContentContainer > p > img {
-  width: 100% !important;
-  height: 100% !important;
+  /* width: 5% !important; */
+  /* height: 100% !important; */
   /* margin: 1rem; */
   display: flex;
   align-items: center;
   justify-self: center;
   /* padding: 1rem; */
-  background-color: aqua;
+  /* background-color: aqua; */
   margin: 0rem;
   gap: 1rem;
-  border: solid 4px black;
+  /* border: solid 4px black; */
+  background-color: rgba(255, 255, 255, 1);
+  /* box-shadow: var(--shadow-lg); */
+  /* border-radius: var(--radius-2xl); 1rem (16px) */
 }
 
 .PageContainer > p,
@@ -29,9 +32,13 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  border: solid 4px gold;
-  background-color: aquamarine;
+  background-color: rgba(255, 255, 255, 0);
+  /* border: solid 4px gold; */
+  /* background-color: aquamarine; */
   margin: 0rem;
+  text-align: center;
+  /* box-shadow: var(--shadow-lg); */
+  border-radius: var(--radius-2xl);
 }
 
 .ContentContainer {
@@ -40,29 +47,55 @@
   gap: 1rem;
 }
 
+.Page {
+  box-shadow: black 1rem;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-2xl); /* 1rem (16px) */
+}
+
+/* .Pages {
+  background-color: rgba(25, 255, 0, 1);
+} */
+
 .PageTitle {
-  border: solid 4px black;
+  /* border: solid 4px black; */
   padding-bottom: 2rem;
   align-items: center;
   justify-content: center;
+  background-color: black;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-2xl); /* 1rem (16px) */
 }
 
 .PageContainer {
-  border: double 4px black;
+  /* border: double 4px black; */
+  /* background-color: black; */
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-2xl); /* 1rem (16px) */
 }
 
+/* .PageContainer > * > img:hover {
+  box-shadow: var(--shadow-2xl);
+} */
+
 .ContentTitle {
-  border: dashed 4px red;
+  /* border: dashed 4px red; */
   align-items: center;
   display: flex;
   justify-content: center;
   /* margin-left: 0; */
   margin: 0;
+  background-color: black;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-2xl); /* 1rem (16px) */
 }
 
 .ContentContainer {
-  border: dotted 4px red;
+  /* border: dotted 4px red; */
   margin-top: 1rem;
+  /* background-color: black; */
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-2xl); /* 1rem (16px) */
 }
 
 /* div {
