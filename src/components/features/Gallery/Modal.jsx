@@ -49,11 +49,10 @@ const Modal = ({
         <div className="flex relative  flex-col ">
           {/* modal title */}
           <div className=" flex relative  justify-center align-center">
-            <h1 className="Modal-Title m-4 flex-col flex relative    hover:animate-pulse text-1xl shadow-2xl rounded font-thin text-white">
+            <h1 className="Modal-Title m-4 flex-col flex relative    hover:animate-pulse text-1xl shadow-2xl rounded font-thin text-gray-800 dark:text-white">
               {clickedAsset.name}
             </h1>
           </div>
-
           <div className="    relative h-1/2   flex justify-center align-center  ">
             <img
               className=" Modal-Image   relative     "
@@ -63,13 +62,11 @@ const Modal = ({
           </div>
 
           <div className="Modal-Description  relative flex align-center justify-center   ">
-            <p className="   flex  align-center justify-center m-4 font-thin text-inherit text-shadow-2xs hover:animate-pulse text-4xl  px-10  ">
+            <p className="   flex  text-gray-800 dark:text-white align-center justify-center m-4 font-thin  text-shadow-2xs hover:animate-pulse text-4xl  px-10  ">
               {clickedAsset.description}
             </p>
           </div>
-
           <div className="Modal-Categories    align-center justify-center flex  rounded-full bg-transparent   font-thin text-black text-sm   ">
-            {/* {console.log("clickedAsset = ", clickedAsset)} */}
             {clickedAsset.categories.map((category) => {
               return (
                 <div
@@ -87,7 +84,7 @@ const Modal = ({
 
       {/* <div className="overlay dismiss w-full"> */}
       <span
-        className="dismiss fixed right-0 top-0 font-thin text-8xl hover:bg-amber-300 hover:animate-pulse  m-2 rounded shadow-lg "
+        className="dismiss fixed right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-amber-300 hover:animate-pulse  m-2 rounded shadow-lg "
         onClick={handleClick}
       >
         &#10006;

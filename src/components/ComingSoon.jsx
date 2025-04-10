@@ -2,24 +2,20 @@ import React from "react";
 
 export default function ComingSoon() {
   return (
-    <>
-      <div className="ComingSoon flex justify-center items-center m-4 rounded shadow">
+    <div className="ComingSoonBody flex justify-center align-center pt-12 h-full">
+      <span className="text-9xl px-4  absolute text-red-50 hover:text-red-300 ">
+        Gosheh Art
+      </span>
+      <div className=" flex justify-center items-center w-full h-full">
+        <p className="absolute text-red-50 hover:text-red-300 text-4xl">
+          Coming soon...
+        </p>
         <img
           src="/comingsoonimg2.jpg"
-          className=" w-screen bg-cover bg-no-repeat rounded shadow"
+          className="rounded-full shadow bg-screen "
           alt="ph"
         />
-        <div className="absolute top-2 left-2 ">
-          <span className="text-9xl  text-red-50 hover:text-red-300 ">
-            Gosheh Art
-          </span>
-        </div>
-        <div className="absolute justify-center items-center">
-          <p className="text-red-50 hover:text-red-300 text-4xl">
-            Coming Soon...
-          </p>
-        </div>
       </div>
-    </>
+    </div>
   );
 }

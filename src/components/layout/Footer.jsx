@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer>
       <div className="">
-        <span className="text-red-500 hover:text-black text-4xl flex items-center justify-center ">
+        <span className="hover:text-red-500 font-thin text-black text-4xl flex items-center justify-center ">
           &copy; Gosheh Art {currentYear}
         </span>
       </div>

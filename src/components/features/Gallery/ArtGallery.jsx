@@ -21,7 +21,6 @@ const ArtGallery = () => {
   };
 
   useEffect(() => {
-    console.log(assets);
     setFoundAssets(
       assets.filter(
         (asset) =>
@@ -35,16 +34,16 @@ const ArtGallery = () => {
   }, [searchTerm, assets]);
 
   return (
-    <div className="ArtGallery border-black bg-red-500 border-1 rounded shadow-lg m-4">
-      <h1 className="text-6xl font-thin m-4 mx-auto flex align-center justify-center border-b-black border-b-4 p-4 ">
-        Art Gallery
-      </h1>
+    <div className="ArtGallery border-black bg-inherit text-black font-thin border-1 rounded shadow-lg m-4">
       {isLoading ? (
         <h1 className="font-thin align-center justify-center flex mx-auto p-4">
           Loading...
         </h1>
       ) : (
         <>
+          <h1 className="text-6xl font-thin m-4 mx-auto flex align-center justify-center  border-b-1 p-4 ">
+            Art Gallery
+          </h1>
           <AssetSearch searchAsset={searchAsset} />
 
           {foundAssets.length !== 0 ? (

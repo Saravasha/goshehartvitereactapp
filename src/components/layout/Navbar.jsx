@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import GetRandomAsset from "../features/GetRandomAsset";
@@ -12,15 +12,29 @@ export default function Navbar() {
   const MappingPages = () => {
     return (
       <div className="text-sm lg:flex-grow">
-        {pages.map((page, index) => (
-          <a
-            href={page.title}
-            key={index}
-            className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-white hover:text-white mr-4"
-          >
-            {page.title}
-          </a>
-        ))}
+        <div>
+          {pages.map((page, index) => (
+            <Link
+              to={page.title}
+              key={index}
+              smooth={true}
+              duration={500}
+              className="block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl text-white hover:text-white mr-4"
+            >
+              {page.title}
+            </Link>
+          ))}
+          <div className="Features ">
+            <Link
+              className="block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl text-white hover:text-white mr-4"
+              to="ArtGallery"
+              smooth={true}
+              duration={500}
+            >
+              Art Gallery
+            </Link>
+          </div>
+        </div>
       </div>
     );
   };
