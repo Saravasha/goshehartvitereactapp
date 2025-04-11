@@ -1,62 +1,121 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-scroll";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import GetRandomAsset from "../features/GetRandomAsset";
+import ScrollToTop from "react-scroll-to-top";
 
 import useApi from "../api/useApi";
 
 export default function Navbar() {
-  var { pages } = useApi();
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const { pages } = useApi();
+  const navRef = useRef();
+
+  const [navbarOffset, setNavbarOffset] = useState(0);
+
+  // const ScrollToTop = () => {
+  //   return <div classname></div>;
+  // };
 
   const MappingPages = () => {
+    const handleLinkClick = () => {
+      setShow(false); // Hide navbar when link is clicked
+      // console.log(this.page.title);
+    };
     return (
       <div className="text-sm lg:flex-grow">
-        <div>
-          {pages.map((page, index) => (
-            <Link
-              to={page.title}
-              key={index}
-              smooth={true}
-              duration={500}
-              className="block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl text-white hover:text-white mr-4"
-            >
+        {pages.map((page, index) => (
+          <Link
+            to={page.title}
+            onClick={handleLinkClick}
+            key={index}
+            smooth={true}
+            duration={500}
+            offset={navbarOffset}
+          >
+            <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-red-500 hover:text-gray-700 hover:shadow-2xl mr-4  ">
               {page.title}
-            </Link>
-          ))}
-          <div className="Features ">
-            <Link
-              className="block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl text-white hover:text-white mr-4"
-              to="ArtGallery"
-              smooth={true}
-              duration={500}
-            >
-              Art Gallery
-            </Link>
-          </div>
-        </div>
+            </p>
+          </Link>
+        ))}
+        {/* //Hard coded Features */}
+        <Link
+          to="ArtGallery"
+          onClick={handleLinkClick}
+          smooth={true}
+          duration={500}
+          offset={navbarOffset}
+        >
+          <p className="block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-red-500 hover:text-white mr-4">
+            Art Gallery
+          </p>
+        </Link>
       </div>
     );
   };
 
+  const controlNavbar = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > lastScrollY) {
+        // if scroll down hide the navbar
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Smooth scroll effect
+    });
+  };
+
   useEffect(() => {
-    pages = pages.map((page) => page.title);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener("scroll", controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    const updateOffset = () => {
+      if (navRef.current) {
+        const height = navRef.current.offsetHeight;
+        setNavbarOffset(-height);
+      }
+    };
+
+    updateOffset(); // initial set
+    window.addEventListener("resize", updateOffset);
+
+    return () => window.removeEventListener("resize", updateOffset);
   }, []);
 
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap bg-gradient-to-r from-green-400 to-white p-6">
+      <nav
+        ref={navRef}
+        className={`active transition-all  duration-300 ease-in-out ${
+          !show ? "hidden" : ""
+        } flex transition-opacity sticky top-0 items-center z-50 justify-between flex-wrap bg-gradient-to-r from-green-950 to-white p-6`}
+      >
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <svg
-            className="fill-current h-8 w-8 mr-2"
-            width="54"
-            height="54"
-            viewBox="0 0 54 54"
-            xmlns="http://www.w3.org/2000/svg"
+          <span
+            className="font-semibold text-xl tracking-tight cursor-pointer"
+            onClick={scrollToTop}
           >
-            <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-          </svg>
-          <span className="font-semibold text-xl tracking-tight">
             Goshehart.se
           </span>
         </div>
@@ -75,6 +134,7 @@ export default function Navbar() {
         <div className="w-full block flex-grow lg:flex text text-8xl lg:items-center lg:w-auto drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           <MappingPages />
         </div>
+
         {/* <div><Link to={pages}></Link></div> */}
       </nav>
     </>

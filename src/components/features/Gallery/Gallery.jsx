@@ -3,16 +3,27 @@ import React, { useEffect, useState } from "react";
 import Asset from "./Asset";
 import ArtGallery from "./ArtGallery";
 import Modal from "./Modal";
+import ScrollToTopButton from "../ScrollToTopButton";
 
 const Gallery = ({ assets, directApi, isLoading }) => {
   const [clickedImage, setClickedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState();
   const [clickedAsset, setClickedAsset] = useState(null);
 
+  const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
+
   const handleClick = (asset) => {
     setCurrentIndex(asset.id);
     setClickedImage(directApi + asset.imageUrl);
     setClickedAsset(asset);
+
+    setIsModalVisible(true); // Open modal when image is clicked
+  };
+
+  const handleCloseModal = () => {
+    setClickedImage(null);
+    setClickedAsset(null);
+    setIsModalVisible(false); // Close modal
   };
 
   const handleRotationRight = () => {
@@ -93,8 +104,11 @@ const Gallery = ({ assets, directApi, isLoading }) => {
           handleRotationRight={handleRotationRight}
           setClickedImage={setClickedImage}
           clickedAsset={clickedAsset}
+          onClose={handleCloseModal} // Pass close handler to modal
         />
       )}
+
+      {!isModalVisible && <ScrollToTopButton isVisible={!isModalVisible} />}
     </>
   );
 };

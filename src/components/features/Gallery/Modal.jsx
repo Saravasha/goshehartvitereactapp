@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Asset from "./Asset";
+
 const Modal = ({
   clickedImage,
   handleRotationLeft,
@@ -7,11 +7,14 @@ const Modal = ({
   setClickedImage,
   clickedAsset,
   setClickedAsset,
+
+  onClose,
 }) => {
   const handleClick = (e) => {
     if (e.target.classList.contains("dismiss")) {
       setClickedImage(null);
       // setClickedAsset(null);
+      if (onClose) onClose(); // Call onClose prop to notify parent
     }
   };
 
@@ -20,7 +23,7 @@ const Modal = ({
     function handleEscapeKey(e) {
       if (e.code === "Escape") {
         setClickedImage(null);
-        // setClickedAsset(null);
+        if (onClose) onClose(); // Call onClose prop to notify parent
       }
     }
 
@@ -49,13 +52,13 @@ const Modal = ({
         <div className="flex relative  flex-col ">
           {/* modal title */}
           <div className=" flex relative  justify-center align-center">
-            <h1 className="Modal-Title m-4 flex-col flex relative    hover:animate-pulse text-1xl shadow-2xl rounded font-thin text-gray-800 dark:text-white">
+            <h1 className="Modal-Title m-4 flex-col flex relative hover:animate-pulse text-1xl shadow-2xl rounded font-thin text-gray-800 dark:text-white">
               {clickedAsset.name}
             </h1>
           </div>
-          <div className="    relative h-1/2   flex justify-center align-center  ">
+          <div className="relative h-1/2 flex justify-center align-center">
             <img
-              className=" Modal-Image   relative     "
+              className=" Modal-Image relative"
               src={clickedImage}
               alt="bigger picture"
             ></img>
@@ -83,15 +86,29 @@ const Modal = ({
       </div>
 
       {/* <div className="overlay dismiss w-full"> */}
-      <span
-        className="dismiss fixed right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-amber-300 hover:animate-pulse  m-2 rounded shadow-lg "
+
+      <svg
         onClick={handleClick}
+        className="dismiss cursor-pointer fixed w-[64px] h-[64px] right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-amber-300 hover:animate-pulse  m-2 rounded shadow-lg "
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
       >
-        &#10006;
-      </span>
+        <path
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M6 18 17.94 6M18 18 6.06 6"
+        />
+      </svg>
+
       <svg
         onClick={handleRotationLeft}
-        className="w-[64px] h-[64px] text-gray-800 dark:text-white fixed left-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse ml-1 rounded shadow-lg"
+        className="w-[64px] h-[64px] cursor-pointer text-gray-800 dark:text-white fixed left-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse ml-1 rounded shadow-lg"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -110,7 +127,7 @@ const Modal = ({
 
       <svg
         onClick={handleRotationRight}
-        className="w-[64px] h-[64px] text-gray-800 dark:text-white fixed right-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse mr-1 rounded shadow-lg"
+        className="w-[64px] h-[64px] cursor-pointer text-gray-800 dark:text-white fixed right-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse mr-1 rounded shadow-lg"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
