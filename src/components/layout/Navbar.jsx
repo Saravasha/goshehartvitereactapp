@@ -1,24 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-scroll";
-import axios from "axios";
-import DOMPurify from "dompurify";
-import GetRandomAsset from "../features/GetRandomAsset";
-import ScrollToTop from "react-scroll-to-top";
 
-import useApi from "../api/useApi";
-
-export default function Navbar() {
+export default function Navbar({ pages, isModalVisible }) {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const { pages } = useApi();
   const navRef = useRef();
 
   const [navbarOffset, setNavbarOffset] = useState(0);
-
-  // const ScrollToTop = () => {
-  //   return <div classname></div>;
-  // };
 
   const MappingPages = () => {
     const handleLinkClick = () => {
@@ -36,7 +25,7 @@ export default function Navbar() {
             duration={500}
             offset={navbarOffset}
           >
-            <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-red-500 hover:text-gray-700 hover:shadow-2xl mr-4  ">
+            <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4  ">
               {page.title}
             </p>
           </Link>
@@ -49,8 +38,19 @@ export default function Navbar() {
           duration={500}
           offset={navbarOffset}
         >
-          <p className="block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-red-500 hover:text-white mr-4">
+          <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
             Art Gallery
+          </p>
+        </Link>
+        <Link
+          to="SocialMedia"
+          onClick={handleLinkClick}
+          smooth={true}
+          duration={500}
+          offset={navbarOffset}
+        >
+          <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
+            Social Media
           </p>
         </Link>
       </div>
@@ -77,6 +77,14 @@ export default function Navbar() {
       behavior: "smooth", // Smooth scroll effect
     });
   };
+
+  useEffect(() => {
+    if (!isModalVisible) {
+      setShow(true); // Ensure navbar is shown when modal is closed
+    } else {
+      setShow(false); // Hide navbar when modal is open
+    }
+  }, [isModalVisible]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -111,9 +119,9 @@ export default function Navbar() {
           !show ? "hidden" : ""
         } flex transition-opacity sticky top-0 items-center z-50 justify-between flex-wrap bg-gradient-to-r from-green-950 to-white p-6`}
       >
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
+        <div className="flex items-center flex-shrink-0 text-white mr-6 hover:animate-pulse">
           <span
-            className="font-semibold text-xl tracking-tight cursor-pointer"
+            className="font-semibold text-xl tracking-tight cursor-pointer "
             onClick={scrollToTop}
           >
             Goshehart.se

@@ -23,7 +23,11 @@ export const Page = ({ page, directApi }) => {
 
   return (
     //bg-gradient-to-r from-gray-300 to-slate-100
-    <>
+    <div
+      className="Page flex flex-col gap-4 rounded shadow-sm  text-4xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow m-9  h-full p-4 "
+      key={page.id}
+      id={page.title}
+    >
       <h2 className="PageTitle text-gray-800 dark:text-white  text-8xl justify-center items-center flex drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin  flex-grow w-full h-full">
         {page.title}
       </h2>
@@ -54,6 +58,6 @@ export const Page = ({ page, directApi }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };

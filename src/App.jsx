@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import Footer from "./components/layout/Footer.jsx";
 import Header from "./components/layout/Header.jsx";
 import ComingSoon from "./components/ComingSoon.jsx";
@@ -8,12 +8,12 @@ import Main from "./components/layout/Main.jsx";
 import { ApiProvider } from "./components/api/ApiContext.jsx";
 
 import ArtGallery from "./components/features/Gallery/ArtGallery.jsx";
-import GetRandomAsset from "./components/features/GetRandomAsset.jsx";
-
 import useApi from "./components/api/useApi.jsx";
+import { SocialMedia } from "./components/layout/SocialMedia.jsx";
 
 function App() {
-  const { isLoading } = useApi();
+  const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
+  const { assets, pages, directApi, isLoading } = useApi();
   // console.log("App environment = ", `${import.meta.env.MODE}`);
 
   return (
@@ -24,11 +24,23 @@ function App() {
         <>
           <ComingSoon />
           <Header />
-          <Navbar />
+          <Navbar pages={pages} isModalVisible={isModalVisible} />
 
-          <Main></Main>
+          <Main
+            assets={assets}
+            pages={pages}
+            directApi={directApi}
+            isLoading={isLoading}
+          ></Main>
 
-          <ArtGallery />
+          <ArtGallery
+            assets={assets}
+            directApi={directApi}
+            isLoading={isLoading}
+            isModalVisible={isModalVisible}
+            setIsModalVisible={setIsModalVisible}
+          />
+          <SocialMedia />
           <Footer />
         </>
       )}
