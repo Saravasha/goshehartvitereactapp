@@ -1,9 +1,6 @@
-import React, { Suspense, useEffect, useState } from "react";
-import useApi from "../api/useApi";
+import React from "react";
 
-export default function GetRandomAsset() {
-  const { assets, directApi, isLoading } = useApi();
-
+export default function GetRandomAsset({ assets, directApi, isLoading }) {
   if (!assets || assets.length === 0) {
     return <div>No images available</div>;
   }

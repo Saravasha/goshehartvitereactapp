@@ -9,14 +9,14 @@ const AssetSearch = ({ searchAsset }) => {
 
   return (
     <>
-      <div className="Search  rounded  flex  align-center justify-center ">
+      <div className="Search  rounded  flex  align-center justify-center border-4 border-transparent">
         {/* <form
           </form>
           type="button"
           onChange={(e) => searchAsset(e)}
           className="w-full max-w-sm"
         > */}
-        <div className="flex align-center border-b-1 border-black py-2">
+        <div className="flex align-center border-b-1 border-black w-1/4 py-2">
           <input
             onChange={(e) => searchAsset(e)}
             type="text"

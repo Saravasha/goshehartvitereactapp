@@ -1,8 +1,5 @@
-import useApi from "../api/useApi";
 import Asset from "../features/Gallery/Asset";
 export default function Gallery() {
-  const { assets, directApi, isLoading } = useApi();
-
   return (
     <div className="Gallery border-black bg-red-500 border-1 rounded shadow-lg m-4 grid">
       {isLoading ? (

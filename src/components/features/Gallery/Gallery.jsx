@@ -1,16 +1,18 @@
-import useApi from "../../api/useApi";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Asset from "./Asset";
-import ArtGallery from "./ArtGallery";
 import Modal from "./Modal";
 import ScrollToTopButton from "../ScrollToTopButton";
 
-const Gallery = ({ assets, directApi, isLoading }) => {
+const Gallery = ({
+  assets,
+  directApi,
+  isLoading,
+  isModalVisible,
+  setIsModalVisible,
+}) => {
   const [clickedImage, setClickedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState();
   const [clickedAsset, setClickedAsset] = useState(null);
-
-  const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
 
   const handleClick = (asset) => {
     setCurrentIndex(asset.id);
@@ -72,7 +74,7 @@ const Gallery = ({ assets, directApi, isLoading }) => {
         </h1>
       ) : (
         // sm:align-center sm:justify-center columns-3 2xl:columns-2 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1
-        <div className="Gallery   align-center justify-center columns-3  gap-4 m-4 p-4    bg-inherit  rounded shadow-lg  ">
+        <div className="Gallery   align-center justify-center columns-3  gap-4  p-4      rounded shadow-lg  ">
           {/* <div> */}
           {/* <> */}
           {/* 2xl:columns-5 xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 */}

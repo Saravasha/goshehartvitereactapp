@@ -7,7 +7,6 @@ const Modal = ({
   setClickedImage,
   clickedAsset,
   setClickedAsset,
-
   onClose,
 }) => {
   const handleClick = (e) => {
@@ -28,7 +27,10 @@ const Modal = ({
     }
 
     document.addEventListener("keydown", handleEscapeKey);
-    return () => document.removeEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.style.overflow = "auto"; // Enable scrolling again when modal is closed
+    };
   }, []);
 
   useEffect(() => {
