@@ -87,8 +87,7 @@ const Modal = ({
         </div>
       </div>
 
-      {/* <div className="overlay dismiss w-full"> */}
-
+      {/* cross image svg */}
       <svg
         onClick={handleClick}
         className="dismiss cursor-pointer fixed w-[64px] h-[64px] right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-amber-300 hover:animate-pulse  m-2 rounded shadow-lg "
@@ -108,6 +107,7 @@ const Modal = ({
         />
       </svg>
 
+      {/* leftbutton */}
       <svg
         onClick={handleRotationLeft}
         className="w-[64px] h-[64px] cursor-pointer text-gray-800 dark:text-white fixed left-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse ml-1 rounded shadow-lg"
@@ -126,7 +126,7 @@ const Modal = ({
           d="m15 19-7-7 7-7"
         />
       </svg>
-
+      {/* rightbutton */}
       <svg
         onClick={handleRotationRight}
         className="w-[64px] h-[64px] cursor-pointer text-gray-800 dark:text-white fixed right-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse mr-1 rounded shadow-lg"

@@ -2,14 +2,10 @@ import React from "react";
 import AssetSearch from "./AssetSearch";
 import Gallery from "./Gallery";
 import { useEffect, useState } from "react";
+import { useData } from "../../api/ApiContext";
 
-const ArtGallery = ({
-  assets,
-  directApi,
-  isLoading,
-  isModalVisible,
-  setIsModalVisible,
-}) => {
+const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
+  const { assets, directApi, isLoading } = useData();
   const [searchTerm, setSearchTerm] = useState(() => {
     return "";
   });

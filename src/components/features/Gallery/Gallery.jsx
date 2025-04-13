@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Asset from "./Asset";
 import Modal from "./Modal";
 import ScrollToTopButton from "../ScrollToTopButton";
+import { useData } from "../../api/ApiContext";
 
 const Gallery = ({
   assets,
@@ -10,6 +11,7 @@ const Gallery = ({
   isModalVisible,
   setIsModalVisible,
 }) => {
+  // const { assets, directApi, isLoading } = useData();
   const [clickedImage, setClickedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState();
   const [clickedAsset, setClickedAsset] = useState(null);
@@ -89,7 +91,7 @@ const Gallery = ({
             >
               <Asset
                 key={asset.id}
-                image={asset}
+                asset={asset}
                 categories={asset.categories}
                 directApi={directApi}
               />

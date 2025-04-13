@@ -1,6 +1,5 @@
 import ScrollToTop from "react-scroll-to-top";
-import ScrollButton2 from "../../assets/scroll-to-top2.svg";
-import ScrollButton from "../../assets/scroll-to-top.svg";
+
 import React, { useEffect, useState } from "react";
 
 const ScrollToTopButton = ({ isVisible }) => {

@@ -1,9 +1,12 @@
 import React from "react";
 import "./PageBuilder.css";
-import ParallaxEffect from "../ParallaxEffect";
-import { Page } from "./Page";
 
-export default function PageBuilder({ assets, pages, directApi, isLoading }) {
+import { Page } from "./Page";
+import { useData } from "../../api/ApiContext";
+import GetRandomAsset from "../GetRandomAsset";
+
+export default function PageBuilder() {
+  const { pages, directApi, isLoading } = useData();
   return (
     <>
       {isLoading ? (
@@ -17,18 +20,14 @@ export default function PageBuilder({ assets, pages, directApi, isLoading }) {
           </div>
           {pages.map((page, index) => (
             <div
-              className="PageParallax text-gray-800 dark:text-white  text-8xl justify-center [&_*]justify-center [&_*]items-center items-center flex flex-col w-full flex-grow  p-4 "
+              className="Wrapper text-gray-800 dark:text-white  text-8xl justify-center [&_*]justify-center [&_*]items-center items-center flex flex-col w-full flex-grow  p-4 pb-96 pt-0 mt-0  "
               key={page.id}
               id={page.title}
             >
-              <Page key={page.id} page={page} directApi={directApi} />
-              <ParallaxEffect
-                assets={assets}
-                directApi={directApi}
-                isLoading={isLoading}
-                key={-page.id}
-                id={-page.title}
-              />
+              <Page key={page.id} page={page} directApi={directApi}></Page>
+              <div className="ParallaxContainer text-gray-800 dark:text-white  text-8xl justify-center [&_*]justify-center [&_*]items-center flex p-4  m-4 absolute  bg-no-repeat [&_*]:w-full -z-1 ">
+                <GetRandomAsset className="ParallaxContainer text-gray-800 dark:text-white  text-8xl justify-center [&_*]justify-center [&_*]items-center  flex p-4  m-4 absolute bg-fixed bg-no-repeat [&_*]:w-full -z-1 " />
+              </div>
             </div>
           ))}
         </div>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-scroll";
+import { useData } from "../api/ApiContext";
 
-export default function Navbar({ pages, isModalVisible }) {
+export default function Navbar({ isModalVisible }) {
+  const { pages } = useData();
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 

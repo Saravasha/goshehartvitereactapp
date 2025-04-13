@@ -11,32 +11,27 @@ import ArtGallery from "./components/features/Gallery/ArtGallery.jsx";
 import useApi from "./components/api/useApi.jsx";
 import { SocialMedia } from "./components/layout/SocialMedia.jsx";
 
+import { useData } from "./components/api/ApiContext.jsx";
+import LoadingScreen from "./components/LoadingScreen.jsx";
+
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
-  const { assets, pages, directApi, isLoading } = useApi();
+  const { isLoading } = useData();
   // console.log("App environment = ", `${import.meta.env.MODE}`);
 
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <LoadingScreen />
       ) : (
         <>
-          <ComingSoon />
           <Header />
-          <Navbar pages={pages} isModalVisible={isModalVisible} />
+          <Navbar isModalVisible={isModalVisible} />
+          <ComingSoon />
 
-          <Main
-            assets={assets}
-            pages={pages}
-            directApi={directApi}
-            isLoading={isLoading}
-          ></Main>
+          <Main />
 
           <ArtGallery
-            assets={assets}
-            directApi={directApi}
-            isLoading={isLoading}
             isModalVisible={isModalVisible}
             setIsModalVisible={setIsModalVisible}
           />
