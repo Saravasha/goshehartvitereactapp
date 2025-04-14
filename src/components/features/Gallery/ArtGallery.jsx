@@ -2,14 +2,10 @@ import React from "react";
 import AssetSearch from "./AssetSearch";
 import Gallery from "./Gallery";
 import { useEffect, useState } from "react";
+import { useData } from "../../api/ApiContext";
 
-const ArtGallery = ({
-  assets,
-  directApi,
-  isLoading,
-  isModalVisible,
-  setIsModalVisible,
-}) => {
+const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
+  const { assets, directApi, isLoading } = useData();
   const [searchTerm, setSearchTerm] = useState(() => {
     return "";
   });
@@ -37,7 +33,7 @@ const ArtGallery = ({
   }, [searchTerm, assets]);
 
   return (
-    <div className="ArtGallery bg-inherit text-black font-thin  rounded shadow-2xl m-4">
+    <div className="ArtGallery flex flex-col  text-black font-thin m-4 rounded-2xl shadow-2xl relative">
       {isLoading ? (
         <h1 className="font-thin align-center justify-center flex mx-auto p-4">
           Loading...
