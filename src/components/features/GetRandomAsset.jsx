@@ -18,7 +18,7 @@ export default function GetRandomAsset() {
         </h1>
       ) : (
         <img
-          className="ParallaxContainer"
+          className="w-fit h-full flex [&_*]:rounded-2xl   rounded shadow-2xl py-8 object-cover "
           src={directApi + randomImage.imageUrl}
           loading="lazy"
         ></img>
