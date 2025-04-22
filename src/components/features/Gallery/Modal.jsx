@@ -99,6 +99,7 @@ const Modal = ({
         viewBox="0 0 24 24"
       >
         <path
+          className="dismiss"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"

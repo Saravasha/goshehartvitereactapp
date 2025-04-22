@@ -117,9 +117,9 @@ export default function Navbar({ isModalVisible }) {
     <>
       <nav
         ref={navRef}
-        className={`active transition-all  duration-300 ease-in-out ${
-          !show ? "hidden" : ""
-        } flex transition-opacity sticky top-0 items-center z-50 justify-between flex-wrap bg-gradient-to-r from-green-950 to-white p-6`}
+        className={`transition-transform duration-300 ease-in-out transform sticky top-0 z-50 flex items-center justify-between flex-wrap bg-gradient-to-r from-green-950 to-white p-6 ${
+          show ? "translate-y-0" : "-translate-y-full"
+        }`}
       >
         <div className="flex items-center flex-shrink-0 text-white mr-6 hover:animate-pulse">
           <span
