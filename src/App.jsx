@@ -24,7 +24,7 @@ function App() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <>
+        <div className="bg-gradient-to-r from-green-50 to-amber-50">
           <Header />
           <Navbar isModalVisible={isModalVisible} />
           <ComingSoon />
@@ -37,7 +37,7 @@ function App() {
           />
           <SocialMedia />
           <Footer />
-        </>
+        </div>
       )}
     </>
   );

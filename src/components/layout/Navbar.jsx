@@ -27,9 +27,9 @@ export default function Navbar({ isModalVisible }) {
             duration={500}
             offset={navbarOffset}
           >
-            <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4  ">
+            <span className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4  ">
               {page.title}
-            </p>
+            </span>
           </Link>
         ))}
         {/* //Hard coded Features */}
@@ -40,9 +40,9 @@ export default function Navbar({ isModalVisible }) {
           duration={500}
           offset={navbarOffset}
         >
-          <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
+          <span className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
             Art Gallery
-          </p>
+          </span>
         </Link>
         <Link
           to="SocialMedia"
@@ -51,9 +51,9 @@ export default function Navbar({ isModalVisible }) {
           duration={500}
           offset={navbarOffset}
         >
-          <p className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
+          <span className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
             Social Media
-          </p>
+          </span>
         </Link>
       </div>
     );

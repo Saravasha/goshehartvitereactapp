@@ -50,7 +50,7 @@ const Modal = ({
       className="ModalContainer overlay  dismiss fixed flex   m-0 p-0  left-0 top-0  w-full   bg-black h-full"
       onClick={handleClick}
     >
-      <div className="ModalAsset  absolute top-0 flex align-center justify-center w-full h-full ">
+      <div className="ModalAsset  absolute top-0 flex align-center justify-center w-full h-full overflow-auto ">
         <div className="flex relative  flex-col ">
           {/* modal title */}
           <div className=" flex relative  justify-center align-center">
@@ -58,7 +58,7 @@ const Modal = ({
               {clickedAsset.name}
             </h1>
           </div>
-          <div className="relative h-1/2 flex justify-center align-center">
+          <div className="relative w-full flex justify-center align-center">
             <img
               className=" Modal-Image relative"
               src={clickedImage}
@@ -67,7 +67,7 @@ const Modal = ({
           </div>
 
           <div className="Modal-Description  relative flex align-center justify-center   ">
-            <p className="   flex  text-gray-800 dark:text-white align-center justify-center m-4 font-thin  text-shadow-2xs hover:animate-pulse text-4xl  px-10  ">
+            <p className="   flex  text-gray-800 dark:text-white align-center justify-center m-4 font-thin  text-shadow-2xs  text-4xl  px-10  ">
               {clickedAsset.description}
             </p>
           </div>
@@ -76,7 +76,7 @@ const Modal = ({
               return (
                 <div
                   key={category.id}
-                  className="  bg-gray-200  inline-block align-center justify-center rounded-full p-3 text-sm font-semibold  border-black  border-1 hover:bg-red-500 text-black m-1 "
+                  className="  bg-gray-200  inline-block align-center justify-center rounded-full p-3 text-sm font-semibold  border-black  border-1 hover:bg-green-700 text-black m-1 "
                 >
                   {/* {console.log(category.id)} */}
                   {category.name}
@@ -90,7 +90,7 @@ const Modal = ({
       {/* cross image svg */}
       <svg
         onClick={handleClick}
-        className="dismiss cursor-pointer fixed w-[64px] h-[64px] right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-amber-300 hover:animate-pulse  m-2 rounded shadow-lg "
+        className="dismiss cursor-pointer fixed w-[64px] h-[64px] right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-red-700 hover:animate-pulse  m-2 rounded shadow-lg "
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
