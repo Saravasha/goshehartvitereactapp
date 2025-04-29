@@ -44,7 +44,7 @@ export const Page = ({ page }) => {
       </div>
       <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
         {page.contents.map((content) => (
-          <div key={content.id} id={content.id}>
+          <div key={content.id} id={content.title}>
             <h3 className="ContentTitle italic text-shadow-2xs text-gray-800 dark:text-white dark:bg-green-900/30 text-6xl justify-center items-center flex m-4 flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4">
               {content.title}
             </h3>
