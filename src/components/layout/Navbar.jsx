@@ -10,28 +10,59 @@ export default function Navbar({ isModalVisible }) {
   const navRef = useRef();
 
   const [navbarOffset, setNavbarOffset] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
+  const baseClass =
+    "block mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl hover:animate-pulse shadow-2xl mr-4 no-underline";
+  const activeClass = "!text-gray-500 font-bold";
+  const inactiveClass = "!text-white hover:text-gray-700 hover:shadow-2xl";
 
   const MappingPages = () => {
     const handleLinkClick = () => {
       setShow(false); // Hide navbar when link is clicked
-      // console.log(this.page.title);
+      // console.log("page", pages);
     };
     return (
-      <div className="text-sm lg:flex-grow">
+      <div className="text-sm  lg:flex-grow flex-col flex">
         {pages.map((page, index) => (
-          <Link
-            to={page.title}
-            onClick={handleLinkClick}
-            key={index}
-            smooth={true}
-            duration={500}
-            offset={navbarOffset}
-          >
-            <span className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4  ">
+          <div key={index}>
+            <Link
+              to={page.title}
+              onClick={handleLinkClick}
+              smooth={true}
+              duration={500}
+              offset={navbarOffset}
+              spy={true}
+              onSetActive={() => setActiveSection(page.title)}
+              className={`${baseClass} ${
+                activeSection === page.title ? activeClass : inactiveClass
+              }`}
+            >
               {page.title}
-            </span>
-          </Link>
+            </Link>
+            <div>
+              {page.contents.map((content, subIndex) => (
+                <Link
+                  to={content.title}
+                  onClick={handleLinkClick}
+                  key={subIndex}
+                  smooth={true}
+                  duration={500}
+                  offset={navbarOffset}
+                  spy={true}
+                  onSetActive={() => setActiveSection(content.title)}
+                  className={`${baseClass} ${
+                    activeSection === content.title
+                      ? activeClass
+                      : inactiveClass
+                  }`}
+                >
+                  {content.title}
+                </Link>
+              ))}
+            </div>
+          </div>
         ))}
+
         {/* //Hard coded Features */}
         <Link
           to="ArtGallery"
@@ -39,10 +70,13 @@ export default function Navbar({ isModalVisible }) {
           smooth={true}
           duration={500}
           offset={navbarOffset}
+          spy={true}
+          onSetActive={() => setActiveSection("ArtGallery")}
+          className={`${baseClass} ${
+            activeSection === "ArtGallery" ? activeClass : inactiveClass
+          }`}
         >
-          <span className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
-            Art Gallery
-          </span>
+          Art Gallery
         </Link>
         <Link
           to="SocialMedia"
@@ -50,10 +84,13 @@ export default function Navbar({ isModalVisible }) {
           smooth={true}
           duration={500}
           offset={navbarOffset}
+          spy={true}
+          onSetActive={() => setActiveSection("SocialMedia")}
+          className={`${baseClass} ${
+            activeSection === "SocialMedia" ? activeClass : inactiveClass
+          }`}
         >
-          <span className="block focus:bg-green-300 mt-4 lg:inline-block cursor-pointer lg:mt-0 text-2xl dark:text-white text-green-700 hover:animate-pulse shadow-2xl hover:text-gray-700 hover:shadow-2xl mr-4 ">
-            Social Media
-          </span>
+          Social Media
         </Link>
       </div>
     );
@@ -141,7 +178,7 @@ export default function Navbar({ isModalVisible }) {
             </svg>
           </button>
         </div>
-        <div className="w-full block flex-grow lg:flex text text-8xl lg:items-center lg:w-auto drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        <div className="w-full flex flex-grow lg:flex text text-8xl lg:items-center lg:w-auto drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           <MappingPages />
         </div>
 

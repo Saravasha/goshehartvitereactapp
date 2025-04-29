@@ -4,7 +4,7 @@ import Header from "./components/layout/Header.jsx";
 import ComingSoon from "./components/ComingSoon.jsx";
 import Navbar from "./components/layout/Navbar.jsx";
 import Main from "./components/layout/Main.jsx";
-
+import { AnimatePresence } from "framer-motion";
 import { ApiProvider } from "./components/api/ApiContext.jsx";
 
 import ArtGallery from "./components/features/Gallery/ArtGallery.jsx";
@@ -21,24 +21,29 @@ function App() {
 
   return (
     <>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <div className="bg-gradient-to-r from-green-50 to-amber-50">
-          <Header />
-          <Navbar isModalVisible={isModalVisible} />
-          <ComingSoon />
+      <AnimatePresence>
+        {isLoading ? (
+          <LoadingScreen key="loading" />
+        ) : (
+          <div
+            key="main"
+            className="bg-gradient-to-r from-green-50 to-amber-50"
+          >
+            <Header />
+            <Navbar isModalVisible={isModalVisible} />
+            <ComingSoon />
 
-          <Main />
+            <Main />
 
-          <ArtGallery
-            isModalVisible={isModalVisible}
-            setIsModalVisible={setIsModalVisible}
-          />
-          <SocialMedia />
-          <Footer />
-        </div>
-      )}
+            <ArtGallery
+              isModalVisible={isModalVisible}
+              setIsModalVisible={setIsModalVisible}
+            />
+            <SocialMedia />
+            <Footer />
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
