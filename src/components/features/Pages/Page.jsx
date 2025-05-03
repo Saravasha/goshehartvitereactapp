@@ -39,15 +39,17 @@ export const Page = ({ page }) => {
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(prependApiUrlToImages(page.container)),
         }}
-      >
-        {/* {console.log("pagecontainer = ", page.container)} */}
-      </div>
+      ></div>
       <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
         {page.contents.map((content) => (
-          <div key={content.id} id={content.title}>
+          <div key={content.id} id={content.title} className="">
             <h3 className="ContentTitle italic text-shadow-2xs text-gray-800 dark:text-white dark:bg-green-900/30 text-6xl justify-center items-center flex m-4 flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4">
               {content.title}
             </h3>
+            {/* content date */}
+            <h4 className="ContentContainerDateString italic text-shadow-2xs text-gray-800 dark:text-white pt-4 text-4xl justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]  ">
+              {content.dateString}
+            </h4>
             {/* content container */}
             <div
               className="ContentContainer text-4xl italic text-shadow-2xs flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,1)] gap-4 bg-inherit justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
