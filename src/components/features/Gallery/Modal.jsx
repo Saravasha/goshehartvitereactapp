@@ -54,10 +54,13 @@ const Modal = ({
         <div className="flex relative  flex-col ">
           {/* modal title */}
           <div className=" flex relative  justify-center align-center">
-            <h1 className="Modal-Title m-4 flex-col flex relative hover:animate-pulse text-1xl shadow-2xl rounded font-thin text-gray-800 dark:text-white">
+            <h1 className="Modal-Title m-4 flex-col flex relative hover:animate-pulse text-1xl shadow-2xl  font-thin text-gray-800 dark:text-white">
               {clickedAsset.name}
             </h1>
           </div>
+          <span className="relative w-full flex align-center justify-center  text-white pb-4">
+            {clickedAsset.dateString}
+          </span>
           <div className="relative w-full flex justify-center align-center">
             <img
               className=" Modal-Image relative"

@@ -18,7 +18,6 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
   const { isLoading } = useData();
   // console.log("App environment = ", `${import.meta.env.MODE}`);
-
   return (
     <>
       <AnimatePresence>

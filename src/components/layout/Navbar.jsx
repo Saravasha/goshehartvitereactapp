@@ -19,7 +19,6 @@ export default function Navbar({ isModalVisible }) {
   const MappingPages = () => {
     const handleLinkClick = () => {
       setShow(false); // Hide navbar when link is clicked
-      // console.log("page", pages);
     };
     return (
       <div className="text-sm  lg:flex-grow flex-col flex">
