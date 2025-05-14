@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ComingSoon() {
   return (
-    <div className="ComingSoonBody flex justify-center align-center pt-12 h-full">
+    <div className="ComingSoonBody flex justify-center align-center pt-12 w-full px-3">
       <span className="text-9xl px-4 italic text-shadow-2xs  absolute text-red-50 hover:text-red-300 ">
         Gosheh Art
       </span>
@@ -12,7 +12,7 @@ export default function ComingSoon() {
         </p>
         <img
           src="/comingsoonimg2.jpg"
-          className="rounded-full shadow bg-screen "
+          className="rounded-full shadow bg-screen"
           alt="ph"
         />
       </div>

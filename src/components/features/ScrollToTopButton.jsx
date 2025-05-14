@@ -47,24 +47,6 @@ const ScrollToTopButton = ({ isVisible }) => {
     setTimer(newTimer);
   };
 
-  const UpArrow = (
-    <svg
-      className="w-[64px] h-[64px] text-gray-800 dark:text-white hover:animate-pulse bg-green-700 rounded"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M12 6v13m0-13 4 4m-4-4-4 4"
-      />
-    </svg>
-  );
-
   return (
     <ScrollToTop
       smooth
@@ -72,7 +54,7 @@ const ScrollToTopButton = ({ isVisible }) => {
       component={
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <svg
-            className="w-[64px] h-[64px] text-gray-800 dark:text-white hover:animate-pulse bg-green-700 rounded"
+            className="w-[64px] h-[64px] text-slate-50 dark:text-white hover:animate-pulse dark:bg-green-900 rounded bg-green-800 "
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
