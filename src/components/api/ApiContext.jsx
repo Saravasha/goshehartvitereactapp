@@ -5,12 +5,13 @@ const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
   const { assets, pages, directApi, isLoading } = useApi();
-  console.log(
-    { Assets: assets },
-    { Pages: pages },
-    { directApi: directApi },
-    { isLoading: isLoading }
-  );
+  if (`${import.meta.env.MODE}` == "development")
+    console.log(
+      { Assets: assets },
+      { Pages: pages },
+      { directApi: directApi },
+      { isLoading: isLoading }
+    );
   return (
     <ApiContext.Provider value={{ assets, pages, directApi, isLoading }}>
       {children}

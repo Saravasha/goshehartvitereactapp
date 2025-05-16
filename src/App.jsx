@@ -15,7 +15,7 @@ import { useData } from "./components/api/ApiContext.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
 
 function App() {
-  const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { isLoading } = useData();
   // console.log("App environment = ", `${import.meta.env.MODE}`);
   return (
