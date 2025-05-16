@@ -26,7 +26,7 @@ function App() {
         ) : (
           <div
             key="main"
-            className="bg-gradient-to-r from-green-50 to-amber-50"
+            className="dark:bg-gradient-to-r dark:from-slate-800 dark:to-green-700 bg-gradient-to-r from-rose-200 to-green-50"
           >
             <Header />
             <Navbar isModalVisible={isModalVisible} />

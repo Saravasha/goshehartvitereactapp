@@ -2,15 +2,14 @@ import React from "react";
 
 export const SocialMedia = () => {
   return (
-    <div className="SocialMedia gap-4 flex flex-col align-center justify-center py-10  m-4  rounded shadow-2xl">
-      <div>
-        <h1 className="flex align-center justify-center  font-thin text-black">
-          Follow me @
-        </h1>
-      </div>
+    <div className="SocialMedia gap-4 flex flex-col text-center justify-center py-10  m-4  rounded shadow-2xl">
+      {/* header */}
+      <h1 className=" font-thin hover:text-green-700 hover:animate-pulse dark:text-white text-black">
+        Follow me @
+      </h1>
 
       {/* instagram */}
-      <div className="flex align-center gap-4 justify-center">
+      <div className="flex gap-4 justify-center">
         <a
           href="https://www.instagram.com/gracefulagedstyle/"
           target="_blank"
@@ -18,7 +17,7 @@ export const SocialMedia = () => {
           className="social-icon "
         >
           <svg
-            className=" w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full"
+            className=" w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -27,7 +26,7 @@ export const SocialMedia = () => {
             viewBox="0 0 24 24"
           >
             <path
-              fill="currentColor"
+              fill="white"
               fillRule="evenodd"
               d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
               clipRule="evenodd"
@@ -42,12 +41,12 @@ export const SocialMedia = () => {
           className="social-icon"
         >
           <svg
-            className="w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full"
+            className="w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            fill="currentColor"
+            fill="white"
             viewBox="0 0 24 24"
           >
             <path
@@ -65,12 +64,12 @@ export const SocialMedia = () => {
           className="social-icon"
         >
           <svg
-            className="w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full"
+            className="w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            fill="currentColor"
+            fill="white"
             viewBox="0 0 24 24"
           >
             <path

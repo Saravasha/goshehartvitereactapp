@@ -46,18 +46,18 @@ export default function MobileNavbar({ isModalVisible }) {
         >
           Gosheh Art
         </div>
-        <button
+        <div
           aria-expanded
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="  text-3xl hover:animate-pulse"
+          className="  dark:bg-gray-800 rounded-sm text-3xl bg-green-700 hover:animate-pulse drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
         >
           <Hamburger
             easing="ease-in"
-            color="#ffffff"
             toggled={isMenuOpen}
             toggle={setIsMenuOpen}
+            hideOutline={true}
           />
-        </button>
+        </div>
       </div>
       {isMenuOpen && (
         <div className="mt-2 flex flex-col">
