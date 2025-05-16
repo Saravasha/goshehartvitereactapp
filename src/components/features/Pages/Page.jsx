@@ -24,7 +24,6 @@ export const Page = ({ page }) => {
   };
 
   return (
-    //bg-gradient-to-r from-gray-300 to-slate-100
     <div
       className="Page  bg-white/30 backdrop-blur-sm flex flex-col gap-4 rounded shadow-2xl  text-4xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow    h-full "
       key={page.id}

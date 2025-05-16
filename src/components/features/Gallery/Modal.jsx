@@ -12,8 +12,7 @@ const Modal = ({
   const handleClick = (e) => {
     if (e.target.classList.contains("dismiss")) {
       setClickedImage(null);
-      // setClickedAsset(null);
-      if (onClose) onClose(); // Call onClose prop to notify parent
+      if (onClose) onClose();
     }
   };
 
@@ -22,7 +21,7 @@ const Modal = ({
     function handleEscapeKey(e) {
       if (e.code === "Escape") {
         setClickedImage(null);
-        if (onClose) onClose(); // Call onClose prop to notify parent
+        if (onClose) onClose();
       }
     }
 
@@ -81,7 +80,6 @@ const Modal = ({
                   key={category.id}
                   className="  bg-gray-200  inline-block align-center justify-center rounded-full p-3 text-sm font-semibold  border-black  border-1 hover:bg-green-700 text-black m-1 "
                 >
-                  {/* {console.log(category.id)} */}
                   {category.name}
                 </div>
               );

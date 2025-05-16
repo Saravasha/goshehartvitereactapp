@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ComingSoon() {
   return (
     <div className="ComingSoonBody relative justify-center flex w-full h-full ">
