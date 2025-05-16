@@ -36,11 +36,7 @@ export default function PageBuilder() {
                 <Background className="flex flex-col w-full h-full items-center justify-center text-gray-800 dark:text-white  text-8xl [&_*]justify-center [&_*]items-center  flex-grow  p-4">
                   <GetRandomAsset className="w-full [&_*]:h-full [&_*]:m-0  text-gray-800 dark:text-white  text-8xl justify-center [&_*]justify-center [&_*]items-center flex p-4  [&_*]:w-full shadow rounded-2xl" />
                 </Background>
-                <Page
-                  // className=" w-full flex items-center justify-center text-gray-800 dark:text-white  text-8xl [&_*]justify-center [&_*]items-center flex-col flex-grow  p-4  pt-0 mt-0"
-                  page={page}
-                  directApi={directApi}
-                ></Page>
+                <Page page={page} directApi={directApi}></Page>
               </Parallax>
             </div>
           ))}
