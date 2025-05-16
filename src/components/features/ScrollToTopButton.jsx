@@ -54,7 +54,7 @@ const ScrollToTopButton = ({ isVisible }) => {
       component={
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <svg
-            className="w-[64px] h-[64px] text-slate-50 dark:text-white hover:animate-pulse dark:bg-green-900 rounded bg-green-800 "
+            className="w-[64px] h-[64px] text-slate-50 dark:text-white hover:animate-pulse dark:bg-green-900 rounded bg-green-800 drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
