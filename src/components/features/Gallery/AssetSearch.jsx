@@ -9,8 +9,8 @@ const AssetSearch = ({ searchAsset }) => {
 
   return (
     <>
-      <div className="Search  rounded  flex  align-center justify-center border-4 border-transparent">
-        <div className="flex align-center  border-b-1 border-black w-1/2 py-2">
+      <div className="Search  rounded  flex   justify-center border-4 border-transparent">
+        <div className="flex   border-b-1 border-black w-1/2 py-2">
           <input
             onChange={(e) => searchAsset(e)}
             type="text"

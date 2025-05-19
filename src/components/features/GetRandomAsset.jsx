@@ -13,7 +13,7 @@ export default function GetRandomAsset() {
   return (
     <>
       {isLoading ? (
-        <h1 className="font-thin align-center justify-center flex m-4 p-4 relative">
+        <h1 className="font-thin  justify-center flex m-4 p-4 relative">
           Loading...
         </h1>
       ) : (

@@ -14,7 +14,7 @@ export default function DesktopNavbar({ isModalVisible }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const baseClass =
-    "flex mt-4 justify-start cursor-pointer mt-0  hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mr-4 no-underline  xs:align-center xs:justify-center  text-2xl justify-start";
+    "flex mt-4 justify-start cursor-pointer mt-0 hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mr-4";
   const activeClass = "!text-gray-500 font-bold";
   const inactiveClass = "!text-white hover:text-gray-700 hover:shadow-2xl";
 
@@ -23,7 +23,7 @@ export default function DesktopNavbar({ isModalVisible }) {
       setShow(false); // Hide navbar when link is clicked
     };
     return (
-      <div className="text-4xl flex-grow flex-row  text-6xl flex flex-col flex-grow">
+      <div className="text-4xl flex-grow justify-start flex flex-row">
         {pages.map((page, index) => (
           <div key={index}>
             <Link
@@ -40,7 +40,7 @@ export default function DesktopNavbar({ isModalVisible }) {
             >
               {page.title}
             </Link>
-            <div className="text-2xl align-center  flex-grow flex-col flex">
+            <div className="text-2xl flex-grow flex-col flex ">
               {page.contents.map((content, subIndex) => (
                 <Link
                   to={content.title}
@@ -146,7 +146,7 @@ export default function DesktopNavbar({ isModalVisible }) {
     <>
       <nav
         ref={navRef}
-        className={`transition-transform duration-1000 ease-in-out  sticky top-0 z-50 flex  bg-gradient-to-r from-green-950 to-white p-4 ${
+        className={`transition-transform duration-1000 ease-in-out sticky top-0 z-50 flex  bg-gradient-to-r from-green-950 to-white p-4 ${
           show ? "translate-y-0" : "-translate-y-full"
         }`}
       >

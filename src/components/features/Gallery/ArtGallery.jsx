@@ -35,12 +35,12 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
   return (
     <div className="ArtGallery flex flex-col dark:text-white  text-black font-thin m-4 rounded-2xl shadow-2xl relative">
       {isLoading ? (
-        <h1 className="font-thin align-center justify-center flex mx-auto p-4">
+        <h1 className="font-thin  justify-center flex mx-auto p-4">
           Loading...
         </h1>
       ) : (
         <>
-          <h1 className="text-6xl font-thin m-4 mx-auto flex align-center justify-center border-transparent border-b-1 p-4 ">
+          <h1 className="text-6xl font-thin m-4 mx-auto flex  justify-center border-transparent border-b-1 p-4 ">
             Art Gallery
           </h1>
           <AssetSearch searchAsset={searchAsset} />
@@ -54,7 +54,7 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
               setIsModalVisible={setIsModalVisible}
             />
           ) : foundAssets.length === 0 ? (
-            <h1 className=" font-thin align-center justify-center flex mx-auto p-4">
+            <h1 className=" font-thin  justify-center flex mx-auto p-4">
               Could not find what you were looking for
             </h1>
           ) : (
