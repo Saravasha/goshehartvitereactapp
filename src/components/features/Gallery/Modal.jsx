@@ -49,20 +49,20 @@ const Modal = ({
       className="ModalContainer overlay  dismiss fixed flex   m-0 p-0  left-0 top-0  w-full z-50 bg-black h-full"
       onClick={handleClick}
     >
-      <div className="ModalAsset  absolute top-0 flex align-center justify-center w-full h-full overflow-auto ">
+      <div className="ModalAsset  absolute top-0 flex  justify-center w-full h-full overflow-auto ">
         <div className="flex relative  flex-col ">
           {/* Modal Title */}
-          <div className=" flex relative  justify-center align-center">
+          <div className=" flex relative  justify-center ">
             <h1 className="Modal-Title m-4 flex-col flex relative hover:animate-pulse text-1xl shadow-2xl  font-thin text-white ">
               {clickedAsset.name}
             </h1>
           </div>
           {/* Date */}
-          <span className="relative w-full flex align-center justify-center  text-white pb-4">
+          <span className="relative w-full flex  justify-center  text-white pb-4">
             {clickedAsset.dateString}
           </span>
           {/* Image */}
-          <div className="relative w-full flex justify-center align-center">
+          <div className="relative w-full flex justify-center ">
             <img
               className=" Modal-Image relative"
               src={clickedImage}
@@ -71,18 +71,18 @@ const Modal = ({
           </div>
 
           {/* Description */}
-          <div className="Modal-Description  relative flex align-center justify-center   ">
-            <p className="flex text-white align-center justify-center m-4 font-thin  text-shadow-2xs  text-4xl  px-10">
+          <div className="Modal-Description  relative flex  justify-center   ">
+            <p className="flex text-white  justify-center m-4 font-thin  text-shadow-2xs  text-4xl  px-10">
               {clickedAsset.description}
             </p>
           </div>
           {/* Categories */}
-          <div className="Modal-Categories    align-center justify-center flex  rounded-full bg-transparent   font-thin text-black text-sm   ">
+          <div className="Modal-Categories  justify-center pb-4 flex rounded-full bg-transparent font-thin text-black text-sm   ">
             {clickedAsset.categories.map((category) => {
               return (
                 <div
                   key={category.id}
-                  className="  bg-gray-200  inline-block align-center justify-center rounded-full p-3 text-sm font-semibold  border-black  border-1 hover:bg-green-700 text-black m-1 "
+                  className="  bg-gray-200  inline-block  justify-center rounded-full p-3 text-sm font-semibold  border-black border-1 hover:bg-green-700 text-black m-1 "
                 >
                   {category.name}
                 </div>

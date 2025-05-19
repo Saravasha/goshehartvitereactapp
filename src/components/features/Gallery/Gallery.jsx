@@ -71,15 +71,15 @@ const Gallery = ({
   return (
     <>
       {isLoading ? (
-        <h1 className="font-thin align-center justify-center flex mx-auto p-4">
+        <h1 className="font-thin justify-center flex mx-auto p-4">
           Loading...
         </h1>
       ) : (
-        <div className="Gallery  align-center justify-center lg:columns-3  gap-4  p-4      rounded shadow-lg">
+        <div className="Gallery justify-center lg:columns-3 gap-4  p-4 rounded shadow-lg">
           {assets.map((asset) => (
             <div
               className="Asset 
-                rounded shadow-lg  hover:shadow-2xl flex justify-center align-center m-4 break-inside-auto overflow-auto   "
+                rounded shadow-lg hover:shadow-2xl flex justify-center m-4 break-inside-auto overflow-auto   "
               key={asset.id}
               onClick={() => handleClick(asset)}
             >

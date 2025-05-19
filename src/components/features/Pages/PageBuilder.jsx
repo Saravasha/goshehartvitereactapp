@@ -16,7 +16,7 @@ export default function PageBuilder() {
       ) : (
         <div
           id="Pages"
-          className="flex w-full [&>_*]:w-full align-center justify-center flex-col text-gray-800 dark:text-white  text-8xl  [&_*]justify-center [&_*]items-center items-center  flex-grow  p-4 "
+          className="flex w-full [&>_*]:w-full  justify-center flex-col text-gray-800 dark:text-white  text-8xl  [&_*]justify-center [&_*]items-center items-center  flex-grow  p-4 "
         >
           <div className="PagesBodyTitle text-6xl flex flex-row  border-white items-center justify-center p-4 m-4 flex-grow ">
             <h1 className="font-thin text-9xl text-gradient-to-r from-gray-300 shadows hover:shadows-2xl hover:text-black to-slate-100 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] ">

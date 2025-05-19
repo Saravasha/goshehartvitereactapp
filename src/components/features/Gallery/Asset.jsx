@@ -16,10 +16,10 @@ const Asset = ({ asset }) => {
         src={directApi + asset.imageUrl}
         loading="lazy"
       ></img>
-      {/* <h2 className="Asset-Title m-4 flex align-center justify-center  font-semibold text-black text-wrap ">
+      {/* <h2 className="Asset-Title m-4 flex  justify-center  font-semibold text-black text-wrap ">
         {image.name}
       </h2>
-      <div className="Description flex align-center justify-center border-black border-4 m-4 font-thin text-black text-xl p-4">
+      <div className="Description flex  justify-center border-black border-4 m-4 font-thin text-black text-xl p-4">
         {image.description}
       </div>
       <div>
