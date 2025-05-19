@@ -46,20 +46,22 @@ const Modal = ({
 
   return (
     <div
-      className="ModalContainer overlay  dismiss fixed flex   m-0 p-0  left-0 top-0  w-full   bg-black h-full"
+      className="ModalContainer overlay  dismiss fixed flex   m-0 p-0  left-0 top-0  w-full z-50 bg-black h-full"
       onClick={handleClick}
     >
       <div className="ModalAsset  absolute top-0 flex align-center justify-center w-full h-full overflow-auto ">
         <div className="flex relative  flex-col ">
-          {/* modal title */}
+          {/* Modal Title */}
           <div className=" flex relative  justify-center align-center">
-            <h1 className="Modal-Title m-4 flex-col flex relative hover:animate-pulse text-1xl shadow-2xl  font-thin text-gray-800 dark:text-white">
+            <h1 className="Modal-Title m-4 flex-col flex relative hover:animate-pulse text-1xl shadow-2xl  font-thin text-white ">
               {clickedAsset.name}
             </h1>
           </div>
+          {/* Date */}
           <span className="relative w-full flex align-center justify-center  text-white pb-4">
             {clickedAsset.dateString}
           </span>
+          {/* Image */}
           <div className="relative w-full flex justify-center align-center">
             <img
               className=" Modal-Image relative"
@@ -68,11 +70,13 @@ const Modal = ({
             ></img>
           </div>
 
+          {/* Description */}
           <div className="Modal-Description  relative flex align-center justify-center   ">
-            <p className="   flex  text-gray-800 dark:text-white align-center justify-center m-4 font-thin  text-shadow-2xs  text-4xl  px-10  ">
+            <p className="flex text-white align-center justify-center m-4 font-thin  text-shadow-2xs  text-4xl  px-10">
               {clickedAsset.description}
             </p>
           </div>
+          {/* Categories */}
           <div className="Modal-Categories    align-center justify-center flex  rounded-full bg-transparent   font-thin text-black text-sm   ">
             {clickedAsset.categories.map((category) => {
               return (
@@ -88,10 +92,10 @@ const Modal = ({
         </div>
       </div>
 
-      {/* cross image svg */}
+      {/* Cross Button */}
       <svg
         onClick={handleClick}
-        className="dismiss cursor-pointer fixed w-[64px] h-[64px] right-0 top-0 font-thin text-8xl  text-gray-800 dark:text-white hover:bg-red-700 hover:animate-pulse  m-2 rounded shadow-lg "
+        className="dismiss cursor-pointer fixed w-[64px] h-[64px] right-0 top-0 font-thin text-8xl  text-white dark:text-white hover:bg-red-700 hover:animate-pulse  m-2 rounded shadow-lg "
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -109,10 +113,10 @@ const Modal = ({
         />
       </svg>
 
-      {/* leftbutton */}
+      {/* Left Button */}
       <svg
         onClick={handleRotationLeft}
-        className="w-[64px] h-[64px] cursor-pointer text-gray-800 dark:text-white fixed left-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse ml-1 rounded shadow-lg"
+        className="w-[64px] h-[64px] cursor-pointer text-white dark:text-white fixed left-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse ml-1 rounded shadow-lg"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -128,10 +132,10 @@ const Modal = ({
           d="m15 19-7-7 7-7"
         />
       </svg>
-      {/* rightbutton */}
+      {/* Right button */}
       <svg
         onClick={handleRotationRight}
-        className="w-[64px] h-[64px] cursor-pointer text-gray-800 dark:text-white fixed right-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse mr-1 rounded shadow-lg"
+        className="w-[64px] h-[64px] cursor-pointer text-white dark:text-white fixed right-0 bottom-1/2 hover:bg-amber-300 hover:animate-pulse mr-1 rounded shadow-lg"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
