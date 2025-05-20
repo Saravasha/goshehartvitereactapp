@@ -19,6 +19,12 @@ export default defineConfig({
     DOTNET_PAGE_API_URL_DEV:
       process.env.VITE_DOTNET_PAGE_API_URL ||
       "http://localhost:5283/api/react/page",
+    DOTNET_COLOR_API_URL:
+      process.env.VITE_DOTNET_COLOR_API_URL ||
+      "https://admin.goshehart.se/api/react/color",
+    DOTNET_COLOR_API_URL_DEV:
+      process.env.VITE_DOTNET_COLOR_API_URL ||
+      "http://localhost:5283/api/react/color",
     DOTNET_API_URL:
       process.env.VITE_DOTNET_API_TARGET || "https://admin.goshehart.se/",
     DOTNET_API_URL_DEV:
