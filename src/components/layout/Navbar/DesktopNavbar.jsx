@@ -11,7 +11,6 @@ export default function DesktopNavbar({ isModalVisible }) {
 
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const baseClass =
     "flex mt-4 justify-start cursor-pointer mt-0 hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mr-4";

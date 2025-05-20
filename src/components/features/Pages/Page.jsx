@@ -13,6 +13,10 @@ export const Page = ({ page }) => {
     const images = tempDiv.querySelectorAll("img");
     images.forEach((img) => {
       const setSrc = img.getAttribute("src");
+      const getAlt = img.getAttribute("alt");
+      if (getAlt) {
+        img.alt = "Image not found";
+      }
       if (setSrc && !setSrc.startsWith("http") && !setSrc.startsWith("https")) {
         // Ensure directApi doesn't have a trailing slash
         img.src = `${directApi.replace(/\/$/, "")}${
