@@ -4,13 +4,15 @@ function useDarkMode() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const updateDarkMode = (e) => setIsDark(e.matches);
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const updateDarkMode = (e) => setIsDark(e.matches);
 
-    setIsDark(mediaQuery.matches);
-    mediaQuery.addEventListener("change", updateDarkMode);
+      setIsDark(mediaQuery.matches);
+      mediaQuery.addEventListener("change", updateDarkMode);
 
-    return () => mediaQuery.removeEventListener("change", updateDarkMode);
+      return () => mediaQuery.removeEventListener("change", updateDarkMode);
+    }
   }, []);
 
   return isDark;
@@ -25,14 +27,27 @@ export default function useColors(colors, colorName, isLoading) {
 
   const color = colors.find((c) => c.name === colorName);
 
+  console.log("useColors →", { colorName, foundColor: color });
   // Determine which color to return based on colorType
   if (colorType === "Text") {
+    if (!color) {
+      console.warn(`Color with name '${colorName}' not found`);
+      return {
+        color: "#ff00ff", // or a visible fallback
+      };
+    }
     return {
       color: isDark ? `${color.darkStartColor}` : `${color.startColor}`,
     };
   }
 
   if (colorType === "Background") {
+    if (!color) {
+      console.warn(`Color with name '${colorName}' not found`);
+      return {
+        background: "#ff00ff", // or a visible fallback
+      };
+    }
     return {
       background: `linear-gradient(to right, ${
         isDark
