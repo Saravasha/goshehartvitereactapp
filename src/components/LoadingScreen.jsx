@@ -15,7 +15,7 @@ const LoadingScreen = () => {
         Gosheh Art
       </span>
       <img
-        className=" p-4  h-full  z-0 blur-xs top-0  flex justify-center  absolute "
+        className=" p-4 h-full  z-0 blur-xs top-0  flex justify-center  absolute "
         src={bgimg}
         alt="alt"
       />

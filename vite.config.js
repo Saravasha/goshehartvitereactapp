@@ -6,6 +6,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   base: "/",
   plugins: [tailwindcss(), react()],
+  build: {
+    sourcemap: true, // Enable this for better debugging in production
+  },
   "process.env": {
     DOTNET_ASSET_API_URL:
       process.env.VITE_DOTNET_ASSET_API_URL ||
