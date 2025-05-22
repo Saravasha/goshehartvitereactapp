@@ -16,7 +16,8 @@ import useColors from "./components/color/useColors.jsx";
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { colors, isLoading } = useData();
-
+  console.log(Array.isArray(colors), colors);
+  console.log(colors[0]);
   const colorInStyle = useColors(colors, "Background Color", isLoading) || {};
 
   return (
