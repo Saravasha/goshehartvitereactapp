@@ -13,10 +13,14 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
     return [];
   });
 
-  const searchAsset = (e) => {
-    setSearchTerm((prevState) => e.target.value);
+  const searchAsset = (value) => {
+    setSearchTerm(value);
 
     // setSearchTerm((prevState) => console.log(e.target.value));
+  };
+
+  const resetSearch = () => {
+    setSearchTerm("");
   };
 
   useEffect(() => {
@@ -33,17 +37,21 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
   }, [searchTerm, assets]);
 
   return (
-    <div className="ArtGallery flex flex-col dark:text-white  text-black font-thin m-4 rounded-2xl shadow-2xl relative">
+    <div className="ArtGallery flex flex-col justify-center dark:text-white  text-black font-thin m-4 rounded-2xl shadow-2xl relative">
       {isLoading ? (
-        <h1 className="font-thin  justify-center flex mx-auto p-4">
+        <h1 className="font-thin justify-center flex mx-auto p-4">
           Loading...
         </h1>
       ) : (
         <>
-          <h1 className="text-6xl font-thin m-4 mx-auto flex  justify-center border-transparent border-b-1 p-4 ">
+          <h1 className="text-6xl font-thin m-4 mx-auto flex justify-center border-transparent border-b-1 p-4 ">
             Art Gallery
           </h1>
-          <AssetSearch searchAsset={searchAsset} />
+          <AssetSearch
+            searchAsset={searchAsset}
+            resetSearch={resetSearch}
+            searchTerm={searchTerm}
+          />
 
           {foundAssets.length !== 0 ? (
             <Gallery

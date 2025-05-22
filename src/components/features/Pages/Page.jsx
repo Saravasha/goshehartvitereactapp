@@ -14,8 +14,8 @@ export const Page = ({ page }) => {
     images.forEach((img) => {
       const setSrc = img.getAttribute("src");
       const getAlt = img.getAttribute("alt");
-      if (getAlt) {
-        img.alt = "Image not found";
+      if (!getAlt) {
+        img.setAttribute("alt", "");
       }
       if (setSrc && !setSrc.startsWith("http") && !setSrc.startsWith("https")) {
         // Ensure directApi doesn't have a trailing slash
@@ -29,7 +29,7 @@ export const Page = ({ page }) => {
 
   return (
     <div
-      className="Page  bg-white/30 backdrop-blur-sm flex flex-col gap-4 rounded shadow-2xl  text-4xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow    h-full "
+      className="Page bg-white/30 backdrop-blur-sm flex flex-col gap-4 rounded shadow-2xl  text-4xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow    h-full "
       key={page.id}
       id={page.title}
     >
@@ -45,7 +45,7 @@ export const Page = ({ page }) => {
       ></div>
       <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
         {page.contents.map((content) => (
-          <div key={content.id} id={content.title} className="">
+          <div key={content.id} id={content.title}>
             <h3 className="ContentTitle italic text-shadow-2xs text-gray-800 dark:text-white dark:bg-green-900/30 text-6xl justify-center items-center flex m-4 flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4">
               {content.title}
             </h3>
