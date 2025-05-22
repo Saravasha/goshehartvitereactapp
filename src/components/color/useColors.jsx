@@ -16,18 +16,15 @@ function useDarkMode() {
   return isDark;
 }
 
-export default function useColors(colors, colorName) {
+export default function useColors(colors, colorName, isLoading) {
   const isDark = useDarkMode();
+  if (isLoading) return {};
   if (!colors || !Array.isArray(colors)) return {};
+
   const colorTypes = ["Background", "Text"];
   const colorType = colorTypes.find((type) => colorName.includes(type));
 
   const color = colors.find((c) => c.name === colorName);
-
-  if (!color) {
-    console.warn(`useColors: No color found for name '${colorName}'`);
-    return {};
-  }
 
   // Determine which color to return based on colorType
   if (colorType === "Text") {
