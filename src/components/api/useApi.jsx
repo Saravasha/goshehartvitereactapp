@@ -42,7 +42,6 @@ const useApi = () => {
     }
 
     PagesGetter();
-    console.log(pages);
   }, [pageUrl]);
 
   // Colors
@@ -59,7 +58,6 @@ const useApi = () => {
     }
 
     ColorsGetter();
-    console.log(colors);
   }, [colorUrl]);
 
   useEffect(() => {
