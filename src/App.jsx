@@ -19,7 +19,7 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { colors, isLoading } = useData();
 
-  const colorInStyle = useColors(colors, "Background Color");
+  const colorInStyle = useColors(colors, "Background Color") || {};
 
   return (
     <>

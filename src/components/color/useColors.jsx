@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Detect system dark mode
 function useDarkMode() {
   const [isDark, setIsDark] = useState(false);
 
@@ -17,10 +16,9 @@ function useDarkMode() {
   return isDark;
 }
 
-// Hook to return background gradient style
 export default function useColors(colors, colorName) {
   const isDark = useDarkMode();
-
+  if (!Array.isArray(colors)) return {};
   const color = colors.find((c) => c.name === colorName);
 
   if (!color) return {};
