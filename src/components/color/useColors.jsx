@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 function useDarkMode() {
   const [isDark, setIsDark] = useState(false);
@@ -20,42 +20,44 @@ function useDarkMode() {
 
 export default function useColors(colors, colorName, isLoading) {
   const isDark = useDarkMode();
-  if (isLoading) return {};
 
-  const colorTypes = ["Background", "Text"];
-  const colorType = colorTypes.find((type) => colorName.includes(type));
+  return useMemo(() => {
+    if (isLoading || !Array.isArray(colors)) return {};
 
-  const color = colors.find((c) => c.name === colorName);
+    const normalizedColorName = colorName.trim().toLowerCase();
+    const colorTypes = ["Background", "Text"];
+    const colorType = colorTypes.find((type) =>
+      normalizedColorName.includes(type.toLowerCase())
+    );
 
-  console.log("useColors →", { colorName, foundColor: color });
-  // Determine which color to return based on colorType
-  if (colorType === "Text") {
+    const color = colors.find(
+      (c) => c.name.trim().toLowerCase() === normalizedColorName
+    );
+
     if (!color) {
-      console.warn(`Color with name '${colorName}' not found`);
+      console.warn(`Color '${colorName}' not found`);
+      return colorType === "Text"
+        ? { color: "#ff00ff" }
+        : { background: "#ff00ff" };
+    }
+
+    if (colorType === "Text") {
       return {
-        color: "#ff00ff", // or a visible fallback
+        color: isDark ? color.darkStartColor : color.startColor,
       };
     }
-    return {
-      color: isDark ? `${color.darkStartColor}` : `${color.startColor}`,
-    };
-  }
 
-  if (colorType === "Background") {
-    if (!color) {
-      console.warn(`Color with name '${colorName}' not found`);
+    if (colorType === "Background") {
       return {
-        background: "#ff00ff", // or a visible fallback
+        background: `linear-gradient(to right, ${
+          isDark
+            ? `${color.darkStartColor}, ${color.darkEndColor}`
+            : `${color.startColor}, ${color.endColor}`
+        })`,
       };
     }
-    return {
-      background: `linear-gradient(to right, ${
-        isDark
-          ? `${color.darkStartColor}, ${color.darkEndColor}`
-          : `${color.startColor}, ${color.endColor}`
-      })`,
-    };
-  }
 
-  return {};
+    console.warn(`Unknown color type for '${colorName}'`);
+    return {};
+  }, [colors, colorName, isLoading, isDark]);
 }
