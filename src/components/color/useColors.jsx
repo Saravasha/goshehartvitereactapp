@@ -19,7 +19,6 @@ function useDarkMode() {
 export default function useColors(colors, colorName, isLoading) {
   const isDark = useDarkMode();
   if (isLoading) return {};
-  if (!colors || !Array.isArray(colors)) return {};
 
   const colorTypes = ["Background", "Text"];
   const colorType = colorTypes.find((type) => colorName.includes(type));
