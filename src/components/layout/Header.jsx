@@ -1,10 +1,10 @@
-import React from "react";
 import useColors from "../../components/color/useColors.jsx";
+
 import { useData } from "../../components/api/ApiContext.jsx";
 
 export default function Header() {
-  const { colors } = useData();
-  const colorInStyle = useColors(colors, "Header Text") || {};
+  const { colors, isLoading } = useData();
+  const colorInStyle = useColors(colors, "Header Text", isLoading) || {};
   return (
     <div className="flex italic  justify-center font-thin ">
       <p
