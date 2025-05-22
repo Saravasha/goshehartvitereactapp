@@ -13,31 +13,32 @@ import { SocialMedia } from "./components/layout/SocialMedia.jsx";
 
 import { useData } from "./components/api/ApiContext.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
+import useColors from "./components/color/useColors.jsx";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { isLoading } = useData();
+  const { colors, isLoading } = useData();
+
+  const colorInStyle = useColors(colors, "Background Color");
+
   return (
     <>
       <AnimatePresence>
         {isLoading ? (
           <LoadingScreen key="loading" />
         ) : (
-          <div
-            key="main"
-            className="dark:bg-gradient-to-r dark:from-slate-800 dark:to-green-700 bg-gradient-to-r from-rose-200 to-green-50"
-          >
+          <div key="main" style={colorInStyle}>
             <Header />
             <Navbar isModalVisible={isModalVisible} />
             <ComingSoon />
 
             <Main />
 
+            <SocialMedia />
             <ArtGallery
               isModalVisible={isModalVisible}
               setIsModalVisible={setIsModalVisible}
             />
-            <SocialMedia />
             <Footer />
           </div>
         )}

@@ -6,8 +6,8 @@
 /* margin: 1rem; */
 .PageContainer > p > img,
 .ContentContainer > p > img {
-  width: 80% !important;
-  height: 100% !important;
+  width: 50% !important;
+  /* height: 100% !important; */
   /* margin: 1rem; */
   display: flex;
   align-items: center;
