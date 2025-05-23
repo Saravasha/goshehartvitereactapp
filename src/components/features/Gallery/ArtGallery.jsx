@@ -44,7 +44,7 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
         </h1>
       ) : (
         <>
-          <h1 className="text-6xl font-thin m-4 mx-auto flex justify-center border-transparent border-b-1 p-4 ">
+          <h1 className="text-6xl font-thin m-4 mx-auto flex justify-center border-transparent border-b-1 p-4">
             Art Gallery
           </h1>
           <AssetSearch
