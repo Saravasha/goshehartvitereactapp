@@ -23,7 +23,7 @@ export default function GetRandomAsset() {
       ) : (
         <img
           className="w-fit h-full flex rounded-2xl shadow-2xl py-8 object-cover"
-          src={encodeURI(directApi + randomImage.fileUrl)}
+          src={directApi + randomImage.fileUrl}
           loading="lazy"
           alt={randomImage.name || "Random Asset"}
         />

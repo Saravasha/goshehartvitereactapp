@@ -3,14 +3,15 @@ import { useData } from "../../api/ApiContext";
 
 const Asset = ({ asset }) => {
   const { directApi } = useData();
-
+  const joinUrl = (base, path) =>
+    `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
   const isImage = asset.type === "Image";
   const isVideo = asset.type === "Video";
   const isAudio = asset.type === "Audio";
 
-  const fileUrl = asset.fileUrl ? encodeURI(directApi + asset.fileUrl) : null;
+  const fileUrl = asset.fileUrl ? joinUrl(directApi, asset.fileUrl) : null;
   const thumbnailUrl = asset.thumbnailUrl
-    ? directApi + asset.thumbnailUrl
+    ? joinUrl(directApi, asset.thumbnailUrl)
     : null;
 
   if (!fileUrl) return <div className="text-red-500">Missing asset file</div>;

@@ -14,7 +14,7 @@ const Gallery = ({
   const [clickedAsset, setClickedAsset] = useState(null);
 
   const handleClick = (asset) => {
-    const index = assets.findIndex((a) => a.id === asset.id); // ✅ FIXED
+    const index = assets.findIndex((a) => a.id === asset.id);
     setCurrentIndex(index);
     setClickedAsset(asset);
     setIsModalVisible(true);
@@ -65,7 +65,6 @@ const Gallery = ({
         <Modal
           clickedAsset={clickedAsset}
           setClickedAsset={setClickedAsset}
-          // onClose={handleCloseModal}
           handleRotationLeft={handleRotationLeft}
           handleRotationRight={handleRotationRight}
         />
