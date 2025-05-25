@@ -10,10 +10,14 @@ const Modal = ({
 }) => {
   const { directApi } = useData();
 
+  const joinUrl = (base, path) =>
+    `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+
   const fileUrl = clickedAsset?.fileUrl
-    ? directApi + clickedAsset.fileUrl
+    ? joinUrl(directApi, clickedAsset.fileUrl)
     : null;
-  const mediaType = clickedAsset?.type?.toLowerCase(); // safer and direct // "image", "video", etc.
+
+  const mediaType = clickedAsset?.type?.toLowerCase();
 
   const handleClick = (e) => {
     if (e.target.classList.contains("dismiss")) {

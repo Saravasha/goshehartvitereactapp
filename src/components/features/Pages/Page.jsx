@@ -3,37 +3,40 @@ import { useData } from "../../api/ApiContext";
 
 export const Page = ({ page }) => {
   const { directApi } = useData();
+  const joinUrl = (base, path) =>
+    `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+
   const prependApiUrlToMedia = (htmlContent) => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = htmlContent;
 
-    const images = tempDiv.querySelectorAll("img");
-    images.forEach((img) => {
-      const setSrc = img.getAttribute("src");
-      const setAlt = img.getAttribute("alt");
-      const setLazy = img.getAttribute("loading");
-      if (!setAlt) {
-        img.setAttribute("alt", "");
-      }
-      if (!setLazy) {
-        img.setAttribute("loading", "lazy");
-      }
-      if (setSrc && !setSrc.startsWith("http") && !setSrc.startsWith("https")) {
-        const fullUrl = `${directApi.replace(/\/$/, "")}${
-          setSrc.startsWith("/") ? "" : "/"
-        }${setSrc}`;
+    tempDiv.querySelectorAll("img").forEach((img) => {
+      const src = img.getAttribute("src");
+      const alt = img.getAttribute("alt");
+      const loading = img.getAttribute("loading");
 
-        img.src = encodeURI(fullUrl);
+      if (!alt) img.setAttribute("alt", "");
+      if (!loading) img.setAttribute("loading", "lazy");
+
+      if (
+        src &&
+        !src.startsWith("http://") &&
+        !src.startsWith("https://") &&
+        !src.startsWith("//")
+      ) {
+        img.src = joinUrl(directApi, src);
       }
     });
-    // Fix <video> poster
+
     tempDiv.querySelectorAll("video").forEach((video) => {
       const poster = video.getAttribute("poster");
-      if (poster && !poster.startsWith("http") && !poster.startsWith("https")) {
-        const fullPosterUrl = `${directApi.replace(/\/$/, "")}${
-          poster.startsWith("/") ? "" : "/"
-        }${poster}`;
-        video.setAttribute("poster", encodeURI(fullPosterUrl));
+      if (
+        poster &&
+        !poster.startsWith("http://") &&
+        !poster.startsWith("https://") &&
+        !poster.startsWith("//")
+      ) {
+        video.setAttribute("poster", joinUrl(directApi, poster));
       }
     });
 
