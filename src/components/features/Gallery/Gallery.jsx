@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Asset from "./Asset";
 import Modal from "./Modal";
 import ScrollToTopButton from "../ScrollToTopButton";
-import { useData } from "../../api/ApiContext";
 
 const Gallery = ({
   assets,
@@ -11,61 +10,30 @@ const Gallery = ({
   isModalVisible,
   setIsModalVisible,
 }) => {
-  // const { assets, directApi, isLoading } = useData();
-  const [clickedImage, setClickedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState();
   const [clickedAsset, setClickedAsset] = useState(null);
 
   const handleClick = (asset) => {
-    setCurrentIndex(asset.id);
-    setClickedImage(directApi + asset.imageUrl);
+    const index = assets.findIndex((a) => a.id === asset.id); // ✅ FIXED
+    setCurrentIndex(index);
     setClickedAsset(asset);
-
-    setIsModalVisible(true); // Open modal when image is clicked
-  };
-
-  const handleCloseModal = () => {
-    setClickedImage(null);
-    setClickedAsset(null);
-    setIsModalVisible(false); // Close modal
+    setIsModalVisible(true);
   };
 
   const handleRotationRight = () => {
     const totalLength = assets.length;
-    if (currentIndex + 1 >= totalLength) {
-      setCurrentIndex(0);
-      const newUrl = directApi + assets[0].imageUrl;
-      setClickedImage(newUrl);
-      setClickedAsset(assets[0]);
-      return;
-    }
-    const newIndex = currentIndex + 1;
-    const newUrl = assets.filter((item) => {
-      return assets.indexOf(item) === newIndex;
-    });
-    const newItem = directApi + newUrl[0].imageUrl;
-    setClickedImage(newItem);
+    const newIndex = (currentIndex + 1) % totalLength;
+    const newAsset = assets[newIndex];
     setCurrentIndex(newIndex);
-    setClickedAsset(newUrl[0]);
+    setClickedAsset(newAsset);
   };
 
   const handleRotationLeft = () => {
     const totalLength = assets.length;
-    if (currentIndex === 0) {
-      setCurrentIndex(totalLength - 1);
-      const newUrl = directApi + assets[totalLength - 1].imageUrl;
-      setClickedImage(newUrl);
-      setClickedAsset(assets[totalLength - 1]);
-      return;
-    }
-    const newIndex = currentIndex - 1;
-    const newUrl = assets.filter((item) => {
-      return assets.indexOf(item) === newIndex;
-    });
-    const newItem = directApi + newUrl[0].imageUrl;
-    setClickedImage(newItem);
+    const newIndex = (currentIndex - 1 + totalLength) % totalLength;
+    const newAsset = assets[newIndex];
     setCurrentIndex(newIndex);
-    setClickedAsset(newUrl[0]);
+    setClickedAsset(newAsset);
   };
 
   return (
@@ -93,17 +61,15 @@ const Gallery = ({
           ))}
         </div>
       )}
-      {clickedImage && (
+      {isModalVisible && clickedAsset && (
         <Modal
-          clickedImage={clickedImage}
+          clickedAsset={clickedAsset}
+          setClickedAsset={setClickedAsset}
+          // onClose={handleCloseModal}
           handleRotationLeft={handleRotationLeft}
           handleRotationRight={handleRotationRight}
-          setClickedImage={setClickedImage}
-          clickedAsset={clickedAsset}
-          onClose={handleCloseModal} // Pass close handler to modal
         />
       )}
-
       {!isModalVisible && <ScrollToTopButton isVisible={!isModalVisible} />}
     </>
   );

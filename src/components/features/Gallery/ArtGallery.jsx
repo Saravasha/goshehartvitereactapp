@@ -1,22 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AssetSearch from "./AssetSearch";
 import Gallery from "./Gallery";
-import { useEffect, useState } from "react";
 import { useData } from "../../api/ApiContext";
 
 const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
   const { assets, directApi, isLoading } = useData();
-  const [searchTerm, setSearchTerm] = useState(() => {
-    return "";
-  });
-  const [foundAssets, setFoundAssets] = useState(() => {
-    return [];
-  });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [foundAssets, setFoundAssets] = useState([]);
 
   const searchAsset = (value) => {
     setSearchTerm(value);
-
-    // setSearchTerm((prevState) => console.log(e.target.value));
   };
 
   const resetSearch = () => {
@@ -24,27 +17,52 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
   };
 
   useEffect(() => {
+    if (!searchTerm.trim()) {
+      // Show all assets if searchTerm is empty
+      setFoundAssets(assets);
+      return;
+    }
+
+    const lowerSearch = searchTerm.toLowerCase();
+
     setFoundAssets(
-      assets.filter(
-        (asset) =>
-          asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          asset.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          asset.categories.some((category) =>
-            category.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-      )
+      assets.filter((asset) => {
+        const nameMatch = asset.name?.toLowerCase().includes(lowerSearch);
+        const descriptionMatch = asset.description
+          ? asset.description.toLowerCase().includes(lowerSearch)
+          : false;
+        const authorMatch = asset.author
+          ? asset.author.toLowerCase().includes(lowerSearch)
+          : false;
+        const locationMatch = asset.location
+          ? asset.location.toLowerCase().includes(lowerSearch)
+          : false;
+        const categoriesMatch = asset.categories
+          ? asset.categories.some((cat) =>
+              cat.name.toLowerCase().includes(lowerSearch)
+            )
+          : false;
+
+        return (
+          nameMatch ||
+          descriptionMatch ||
+          authorMatch ||
+          locationMatch ||
+          categoriesMatch
+        );
+      })
     );
   }, [searchTerm, assets]);
 
   return (
-    <div className="ArtGallery flex flex-col justify-center dark:text-white  text-black font-thin m-4 rounded-2xl shadow-2xl relative">
+    <div className="ArtGallery flex flex-col justify-center dark:text-white text-black font-thin m-4 rounded-2xl shadow-2xl relative">
       {isLoading ? (
         <h1 className="font-thin justify-center flex mx-auto p-4">
           Loading...
         </h1>
       ) : (
         <>
-          <h1 className="text-6xl font-thin m-4 mx-auto flex justify-center border-transparent border-b-1 p-4">
+          <h1 className="text-6xl font-thin m-4 mx-auto flex justify-center border-transparent border-b p-4">
             Art Gallery
           </h1>
           <AssetSearch
@@ -53,7 +71,7 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
             searchTerm={searchTerm}
           />
 
-          {foundAssets.length !== 0 ? (
+          {foundAssets.length > 0 ? (
             <Gallery
               assets={foundAssets}
               directApi={directApi}
@@ -61,18 +79,10 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
               isModalVisible={isModalVisible}
               setIsModalVisible={setIsModalVisible}
             />
-          ) : foundAssets.length === 0 ? (
-            <h1 className=" font-thin  justify-center flex mx-auto p-4">
+          ) : (
+            <h1 className="font-thin justify-center flex mx-auto p-4">
               Could not find what you were looking for
             </h1>
-          ) : (
-            <Gallery
-              assets={assets}
-              directApi={directApi}
-              isLoading={isLoading}
-              isModalVisible={isModalVisible}
-              setIsModalVisible={setIsModalVisible}
-            />
           )}
         </>
       )}

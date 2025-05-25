@@ -3,26 +3,40 @@ import { useData } from "../../api/ApiContext";
 
 export const Page = ({ page }) => {
   const { directApi } = useData();
-  const prependApiUrlToImages = (htmlContent) => {
-    // Create a temporary DOM element to parse the HTML
+  const prependApiUrlToMedia = (htmlContent) => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = htmlContent;
 
-    // Find all <img> tags and prepend the API URL to their src
     const images = tempDiv.querySelectorAll("img");
     images.forEach((img) => {
       const setSrc = img.getAttribute("src");
-      const getAlt = img.getAttribute("alt");
-      if (!getAlt) {
+      const setAlt = img.getAttribute("alt");
+      const setLazy = img.getAttribute("loading");
+      if (!setAlt) {
         img.setAttribute("alt", "");
       }
+      if (!setLazy) {
+        img.setAttribute("loading", "lazy");
+      }
       if (setSrc && !setSrc.startsWith("http") && !setSrc.startsWith("https")) {
-        // Ensure directApi doesn't have a trailing slash
-        img.src = `${directApi.replace(/\/$/, "")}${
+        const fullUrl = `${directApi.replace(/\/$/, "")}${
           setSrc.startsWith("/") ? "" : "/"
         }${setSrc}`;
+
+        img.src = encodeURI(fullUrl);
       }
     });
+    // Fix <video> poster
+    tempDiv.querySelectorAll("video").forEach((video) => {
+      const poster = video.getAttribute("poster");
+      if (poster && !poster.startsWith("http") && !poster.startsWith("https")) {
+        const fullPosterUrl = `${directApi.replace(/\/$/, "")}${
+          poster.startsWith("/") ? "" : "/"
+        }${poster}`;
+        video.setAttribute("poster", encodeURI(fullPosterUrl));
+      }
+    });
+
     return tempDiv.innerHTML;
   };
 
@@ -39,7 +53,7 @@ export const Page = ({ page }) => {
       <div
         className="PageContainer text-4xl max-w-full gap-4  italic text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4  "
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(prependApiUrlToImages(page.container)),
+          __html: DOMPurify.sanitize(prependApiUrlToMedia(page.container)),
         }}
       ></div>
       <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4 ">
@@ -57,7 +71,7 @@ export const Page = ({ page }) => {
               className="ContentContainer text-4xl italic text-shadow-2xs flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,1)] gap-4 bg-inherit justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
-                  prependApiUrlToImages(content.container)
+                  prependApiUrlToMedia(content.container)
                 ),
               }}
             ></div>

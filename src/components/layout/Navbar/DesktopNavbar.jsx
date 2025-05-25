@@ -22,7 +22,7 @@ export default function DesktopNavbar({ isModalVisible }) {
       setShow(false); // Hide navbar when link is clicked
     };
     return (
-      <div className="text-4xl flex-grow justify-start flex flex-row">
+      <div className="text-4xl flex-grow justify-start flex flex-row border-black border-2 ">
         {pages.map((page, index) => (
           <div key={index}>
             <Link
