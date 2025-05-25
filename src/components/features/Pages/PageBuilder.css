@@ -5,7 +5,9 @@
 /* display: flex; */
 /* margin: 1rem; */
 .PageContainer > p > img,
-.ContentContainer > p > img {
+.ContentContainer > p > img,
+.PageContainer > p > video,
+.ContentContainer > p > video {
   width: 50% !important;
   /* height: 100% !important; */
   /* margin: 1rem; */

@@ -4,43 +4,78 @@ import { useData } from "../../api/ApiContext";
 const Asset = ({ asset }) => {
   const { directApi } = useData();
 
-  const imageExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
-  const videoExtensions = ["mp4", "webm", "ogg"];
+  const isImage = asset.type === "Image";
+  const isVideo = asset.type === "Video";
+  const isAudio = asset.type === "Audio";
 
-  const getFileExtension = (url) => {
-    const parts = url.split(".");
-    return parts[parts.length - 1].toLowerCase().split("?")[0];
-  };
+  const fileUrl = asset.fileUrl ? encodeURI(directApi + asset.fileUrl) : null;
+  const thumbnailUrl = asset.thumbnailUrl
+    ? directApi + asset.thumbnailUrl
+    : null;
 
-  const extension = getFileExtension(asset.imageUrl);
-
-  const isImage = imageExtensions.includes(extension);
-  const isVideo = videoExtensions.includes(extension);
+  if (!fileUrl) return <div className="text-red-500">Missing asset file</div>;
 
   return (
-    <>
+    <div className="relative w-full">
+      {/* Image Asset */}
       {isImage && (
         <img
           alt={asset.name}
-          src={directApi + asset.imageUrl}
+          src={fileUrl}
           loading="lazy"
-          style={{ maxWidth: "100%", height: "auto" }}
+          className="max-w-full h-auto rounded shadow"
         />
       )}
+      {/* Video Asset with Thumbnail */}
+      {isVideo && thumbnailUrl && (
+        <div className="relative">
+          <img
+            alt={`Thumbnail for ${asset.name}`}
+            src={thumbnailUrl}
+            loading="lazy"
+            className="max-w-full h-auto rounded shadow object-cover"
+          />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="bg-black bg-opacity-50 rounded-full p-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-8 h-8 text-white"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {isVideo && (
+      {/* Video Fallback if no thumbnail */}
+      {isVideo && !thumbnailUrl && (
         <video
           controls
-          src={directApi + asset.imageUrl}
-          style={{ maxWidth: "100%", height: "auto" }}
+          src={fileUrl}
+          className="max-w-full h-auto rounded shadow"
           preload="none"
         >
           Your browser does not support the video tag.
         </video>
       )}
 
-      {!isImage && !isVideo && <div>Unsupported file format: {extension}</div>}
-    </>
+      {/* Audio Support (Optional) */}
+      {isAudio && (
+        <audio controls src={fileUrl} className="w-full">
+          Your browser does not support the audio element.
+        </audio>
+      )}
+
+      {/* Unknown Type */}
+      {!isImage && !isVideo && !isAudio && (
+        <div className="text-gray-500 text-sm">
+          Unsupported asset type: {asset.type}
+        </div>
+      )}
+    </div>
   );
 };
 
