@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import useApi from "./useApi";
+import useEnv from "../hooks/useEnv";
 
 const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
   const { assets, pages, colors, directApi, isLoading } = useApi();
-  if (`${import.meta.env.MODE}` == "development")
+  const { environment } = useEnv();
+  if (environment == "development")
     console.log(
-      "App environment = ",
-      `${import.meta.env.MODE}`,
+      { Environment: environment },
       { Assets: assets },
       { Pages: pages },
       { Colors: colors },
@@ -17,7 +18,7 @@ export const ApiProvider = ({ children }) => {
     );
   return (
     <ApiContext.Provider
-      value={{ assets, pages, colors, directApi, isLoading }}
+      value={{ environment, assets, pages, colors, directApi, isLoading }}
     >
       {children}
     </ApiContext.Provider>
