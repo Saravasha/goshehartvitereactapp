@@ -16,10 +16,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Set Environment Variables
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL_STAGING }}" >> $GITHUB_ENV
       - name: NPM Build
         run: |
           npm i
-          npm run build
+          npm run build -- --mode staging
           ls -a 
           cp -a dist/. /var/www/goshehartreact
           cd ..
@@ -27,8 +30,8 @@ jobs:
         run: |
           export PM2_HOME=/root/.pm2
           pm2 resurrect
-          pm2 stop goshehartreactviteapp
-          pm2 start goshehartreactviteapp
+          pm2 stop goshehartreactviteapp-staging
+          pm2 start goshehartreactviteapp-staging
           pm2 save
       - name: Starting NGNIX
         run: |
