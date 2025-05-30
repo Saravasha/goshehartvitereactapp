@@ -1,0 +1,35 @@
+# Triggers
+name: Deploy goshehartvitereactapp to Production
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Deploy project with Nginx
+    runs-on: [self-hosted, Production]
+    # runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: NPM Build
+        run: |
+          npm i
+          npm run build
+          ls -a 
+          cp -a dist/. /var/www/html
+          cd ..
+      - name: PM2 Syncing
+        run: |
+          export PM2_HOME=/root/.pm2
+          pm2 resurrect
+          pm2 stop goshehartreactviteapp
+          pm2 start goshehartreactviteapp
+          pm2 save
+      - name: Starting NGNIX
+        run: |
+          service nginx restart
