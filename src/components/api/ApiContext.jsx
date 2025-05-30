@@ -7,7 +7,7 @@ const ApiContext = createContext();
 export const ApiProvider = ({ children }) => {
   const { assets, pages, colors, directApi, isLoading } = useApi();
   const { environment } = useEnv();
-  if (environment == "development")
+  if (environment == "development" || environment == "staging")
     console.log(
       { Environment: environment },
       { Assets: assets },
