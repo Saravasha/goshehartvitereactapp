@@ -24,7 +24,7 @@ jobs:
           npm i
           npm run build -- --mode staging
           ls -a 
-          cp -a dist/. /var/www/goshehartreact
+          cp -a dist/. /var/www/goshehartreact-staging
           cd ..
       - name: PM2 Syncing
         run: |
