@@ -18,7 +18,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Set Environment Variables
         run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL_STAGING }}" >> $GITHUB_ENV
+          echo "VITE_API_URL=${{ secrets.VITE_ENVIRONMENT_STAGING }}" >> $GITHUB_ENV
       - name: NPM Build
         run: |
           npm i
