@@ -11,7 +11,7 @@ import { SocialMedia } from "./components/layout/SocialMedia.jsx";
 
 import { useData } from "./components/api/ApiContext.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
-import useColors from "./components/color/useColors.jsx";
+import useColors from "./components/features/color/useColors.jsx";
 import LifecycleHeader from "./components/lifecycle/LifecycleHeader.jsx";
 
 function App() {

@@ -42,6 +42,7 @@
   text-align: center;
   /* box-shadow: var(--shadow-lg); */
   border-radius: var(--radius-2xl);
+  filter: drop-shadow(0 1.2px 1.2px rgba(0, 3, 3, 0.8));
 }
 
 .ContentContainer {
