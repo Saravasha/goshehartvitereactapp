@@ -13,7 +13,7 @@ export default function DesktopNavbar({ isModalVisible }) {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const baseClass =
-    "flex mt-4 justify-start cursor-pointer mt-0 hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mr-4";
+    "flex mt-4 justify-center cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]";
   const activeClass = "!text-gray-500 font-bold";
   const inactiveClass = "!text-white hover:text-gray-700 hover:shadow-2xl";
 
@@ -22,9 +22,9 @@ export default function DesktopNavbar({ isModalVisible }) {
       setShow(false); // Hide navbar when link is clicked
     };
     return (
-      <div className="text-4xl flex-grow justify-start flex flex-row border-black border-2 ">
+      <div className="flex-grow text-center flex-row flex w-full gap-4">
         {pages.map((page, index) => (
-          <div key={index}>
+          <div key={index} className="flex-1 text-center text-wrap">
             <Link
               to={page.title}
               onClick={handleLinkClick}
@@ -33,13 +33,13 @@ export default function DesktopNavbar({ isModalVisible }) {
               offset={navbarOffset}
               spy={true}
               onSetActive={() => setActiveSection(page.title)}
-              className={`${baseClass} ${
+              className={`${baseClass} text-4xl  ${
                 activeSection === page.title ? activeClass : inactiveClass
               }`}
             >
               {page.title}
             </Link>
-            <div className="text-2xl flex-grow flex-col flex ">
+            <div className="flex-grow flex-col flex mt-2 space-y-1 ">
               {page.contents.map((content, subIndex) => (
                 <Link
                   to={content.title}
@@ -50,7 +50,7 @@ export default function DesktopNavbar({ isModalVisible }) {
                   offset={navbarOffset}
                   spy={true}
                   onSetActive={() => setActiveSection(content.title)}
-                  className={`${baseClass} ${
+                  className={`${baseClass} text-2xl ${
                     activeSection === content.title
                       ? activeClass
                       : inactiveClass
@@ -64,10 +64,9 @@ export default function DesktopNavbar({ isModalVisible }) {
         ))}
 
         {/* //Hard coded Features in the Navbar */}
-        <div>
-          {["ArtGallery", "SocialMedia"].map((title) => (
+        {["ArtGallery", "SocialMedia"].map((title) => (
+          <div key={title} className="flex-1 text-center ">
             <Link
-              key={title}
               to={title}
               onClick={handleLinkClick}
               smooth={true}
@@ -75,14 +74,14 @@ export default function DesktopNavbar({ isModalVisible }) {
               offset={navbarOffset}
               spy={true}
               onSetActive={() => setActiveSection(title)}
-              className={`${baseClass} block ${
+              className={`${baseClass} text-4xl block ${
                 activeSection === title ? activeClass : inactiveClass
               }`}
             >
               {title.replace(/([A-Z])/g, " $1").trim()}
             </Link>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     );
   };

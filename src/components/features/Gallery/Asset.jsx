@@ -17,14 +17,14 @@ const Asset = ({ asset }) => {
   if (!fileUrl) return <div className="text-red-500">Missing asset file</div>;
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full flex items-center justify-center cursor-pointer">
       {/* Image Asset */}
       {isImage && (
         <img
           alt={asset.name}
           src={fileUrl}
           loading="lazy"
-          className="max-w-full h-auto rounded shadow"
+          className="max-w-full h-auto rounded shadow justify-center align-middle"
         />
       )}
       {/* Video Asset with Thumbnail */}
@@ -34,7 +34,7 @@ const Asset = ({ asset }) => {
             alt={`Thumbnail for ${asset.name}`}
             src={thumbnailUrl}
             loading="lazy"
-            className="max-w-full h-auto rounded shadow object-cover"
+            className="max-w-full h-auto rounded shadow"
           />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="bg-black bg-opacity-50 rounded-full p-3">
