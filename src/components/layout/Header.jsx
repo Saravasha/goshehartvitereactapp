@@ -1,4 +1,4 @@
-import useColors from "../../components/color/useColors.jsx";
+import useColors from "../../components/features/color/useColors.jsx";
 
 import { useData } from "../../components/api/ApiContext.jsx";
 
