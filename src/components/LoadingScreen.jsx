@@ -19,7 +19,7 @@ const LoadingScreen = () => {
         src={bgimg}
         alt="alt"
       />
-      <span className="mt-8 text-6xl sm:text-7xl md:text-8xl font-thin text-white animate-pulse text-center">
+      <span className="mt-8 text-4xl sm:text-7xl md:text-6xl font-thin text-white animate-pulse text-center">
         Loading
       </span>
       <div className="flex items-center space-x-4 animate-bounce">
