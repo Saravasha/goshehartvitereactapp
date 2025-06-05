@@ -1,5 +1,6 @@
 import ScrollToTop from "react-scroll-to-top";
-
+import useColors from "./color/useColors";
+import { useData } from "../api/ApiContext";
 import React, { useEffect, useState } from "react";
 
 const ScrollToTopButton = ({ isVisible }) => {
@@ -8,6 +9,9 @@ const ScrollToTopButton = ({ isVisible }) => {
   const [buttonVisibility, setButtonVisibility] = useState(true);
 
   const [isHovered, setIsHovered] = useState(false);
+  const { colors, isLoading } = useData();
+  const colorInStyle =
+    useColors(colors, "ScrollToTop Background Color", isLoading) || {};
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,11 +58,12 @@ const ScrollToTopButton = ({ isVisible }) => {
       component={
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <svg
-            className="w-[64px] h-[64px] text-slate-50 dark:text-white hover:animate-pulse dark:bg-green-900 rounded bg-green-800 drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+            className="w-[64px] h-[64px] text-slate-50 dark:text-white hover:animate-pulse rounded drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            style={colorInStyle}
           >
             <path
               stroke="currentColor"

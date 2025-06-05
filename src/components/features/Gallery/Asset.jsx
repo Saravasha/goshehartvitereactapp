@@ -14,7 +14,7 @@ const Asset = ({ asset }) => {
     ? joinUrl(directApi, asset.thumbnailUrl)
     : null;
 
-  if (!fileUrl) return <div className="text-red-500">Missing asset file</div>;
+  if (!fileUrl) return <div className="text-red-500">Missing Asset File</div>;
 
   return (
     <div className="relative w-full flex items-center justify-center cursor-pointer">

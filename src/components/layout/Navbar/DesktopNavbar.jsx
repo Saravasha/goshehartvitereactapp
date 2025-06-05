@@ -2,9 +2,10 @@
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import { useState, useEffect, useRef } from "react";
+import useColors from "../../../components/features/color/useColors.jsx";
 
 export default function DesktopNavbar({ isModalVisible }) {
-  const { pages } = useData();
+  const { colors, pages, isLoading } = useData();
   const [activeSection, setActiveSection] = useState("");
   const navRef = useRef();
   const [navbarOffset, setNavbarOffset] = useState(0);
@@ -15,7 +16,12 @@ export default function DesktopNavbar({ isModalVisible }) {
   const baseClass =
     "flex mt-4 justify-center cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]";
   const activeClass = "!text-gray-500 font-bold";
-  const inactiveClass = "!text-white hover:text-gray-700 hover:shadow-2xl";
+  const inactiveClass = "text-white hover:text-gray-700 hover:shadow-2xl";
+
+  const colorInStyle =
+    useColors(colors, "Navbar Background Color", isLoading) || {};
+  const colorInStyleText =
+    useColors(colors, "Navbar Text Color", isLoading) || {};
 
   const MappingPages = () => {
     const handleLinkClick = () => {
@@ -32,6 +38,7 @@ export default function DesktopNavbar({ isModalVisible }) {
               duration={500}
               offset={navbarOffset}
               spy={true}
+              style={colorInStyleText}
               onSetActive={() => setActiveSection(page.title)}
               className={`${baseClass} text-4xl  ${
                 activeSection === page.title ? activeClass : inactiveClass
@@ -49,6 +56,7 @@ export default function DesktopNavbar({ isModalVisible }) {
                   duration={500}
                   offset={navbarOffset}
                   spy={true}
+                  style={colorInStyleText}
                   onSetActive={() => setActiveSection(content.title)}
                   className={`${baseClass} text-2xl ${
                     activeSection === content.title
@@ -73,6 +81,7 @@ export default function DesktopNavbar({ isModalVisible }) {
               duration={500}
               offset={navbarOffset}
               spy={true}
+              style={colorInStyleText}
               onSetActive={() => setActiveSection(title)}
               className={`${baseClass} text-4xl block ${
                 activeSection === title ? activeClass : inactiveClass
@@ -144,7 +153,8 @@ export default function DesktopNavbar({ isModalVisible }) {
     <>
       <nav
         ref={navRef}
-        className={`transition-transform duration-1000 ease-in-out sticky top-0 z-50 flex  bg-gradient-to-r from-green-950 to-white p-4 ${
+        style={colorInStyle}
+        className={`transition-transform duration-1000 ease-in-out sticky top-0 z-50 flex p-4 ${
           show ? "translate-y-0" : "-translate-y-full"
         }`}
       >
