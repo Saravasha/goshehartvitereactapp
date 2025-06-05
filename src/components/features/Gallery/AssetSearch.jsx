@@ -6,25 +6,26 @@ const AssetSearch = ({ searchAsset, resetSearch, searchTerm }) => {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <div className="Search rounded flex justify-center border-4 border-transparent">
-        <div className="flex border-b border-black w-1/2 py-2">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleChange}
-            className="text-center font-thin bg-transparent border-none w-full text-black dark:text-white py-1 focus:outline-none"
-            placeholder="Search Gallery for an Asset by ..."
-            autoComplete="off"
-          />
-        </div>
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="Search rounded flex justify-center border-transparent"
+    >
+      <div className="flex flex-col justify-center w-1/2 border-inherit gap-4">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleChange}
+          className="justify-center font-thin bg-transparent placeholder:text-center !text-4xl dark:border-black border-white border-b dark:text-white text-white py-1 focus:outline-none"
+          placeholder="Search Gallery for an Asset by ..."
+          autoComplete="off"
+        />
         <button
           type="button"
           onClick={resetSearch}
           aria-label="Reset search input"
-          className={`transition-all duration-3000 ease-in-out transform 
-              ${searchTerm ? "opacity-100 scale-100" : "opacity-0 scale-0"} 
-              px-2 py-1 border rounded text-sm ml-4`}
+          className={`transition-all duration-3000 ease-in-out transform justify-center !text-2xl flex dark:!bg-green-700 dark:!text-white !bg-red-500 !text-white
+          ${searchTerm ? "opacity-100 scale-100" : "opacity-0 scale-0"} 
+          px-2 py-1 border rounded text-sm`}
         >
           Reset
         </button>

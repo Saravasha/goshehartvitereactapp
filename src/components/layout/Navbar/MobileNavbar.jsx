@@ -3,20 +3,22 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
+import useColors from "../../features/color/useColors";
 
 export default function MobileNavbar({ isModalVisible }) {
-  const { pages } = useData();
+  const { colors, pages, isLoading } = useData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState("");
 
   const baseClass =
-    "text-2xl block text-white font-thin transition flex transform cursor-pointer  hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline text-2xl ";
+    "text-2xl block text-white font-thin transition flex transform cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline text-2xl ";
   const activeClass = "font-thin text-gray-500 !text-gray-500";
   const inactiveClass =
     "text-white !text-white hover:text-gray-700 hover:shadow-2xl";
-
+  const colorInStyle =
+    useColors(colors, "Navbar Background Color", isLoading) || {};
   const controlNavbar = () => {
     if (window.scrollY > lastScrollY) {
       setShowNavbar(false);
@@ -35,7 +37,8 @@ export default function MobileNavbar({ isModalVisible }) {
 
   return (
     <nav
-      className={` top-0 left-0 w-full z-50 bg-gradient-to-r from-green-950 to-white p-4 shadow-md transition-transform duration-1000 ease-in-out transform sticky  flex-wrap  ${
+      style={colorInStyle}
+      className={` top-0 left-0 w-full z-50 p-4 shadow-md transition-transform duration-1000 ease-in-out transform sticky flex-wrap  ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >

@@ -1,8 +1,18 @@
 import DOMPurify from "dompurify";
 import { useData } from "../../api/ApiContext";
+import useColors from "../color/useColors";
 
 export const Page = ({ page }) => {
-  const { directApi } = useData();
+  const { colors, directApi, isLoading } = useData();
+  const colorInStyle =
+    useColors(colors, "Page Header Text Color", isLoading) || {};
+  const colorInStyleContent =
+    useColors(colors, "Content Header Text Color", isLoading) || {};
+  const colorInStylePageBody =
+    useColors(colors, "Page Body Text Color", isLoading) || {};
+  const colorInStyleContentBody =
+    useColors(colors, "Content Body Text Color", isLoading) || {};
+
   const joinUrl = (base, path) =>
     `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
 
@@ -45,28 +55,39 @@ export const Page = ({ page }) => {
 
   return (
     <div
-      className="Page bg-white/30 backdrop-blur-sm flex flex-col gap-4 rounded shadow-2xl  text-4xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow    h-full "
+      className="Page bg-white/30 backdrop-blur-sm flex flex-col gap-4 rounded shadow-2xl  text-4xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow h-full "
       key={page.id}
       id={page.title}
     >
-      <h2 className="PageTitle italic text-shadow-2xs text-gray-800 dark:text-white dark:bg-green-900/30  text-8xl justify-center items-center flex drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin flex-grow w-full h-full">
+      {/* page title */}
+      <h2
+        className="PageTitle italic text-shadow-2xs w-full text-center text-[15vw] bg-slate-900/10 text-8xl justify-center items-center flex drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin flex-grow h-full"
+        style={colorInStyle}
+      >
         {page.title}
       </h2>
       {/* page container */}
       <div
-        className="PageContainer text-4xl max-w-full gap-4  italic text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4  "
+        className="PageContainer text-4xl max-w-full gap-4  italic text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4"
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(prependApiUrlToMedia(page.container)),
         }}
+        style={colorInStylePageBody}
       ></div>
-      <div className="Contents flex flex-col  bg-transparent  text-4xl gap-4 justify-center items-center flex-grow w-full p-4">
+      <div className="Contents flex flex-col bg-transparent text-4xl gap-4 justify-center items-center flex-grow w-full p-4">
         {page.contents.map((content) => (
           <div key={content.id} id={content.title}>
-            <h3 className="ContentTitle italic text-shadow-2xs text-gray-800 dark:text-white dark:bg-green-900/30 text-6xl justify-center items-center flex m-4 flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4">
+            <h3
+              className="ContentTitle italic text-shadow-2xs text-center text-[10vw] dark:text-white bg-slate-900/10 text-6xl justify-center items-center flex m-4 flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4"
+              style={colorInStyleContent}
+            >
               {content.title}
             </h3>
             {/* content date */}
-            <h4 className="ContentContainerDateString italic text-shadow-2xs text-gray-800 dark:text-white pt-4 text-4xl justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
+            <h4
+              className="ContentContainerDateString italic text-shadow-2xs text-center text-[5vw] text-white dark:text-black pt-4 text-4xl justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+              style={colorInStyleContent}
+            >
               {content.dateString}
             </h4>
             {/* content container */}
@@ -77,6 +98,7 @@ export const Page = ({ page }) => {
                   prependApiUrlToMedia(content.container)
                 ),
               }}
+              style={colorInStyleContentBody}
             ></div>
           </div>
         ))}
