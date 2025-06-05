@@ -4,7 +4,7 @@ export const SocialMedia = () => {
   return (
     <div className="SocialMedia gap-4 flex flex-col text-center justify-center py-10  m-4  rounded shadow-2xl">
       {/* header */}
-      <h1 className=" font-thin hover:text-green-700 hover:animate-pulse dark:text-white text-black">
+      <h1 className=" font-thin hover:text-green-700 hover:animate-pulse dark:text-white text-white drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
         Follow me @
       </h1>
 
