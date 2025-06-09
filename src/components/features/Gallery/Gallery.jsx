@@ -67,6 +67,9 @@ const Gallery = ({
           setClickedAsset={setClickedAsset}
           handleRotationLeft={handleRotationLeft}
           handleRotationRight={handleRotationRight}
+          onClose={() => {
+            setIsModalVisible(false);
+          }}
         />
       )}
       {!isModalVisible && <ScrollToTopButton isVisible={!isModalVisible} />}

@@ -6,7 +6,7 @@ export default function Main({ isModalVisible }) {
   return (
     <>
       <PageBuilder />
-      <ScrollToTopButton isVisible={isModalVisible}></ScrollToTopButton>
+      <ScrollToTopButton isVisible={!isModalVisible}></ScrollToTopButton>
     </>
   );
 }
