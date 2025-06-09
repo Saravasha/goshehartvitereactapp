@@ -28,8 +28,8 @@ function App() {
       ) : (
         <div key="main" style={colorInStyle}>
           <LifecycleHeader environment={environment} />
-          <Header />
           <Navbar isModalVisible={isModalVisible} />
+          <Header />
           <ComingSoon />
 
           <Main />

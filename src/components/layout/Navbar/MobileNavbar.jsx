@@ -1,5 +1,4 @@
-// components/Navbar/MobileNavbar.js
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
@@ -13,27 +12,38 @@ export default function MobileNavbar({ isModalVisible }) {
   const [activeSection, setActiveSection] = useState("");
 
   const baseClass =
-    "text-2xl block text-white font-thin transition flex transform cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline text-2xl ";
+    "!text-[4vw] block text-white font-thin transition flex transform cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline";
   const activeClass = "font-thin text-gray-500 !text-gray-500";
   const inactiveClass =
     "text-white !text-white hover:text-gray-700 hover:shadow-2xl";
   const colorInStyle =
     useColors(colors, "Navbar Background Color", isLoading) || {};
+  const colorInStyleButton =
+    useColors(colors, "ScrollToTop Background Color", isLoading) || {};
+
   const controlNavbar = () => {
-    if (window.scrollY > lastScrollY) {
+    if (isMenuOpen) return; // Ignore scroll events when menu is open
+
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
       setShowNavbar(false);
-    } else {
+    } else if (currentScrollY < lastScrollY) {
       setShowNavbar(true);
     }
-    setLastScrollY(window.scrollY);
+
+    setLastScrollY(currentScrollY);
   };
 
   useEffect(() => {
     if (!isModalVisible) {
       window.addEventListener("scroll", controlNavbar);
-      return () => window.removeEventListener("scroll", controlNavbar);
     }
-  }, [lastScrollY, isModalVisible]);
+
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [isModalVisible, lastScrollY, isMenuOpen]); // Added isMenuOpen here
 
   return (
     <nav
@@ -44,15 +54,16 @@ export default function MobileNavbar({ isModalVisible }) {
     >
       <div className="flex justify-between items-center text-white">
         <div
-          className="text-4xl font-thin cursor-pointer drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          className="!text-[8vw] font-thin cursor-pointer drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           Gosheh Art
         </div>
         <div
+          style={colorInStyleButton}
           aria-expanded
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="  dark:bg-gray-800 rounded-sm text-3xl bg-green-700 hover:animate-pulse drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          className="rounded-sm text-3xl  hover:animate-pulse drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
         >
           <Hamburger
             easing="ease-in"

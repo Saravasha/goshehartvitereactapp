@@ -1,14 +1,15 @@
 import ScrollToTop from "react-scroll-to-top";
 import useColors from "./color/useColors";
 import { useData } from "../api/ApiContext";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const ScrollToTopButton = ({ isVisible }) => {
-  if (!isVisible) return null; // Don't render anything if modal is open
-  const [timer, setTimer] = useState(null);
-  const [buttonVisibility, setButtonVisibility] = useState(true);
+  if (!isVisible) return null;
 
+  const [buttonVisibility, setButtonVisibility] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef(null); // ⬅️ Replaces useState
+
   const { colors, isLoading } = useData();
   const colorInStyle =
     useColors(colors, "ScrollToTop Background Color", isLoading) || {};
@@ -17,48 +18,47 @@ const ScrollToTopButton = ({ isVisible }) => {
     const handleScroll = () => {
       setButtonVisibility(true);
 
-      // Clear any existing timer
-      if (timer) clearTimeout(timer);
+      // Clear existing timer
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
 
-      // Set a new timer to hide after 3 seconds
-      const newTimer = setTimeout(() => {
+      // Set new timer to hide after 3 seconds
+      timerRef.current = setTimeout(() => {
         if (!isHovered) {
           setButtonVisibility(false);
         }
       }, 3000);
-      setTimer(newTimer);
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (timer) clearTimeout(timer);
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [timer, isHovered]);
+  }, [isHovered]); // ✅ Only depend on isHovered now
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    if (timer) clearTimeout(timer); // Stop hiding while hovered
+    if (timerRef.current) clearTimeout(timerRef.current);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    // Restart timer when user stops hovering
-    const newTimer = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setButtonVisibility(false);
     }, 3000);
-    setTimer(newTimer);
   };
 
   return (
     <ScrollToTop
       smooth
-      showunder={100}
+      top={100} // Button becomes visible after scrolling 100px
       component={
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <svg
-            className="w-[64px] h-[64px] text-slate-50 dark:text-white hover:animate-pulse rounded drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+            className="w-[4rem] h-[4rem] text-slate-50 relative justify-end dark:text-white hover:animate-pulse rounded drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

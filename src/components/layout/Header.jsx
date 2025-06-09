@@ -7,12 +7,12 @@ export default function Header() {
   const colorInStyle = useColors(colors, "Header Text", isLoading) || {};
   return (
     <div className="flex italic  justify-center font-thin ">
-      <p
-        className="m-4 p-4 text-shadow-2xl w-full text-center text-[8vw] hover:text-green-700 hover:animate-pulse drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+      <h1
+        className="m-4 p-4 text-shadow-2xl w-full text-center !text-[20vw] hover:text-green-700 hover:animate-pulse drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
         style={colorInStyle}
       >
         Gosheh Art
-      </p>
+      </h1>
     </div>
   );
 }
