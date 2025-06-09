@@ -8,11 +8,12 @@ function LifecycleHeader({ environment }) {
           style={{
             backgroundColor: "darkorange",
             color: "white",
-            padding: "10px",
+            padding: "1rem",
             textAlign: "center",
           }}
         >
-          <strong>STAGING ENVIRONMENT</strong> — Not for production use
+          <strong>STAGING ENVIRONMENT</strong>
+          <p> — Not for production use </p>
         </div>
       )}
       {environment === "development" && (
@@ -20,11 +21,12 @@ function LifecycleHeader({ environment }) {
           style={{
             backgroundColor: "darkred",
             color: "white",
-            padding: "10px",
+            padding: "1rem",
             textAlign: "center",
           }}
         >
-          <strong>DEVELOPMENT ENVIRONMENT</strong> — Not for production use
+          <strong>DEVELOPMENT ENVIRONMENT</strong>{" "}
+          <p>— Not for production use</p>
         </div>
       )}
     </>

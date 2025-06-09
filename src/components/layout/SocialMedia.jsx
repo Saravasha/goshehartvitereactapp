@@ -2,14 +2,14 @@ import React from "react";
 
 export const SocialMedia = () => {
   return (
-    <div className="SocialMedia gap-4 flex flex-col text-center justify-center py-10  m-4  rounded shadow-2xl">
+    <div className="SocialMedia gap-4 flex flex-col text-center justify-center py-10 m-4 rounded shadow-2xl">
       {/* header */}
-      <h1 className=" font-thin hover:text-green-700 hover:animate-pulse dark:text-white text-white drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
+      <h1 className=" font-thin !text-[5vw] hover:text-green-700 hover:animate-pulse dark:text-white text-white drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
         Follow me @
       </h1>
 
       {/* instagram */}
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-[2vw] justify-center">
         <a
           href="https://www.instagram.com/gracefulagedstyle/"
           target="_blank"
@@ -17,7 +17,7 @@ export const SocialMedia = () => {
           className="social-icon "
         >
           <svg
-            className=" w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+            className=" w-[8vw] h-[8vw] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -41,7 +41,7 @@ export const SocialMedia = () => {
           className="social-icon"
         >
           <svg
-            className="w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+            className="w-[8vw] h-[8vw] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -64,7 +64,7 @@ export const SocialMedia = () => {
           className="social-icon"
         >
           <svg
-            className="w-[84px] h-[84px] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+            className="w-[8vw] h-[8vw] bg-green-700 hover:animate-pulse  dark:text-white rounded-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"

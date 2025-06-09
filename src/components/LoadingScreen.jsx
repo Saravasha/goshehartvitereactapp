@@ -11,7 +11,7 @@ const LoadingScreen = () => {
       exit={{ opacity: 0, y: -100 }}
       transition={{ duration: 1 }}
     >
-      <span className="mt-8 text-6xl z-1 sm:text-7xl md:text-9xl font-thin text-white  text-center">
+      <span className="mt-8 text-[6vw] z-1 sm:text-7xl md:text-9xl font-thin text-white  text-center">
         Gosheh Art
       </span>
       <img
@@ -19,7 +19,7 @@ const LoadingScreen = () => {
         src={bgimg}
         alt="alt"
       />
-      <span className="mt-8 text-4xl sm:text-7xl md:text-6xl font-thin text-white animate-pulse text-center">
+      <span className="mt-8 text-[4vw] font-thin text-white animate-pulse text-center">
         Loading
       </span>
       <div className="flex items-center space-x-4 animate-bounce">
