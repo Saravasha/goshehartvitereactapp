@@ -26,7 +26,6 @@ const Modal = ({
     }
   };
 
-  
   useEffect(() => {
     const handleEscapeKey = (e) => {
       if (e.code === "Escape") {
