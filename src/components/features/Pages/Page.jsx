@@ -1,17 +1,13 @@
 import DOMPurify from "dompurify";
 import { useData } from "../../api/ApiContext";
-import useColors from "../color/useColors";
+import useColors from "../Colors/useColors";
 
 export const Page = ({ page }) => {
-  const { colors, directApi, isLoading } = useData();
-  const colorInStyle =
-    useColors(colors, "Page Header Text Color", isLoading) || {};
-  const colorInStyleContent =
-    useColors(colors, "Content Header Text Color", isLoading) || {};
-  const colorInStylePageBody =
-    useColors(colors, "Page Body Text Color", isLoading) || {};
-  const colorInStyleContentBody =
-    useColors(colors, "Content Body Text Color", isLoading) || {};
+  const { directApi } = useData();
+  const colorInStyle = useColors("Page Header Text Color") || {};
+  const colorInStyleContent = useColors("Content Header Text Color") || {};
+  const colorInStylePageBody = useColors("Page Body Text Color") || {};
+  const colorInStyleContentBody = useColors("Content Body Text Color") || {};
 
   const joinUrl = (base, path) =>
     `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
@@ -47,6 +43,7 @@ export const Page = ({ page }) => {
         !poster.startsWith("//")
       ) {
         video.setAttribute("poster", joinUrl(directApi, poster));
+        video.setAttribute;
       }
     });
 

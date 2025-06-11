@@ -11,13 +11,13 @@ import { SocialMedia } from "./components/layout/SocialMedia.jsx";
 
 import { useData } from "./components/api/ApiContext.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
-import useColors from "./components/features/color/useColors.jsx";
+import useColors from "./components/features/Colors/useColors.jsx";
 import LifecycleHeader from "./components/lifecycle/LifecycleHeader.jsx";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { environment, colors, isLoading } = useData();
-  const colorInStyle = useColors(colors, "Background Color", isLoading) || {};
+  const { environment, isLoading } = useData();
+  const bgColor = useColors("Background Color") || {};
 
   return (
     <>
@@ -26,7 +26,7 @@ function App() {
           <LoadingScreen key="loading" />
         </AnimatePresence>
       ) : (
-        <div key="main" style={colorInStyle}>
+        <div key="main" style={bgColor}>
           <LifecycleHeader environment={environment} />
           <Navbar isModalVisible={isModalVisible} />
           <Header />

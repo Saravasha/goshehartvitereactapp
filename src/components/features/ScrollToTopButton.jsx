@@ -1,5 +1,5 @@
 import ScrollToTop from "react-scroll-to-top";
-import useColors from "./color/useColors";
+import useColors from "./Colors/useColors";
 import { useData } from "../api/ApiContext";
 import React, { useEffect, useState, useRef } from "react";
 
@@ -10,9 +10,7 @@ const ScrollToTopButton = ({ isVisible }) => {
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef(null); // ⬅️ Replaces useState
 
-  const { colors, isLoading } = useData();
-  const colorInStyle =
-    useColors(colors, "ScrollToTop Background Color", isLoading) || {};
+  const colorInStyle = useColors("ScrollToTop Background Color") || {};
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +35,7 @@ const ScrollToTopButton = ({ isVisible }) => {
       window.removeEventListener("scroll", handleScroll);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [isHovered]); // ✅ Only depend on isHovered now
+  }, [isHovered]); //
 
   const handleMouseEnter = () => {
     setIsHovered(true);
