@@ -18,7 +18,6 @@ export default function DesktopNavbar({ isModalVisible }) {
 
   const colorInStyle = useColors("Navbar Background Color") || {};
   const colorInStyleText = useColors("Navbar Text Color") || {};
-  console.log(colorInStyle);
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       const currentScrollY = window.scrollY;

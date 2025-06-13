@@ -4,6 +4,33 @@
   /* align-items: center; */
 /* display: flex; */
 /* margin: 1rem; */
+
+h2 {
+  font-size: 5rem;
+  overflow-wrap: anywhere;
+}
+h3 {
+  font-size: 4rem;
+  overflow-wrap: anywhere;
+}
+h4 {
+  font-size: 3rem;
+  overflow-wrap: anywhere;
+}
+h5 {
+  font-size: 2rem;
+  overflow-wrap: anywhere;
+}
+p {
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+td {
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
 .PageContainer > p > img,
 .ContentContainer > p > img,
 .PageContainer > p > video,
@@ -42,7 +69,7 @@
   text-align: center;
   /* box-shadow: var(--shadow-lg); */
   border-radius: var(--radius-2xl);
-  filter: drop-shadow(0 1.2px 1.2px rgba(0, 3, 3, 0.8));
+  /* filter: drop-shadow(0 1.2px 1.2px rgba(0, 3, 3, 0.8)); */
 }
 
 .ContentContainer {
@@ -134,4 +161,33 @@
 
 /* [style="width"] {
   width: 100% !important;
+} */
+
+.ContentContainer table {
+  display: grid;
+  /* border-collapse: inherit; */
+  /* margin-bottom: 1rem; */
+  overflow-x: auto;
+  width: 100%;
+}
+.ContentContainer tbody {
+  display: table;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.ContentContainer tr {
+  display: table-row;
+  width: 100%;
+  /* margin-bottom: 1rem; */
+}
+
+.ContentContainer td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: center;
+  display: table-cell;
+}
+
+/* .ContentContainer tr:nth-child(even) {
+  background-color: #b90000;
 } */
