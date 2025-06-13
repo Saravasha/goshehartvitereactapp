@@ -1,5 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 
+import { useData } from "../../api/ApiContext";
+
 function useDarkMode() {
   const [isDark, setIsDark] = useState(false);
 
@@ -18,7 +20,8 @@ function useDarkMode() {
   return isDark;
 }
 
-export default function useColors(colors, colorName, isLoading) {
+export default function useColors(colorName) {
+  const { colors, isLoading } = useData();
   const isDark = useDarkMode();
 
   return useMemo(() => {
@@ -44,6 +47,7 @@ export default function useColors(colors, colorName, isLoading) {
     if (colorType === "Text") {
       return {
         color: isDark ? color.darkStartColor : color.startColor,
+        opacity: isDark ? color.darkOpacity : color.opacity,
       };
     }
 
@@ -54,6 +58,7 @@ export default function useColors(colors, colorName, isLoading) {
             ? `${color.darkStartColor}, ${color.darkEndColor}`
             : `${color.startColor}, ${color.endColor}`
         })`,
+        opacity: isDark ? color.darkOpacity : color.opacity,
       };
     }
 

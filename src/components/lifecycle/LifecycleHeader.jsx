@@ -12,8 +12,8 @@ function LifecycleHeader({ environment }) {
             textAlign: "center",
           }}
         >
-          <strong>STAGING ENVIRONMENT</strong>
-          <p> — Not for production use </p>
+          <strong style={{ fontSize: "1rem" }}>STAGING ENVIRONMENT</strong>
+          <p style={{ fontSize: "1rem" }}> — Not for production use </p>
         </div>
       )}
       {environment === "development" && (
@@ -25,8 +25,8 @@ function LifecycleHeader({ environment }) {
             textAlign: "center",
           }}
         >
-          <strong>DEVELOPMENT ENVIRONMENT</strong>{" "}
-          <p>— Not for production use</p>
+          <strong style={{ fontSize: "1rem" }}>DEVELOPMENT ENVIRONMENT</strong>{" "}
+          <p style={{ fontSize: "1rem" }}>— Not for production use</p>
         </div>
       )}
     </>

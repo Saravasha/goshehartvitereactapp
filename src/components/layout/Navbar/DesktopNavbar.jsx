@@ -1,10 +1,10 @@
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import { useState, useEffect, useRef } from "react";
-import useColors from "../../../components/features/color/useColors.jsx";
+import useColors from "../../../components/features/Colors/useColors.jsx";
 
 export default function DesktopNavbar({ isModalVisible }) {
-  const { colors, pages, isLoading } = useData();
+  const { pages, isLoading } = useData();
   const [activeSection, setActiveSection] = useState("");
   const navRef = useRef();
   const lastScrollY = useRef(0); // useRef for last scroll position
@@ -16,11 +16,8 @@ export default function DesktopNavbar({ isModalVisible }) {
   const activeClass = "!text-gray-500 font-bold";
   const inactiveClass = "text-white hover:text-gray-700 hover:shadow-2xl";
 
-  const colorInStyle =
-    useColors(colors, "Navbar Background Color", isLoading) || {};
-  const colorInStyleText =
-    useColors(colors, "Navbar Text Color", isLoading) || {};
-
+  const colorInStyle = useColors("Navbar Background Color") || {};
+  const colorInStyleText = useColors("Navbar Text Color") || {};
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       const currentScrollY = window.scrollY;

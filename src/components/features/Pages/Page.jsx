@@ -1,17 +1,13 @@
 import DOMPurify from "dompurify";
 import { useData } from "../../api/ApiContext";
-import useColors from "../color/useColors";
+import useColors from "../Colors/useColors";
 
 export const Page = ({ page }) => {
-  const { colors, directApi, isLoading } = useData();
-  const colorInStyle =
-    useColors(colors, "Page Header Text Color", isLoading) || {};
-  const colorInStyleContent =
-    useColors(colors, "Content Header Text Color", isLoading) || {};
-  const colorInStylePageBody =
-    useColors(colors, "Page Body Text Color", isLoading) || {};
-  const colorInStyleContentBody =
-    useColors(colors, "Content Body Text Color", isLoading) || {};
+  const { directApi } = useData();
+  const colorInStyle = useColors("Page Header Text Color") || {};
+  const colorInStyleContent = useColors("Content Header Text Color") || {};
+  const colorInStylePageBody = useColors("Page Body Text Color") || {};
+  const colorInStyleContentBody = useColors("Content Body Text Color") || {};
 
   const joinUrl = (base, path) =>
     `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
@@ -47,6 +43,7 @@ export const Page = ({ page }) => {
         !poster.startsWith("//")
       ) {
         video.setAttribute("poster", joinUrl(directApi, poster));
+        video.setAttribute;
       }
     });
 
@@ -61,14 +58,14 @@ export const Page = ({ page }) => {
     >
       {/* page title */}
       <h2
-        className="PageTitle italic text-shadow-2xs w-full flex text-center justify-center items-center align-middle text-[15vw] bg-transparent/10 drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin flex-grow h-full"
+        className="PageTitle italic text-shadow-2xs w-full flex text-center justify-center items-center align-middle bg-transparent/10 drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin flex-grow h-full"
         style={colorInStyle}
       >
         {page.title}
       </h2>
       {/* page container */}
       <div
-        className="PageContainer text-[8vw] max-w-full gap-4 italic text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4"
+        className="PageContainer text-[1rem]  max-w-full gap-4 italic text-center text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4"
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(prependApiUrlToMedia(page.container)),
         }}
@@ -85,14 +82,14 @@ export const Page = ({ page }) => {
             </h3>
             {/* content date */}
             <h4
-              className="ContentContainerDateString italic text-shadow-2xs text-center text-[5vw]  pt-4  justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+              className="ContentContainerDateString italic text-shadow-2xs text-center  pt-4  justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
               style={colorInStyleContent}
             >
               {content.dateString}
             </h4>
             {/* content container */}
             <div
-              className="ContentContainer text-[5vw] italic text-shadow-2xs flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,1)] gap-4 bg-inherit justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
+              className="ContentContainer italic text-[1rem] text-center text-shadow-2xs flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,1)] gap-4 bg-inherit justify-items-center justify-center items-center m-4 p-4 flex-grow w-full "
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
                   prependApiUrlToMedia(content.container)

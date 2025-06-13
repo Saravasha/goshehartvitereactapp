@@ -2,24 +2,22 @@ import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
-import useColors from "../../features/color/useColors";
+import useColors from "../../features/Colors/useColors";
 
 export default function MobileNavbar({ isModalVisible }) {
-  const { colors, pages, isLoading } = useData();
+  const { pages } = useData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState("");
 
   const baseClass =
-    "!text-[4vw] block text-white font-thin transition flex transform cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline";
+    "italic text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl block text-white font-thin transition flex transform cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline";
   const activeClass = "font-thin text-gray-500 !text-gray-500";
   const inactiveClass =
     "text-white !text-white hover:text-gray-700 hover:shadow-2xl";
-  const colorInStyle =
-    useColors(colors, "Navbar Background Color", isLoading) || {};
-  const colorInStyleButton =
-    useColors(colors, "ScrollToTop Background Color", isLoading) || {};
+  const NavbarBgColor = useColors("Navbar Background Color") || {};
+  const BurgerMenuBgColor = useColors("Hamburger Menu Background Color") || {};
 
   const controlNavbar = () => {
     if (isMenuOpen) return; // Ignore scroll events when menu is open
@@ -47,20 +45,20 @@ export default function MobileNavbar({ isModalVisible }) {
 
   return (
     <nav
-      style={colorInStyle}
+      style={NavbarBgColor}
       className={` top-0 left-0 w-full z-50 p-4 shadow-md transition-transform duration-1000 ease-in-out transform sticky flex-wrap  ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="flex justify-between items-center text-white">
         <div
-          className="!text-[8vw] font-thin cursor-pointer drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          className=" italic text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-thin cursor-pointer drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           Gosheh Art
         </div>
         <div
-          style={colorInStyleButton}
+          style={BurgerMenuBgColor}
           aria-expanded
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="rounded-sm text-3xl  hover:animate-pulse drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
