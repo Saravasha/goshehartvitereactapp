@@ -57,10 +57,10 @@ const Modal = ({
     >
       <div className="ModalAsset absolute top-0 flex justify-center w-full h-full overflow-auto">
         <div className="flex relative flex-col">
-          <h1 className="m-4 text-1xl text-white text-center">
+          <h4 className="m-4 text-[clamp(1rem,calc(2.5vw+1rem),2rem)] text-white text-center">
             {clickedAsset.name}
-          </h1>
-          <span className="text-white text-sm pb-2 text-center">
+          </h4>
+          <span className="text-white sm:text-lg lg:text-sm pb-2 text-center">
             {clickedAsset.dateString}
           </span>
 
@@ -107,7 +107,7 @@ const Modal = ({
       {/* Controls */}
       <svg
         onClick={handleClick}
-        className="dismiss fixed w-[4vw] h-[4vw] hover:animate-pulse right-[1vw] top-0 text-white cursor-pointer hover:bg-red-700 m-2 rounded"
+        className="dismiss fixed w-[8vw] h-[8vw] md:w-[6vw] md:h-[6vw] lg:w-[4vw] lg:h-[4vw]  hover:animate-pulse right-[1vw] top-0 text-white cursor-pointer hover:bg-red-700 m-2 rounded"
         viewBox="0 0 24 24"
         fill="none"
       >
@@ -123,7 +123,7 @@ const Modal = ({
 
       <svg
         onClick={handleRotationLeft}
-        className="fixed w-[4vw] h-[4vw] hover:animate-pulse bottom-1/2 text-white cursor-pointer hover:bg-amber-300 ml-1 rounded"
+        className="fixed w-[8vw] h-[8vw] lg:w-[4vw] lg:h-[4vw] hover:animate-pulse bottom-1/2 text-white cursor-pointer hover:bg-amber-300 ml-1 rounded"
         viewBox="0 0 24 24"
         fill="none"
       >
@@ -138,7 +138,7 @@ const Modal = ({
 
       <svg
         onClick={handleRotationRight}
-        className="fixed w-[4vw] h-[4vw] hover:animate-pulse right-[1vw] bottom-1/2 text-white cursor-pointer hover:bg-amber-300 mr-1 rounded"
+        className="fixed w-[8vw] h-[8vw] lg:w-[4vw] lg:h-[4vw] hover:animate-pulse right-[1vw] bottom-1/2 text-white cursor-pointer hover:bg-amber-300 mr-1 rounded"
         viewBox="0 0 24 24"
         fill="none"
       >
