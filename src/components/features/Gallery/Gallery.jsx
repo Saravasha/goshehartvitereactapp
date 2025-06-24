@@ -43,7 +43,7 @@ const Gallery = ({
           Loading...
         </h1>
       ) : (
-        <div className="Gallery justify-center lg:columns-3 gap-4  p-4 rounded shadow-lg">
+        <div className="Gallery justify-center md:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5 gap-4  p-4 rounded shadow-lg">
           {assets.map((asset) => (
             <div
               className="Asset 

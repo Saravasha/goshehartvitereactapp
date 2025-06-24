@@ -66,9 +66,9 @@ export default function DesktopNavbar({ isModalVisible }) {
   };
 
   const MappingPages = () => (
-    <div className="flex-grow text-center flex flex-row max-w-full gap-[2vw] drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
+    <div className="flex-grow text-center flex-nowrap overflow-x-auto gap-4 px-2 scrollbar-hide flex flex-row max-w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
       {pages.map((page, index) => (
-        <div key={index} className="flex-1 text-center text-wrap">
+        <div key={index} className="flex-1 text-center text-wrap flex-wrap">
           <Link
             to={page.title}
             onClick={handleLinkClick}
@@ -78,13 +78,13 @@ export default function DesktopNavbar({ isModalVisible }) {
             spy={true}
             style={colorInStyleText}
             onSetActive={() => setActiveSection(page.title)}
-            className={`${baseClass} text-[2vw]  ${
+            className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl !underline block  ${
               activeSection === page.title ? activeClass : inactiveClass
             }`}
           >
             {page.title}
           </Link>
-          <div className="flex-grow flex-col flex mt-2 space-y-1 ">
+          <div className="flex-grow flex-col flex mt-2 space-y-1 flex-1 text-center text-wrap">
             {page.contents.map((content, subIndex) => (
               <Link
                 to={content.title}
@@ -96,7 +96,7 @@ export default function DesktopNavbar({ isModalVisible }) {
                 spy={true}
                 style={colorInStyleText}
                 onSetActive={() => setActiveSection(content.title)}
-                className={`${baseClass} text-[1vw] ${
+                className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl block ${
                   activeSection === content.title ? activeClass : inactiveClass
                 }`}
               >
@@ -119,7 +119,7 @@ export default function DesktopNavbar({ isModalVisible }) {
             spy={true}
             style={colorInStyleText}
             onSetActive={() => setActiveSection(title)}
-            className={`${baseClass} text-[2vw] block ${
+            className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl !underline block ${
               activeSection === title ? activeClass : inactiveClass
             }`}
           >
