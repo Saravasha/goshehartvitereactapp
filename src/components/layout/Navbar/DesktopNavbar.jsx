@@ -108,7 +108,7 @@ export default function DesktopNavbar({ isModalVisible }) {
       ))}
 
       {/* Hard coded Features */}
-      {["ArtGallery", "SocialMedia"].map((title) => (
+      {["SocialMedia", "ArtGallery"].map((title) => (
         <div key={title} className="flex-1 text-center text-wrap">
           <Link
             to={title}

@@ -90,7 +90,7 @@ export default function MobileNavbar({ isModalVisible }) {
               {page.title}
             </Link>
           ))}
-          {["ArtGallery", "SocialMedia"].map((title) => (
+          {["SocialMedia", "ArtGallery"].map((title) => (
             <Link
               key={title}
               to={title}
