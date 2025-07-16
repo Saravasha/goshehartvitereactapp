@@ -9,32 +9,52 @@ export const Page = ({ page }) => {
   const colorInStylePageBody = useColors("Page Body Text Color") || {};
   const colorInStyleContentBody = useColors("Content Body Text Color") || {};
 
-  const joinUrl = (base, path) =>
-    `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+  const joinUrl = (...parts) =>
+    parts
+      .filter(Boolean)
+      .map((part) => String(part).replace(/^\/+|\/+$/g, ""))
+      .join("/");
 
   const prependApiUrlToMedia = (htmlContent) => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = htmlContent;
 
+    // Images
     tempDiv.querySelectorAll("img").forEach((img) => {
       const src = img.getAttribute("src");
-      const alt = img.getAttribute("alt");
-      const loading = img.getAttribute("loading");
-
-      if (!alt) img.setAttribute("alt", "");
-      if (!loading) img.setAttribute("loading", "lazy");
-
       if (
         src &&
         !src.startsWith("http://") &&
         !src.startsWith("https://") &&
         !src.startsWith("//")
       ) {
-        img.src = joinUrl(directApi, src);
+        img.setAttribute("src", joinUrl(directApi, src));
+      }
+      if (!img.hasAttribute("alt")) img.setAttribute("alt", "");
+      if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+    });
+
+    // Audio
+    tempDiv.querySelectorAll("audio").forEach((audio) => {
+      const source = audio.querySelector("source");
+      if (source) {
+        const src = source.getAttribute("src");
+        console.log(src);
+        if (
+          src &&
+          !src.startsWith("http://") &&
+          !src.startsWith("https://") &&
+          !src.startsWith("//")
+        ) {
+          source.setAttribute("src", joinUrl(directApi, src));
+          console.log(source);
+        }
       }
     });
 
+    // Video
     tempDiv.querySelectorAll("video").forEach((video) => {
+      // Update poster image if needed
       const poster = video.getAttribute("poster");
       if (
         poster &&
@@ -43,7 +63,20 @@ export const Page = ({ page }) => {
         !poster.startsWith("//")
       ) {
         video.setAttribute("poster", joinUrl(directApi, poster));
-        video.setAttribute;
+      }
+
+      // Update nested source tag
+      const source = video.querySelector("source");
+      if (source) {
+        const src = source.getAttribute("src");
+        if (
+          src &&
+          !src.startsWith("http://") &&
+          !src.startsWith("https://") &&
+          !src.startsWith("//")
+        ) {
+          source.setAttribute("src", joinUrl(directApi, src));
+        }
       }
     });
 
@@ -64,44 +97,50 @@ export const Page = ({ page }) => {
         {page.title}
       </h2>
       {/* page container */}
-      <div
-        className="PageContainer max-w-full gap-4 italic text-center text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4"
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(prependApiUrlToMedia(page.container)),
-        }}
-        style={colorInStylePageBody}
-      ></div>
-      <div className="Contents flex flex-col bg-transparent gap-4 justify-center items-center flex-grow w-full p-4">
-        {page.contents.map((content) => (
-          <div key={content.id} id={content.title}>
-            <h3
-              className="ContentTitle italic text-shadow-2xs text-center  bg-transparent/10  justify-center items-center flex flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4"
-              style={colorInStyleContent}
-            >
-              {content.title}
-            </h3>
-            {/* content date */}
-            {content.dateString && (
-              <h4
-                className="ContentContainerDateString italic text-shadow-2xs text-center pt-4 justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+      {page.container && (
+        <div
+          className="PageContainer max-w-full gap-4 italic text-center text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(prependApiUrlToMedia(page.container)),
+          }}
+          style={colorInStylePageBody}
+        ></div>
+      )}
+      {page.contents && page.contents.length > 0 && (
+        <div className="Contents flex flex-col bg-transparent gap-4 justify-center items-center flex-grow w-full p-4">
+          {page.contents.map((content) => (
+            <div key={content.id} id={content.title}>
+              <h3
+                className="ContentTitle italic text-shadow-2xs text-center  bg-transparent/10  justify-center items-center flex flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4"
                 style={colorInStyleContent}
               >
-                {content.dateString}
-              </h4>
-            )}
-            {/* content container */}
-            <div
-              className="ContentContainer italic text-center text-shadow-2xs flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,1)] gap-4 bg-inherit justify-items-center justify-center items-center p-4 flex-grow w-full "
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(
-                  prependApiUrlToMedia(content.container)
-                ),
-              }}
-              style={colorInStyleContentBody}
-            ></div>
-          </div>
-        ))}
-      </div>
+                {content.title}
+              </h3>
+              {/* content date */}
+              {content.dateString && (
+                <h4
+                  className="ContentContainerDateString italic text-shadow-2xs text-center pt-4 justify-center items-center flex  flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]"
+                  style={colorInStyleContent}
+                >
+                  {content.dateString}
+                </h4>
+              )}
+              {/* content container */}
+              {content.container && (
+                <div
+                  className="ContentContainer italic text-center text-shadow-2xs flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,1)] gap-4 bg-inherit justify-items-center justify-center items-center p-4 flex-grow w-full "
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(
+                      prependApiUrlToMedia(content.container)
+                    ),
+                  }}
+                  style={colorInStyleContentBody}
+                ></div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

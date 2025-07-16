@@ -3,15 +3,23 @@ import { useData } from "../../api/ApiContext";
 
 const Asset = ({ asset }) => {
   const { directApi } = useData();
-  const joinUrl = (base, path) =>
-    `${base.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+
+  const joinUrl = (...parts) =>
+    parts
+      .filter(Boolean)
+      .map((part) => String(part).replace(/^\/+|\/+$/g, ""))
+      .join("/");
+
   const isImage = asset.type === "Image";
   const isVideo = asset.type === "Video";
   const isAudio = asset.type === "Audio";
 
-  const fileUrl = asset.fileUrl ? joinUrl(directApi, asset.fileUrl) : null;
+  const fileUrl = asset.fileUrl
+    ? `${directApi}/${joinUrl(asset.fileUrl)}`
+    : null;
+  const streamUrl = `${directApi}/${joinUrl("Asset", "Stream", asset.id)}`;
   const thumbnailUrl = asset.thumbnailUrl
-    ? joinUrl(directApi, asset.thumbnailUrl)
+    ? `${directApi}/${joinUrl(asset.thumbnailUrl)}`
     : null;
 
   if (!fileUrl) return <div className="text-red-500">Missing Asset File</div>;
@@ -27,6 +35,14 @@ const Asset = ({ asset }) => {
           className="max-w-full h-auto rounded shadow justify-center align-middle"
         />
       )}
+
+      {/* Audio Support */}
+      {isAudio && (
+        <audio controls src={streamUrl} className="w-full">
+          Your browser does not support the audio element.
+        </audio>
+      )}
+
       {/* Video Asset with Thumbnail */}
       {isVideo && thumbnailUrl && (
         <div className="relative">
@@ -55,19 +71,12 @@ const Asset = ({ asset }) => {
       {isVideo && !thumbnailUrl && (
         <video
           controls
-          src={fileUrl}
+          src={streamUrl}
           className="max-w-full h-auto rounded shadow"
           preload="none"
         >
           Your browser does not support the video tag.
         </video>
-      )}
-
-      {/* Audio Support (Optional) */}
-      {isAudio && (
-        <audio controls src={fileUrl} className="w-full">
-          Your browser does not support the audio element.
-        </audio>
       )}
 
       {/* Unknown Type */}

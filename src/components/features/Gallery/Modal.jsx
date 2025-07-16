@@ -18,6 +18,7 @@ const Modal = ({
     : null;
 
   const mediaType = clickedAsset?.type?.toLowerCase();
+  const streamUrl = `${directApi}/Asset/Stream/${clickedAsset.id}`;
 
   const handleClick = (e) => {
     if (e.target.classList.contains("dismiss")) {
@@ -56,8 +57,8 @@ const Modal = ({
       onClick={handleClick}
     >
       <div className="ModalAsset absolute top-0 flex justify-center w-full h-full overflow-auto">
-        <div className="flex relative flex-col">
-          <h4 className="m-4 text-[clamp(1rem,calc(2.5vw+1rem),2rem)] text-white text-center">
+        <div className="flex relative flex-col ">
+          <h4 className="m-4 text-[clamp(1rem,calc(2.5vw+1rem),2rem)] text-white text-center px-[20%]">
             {clickedAsset.name}
           </h4>
           <span className="text-white sm:text-lg lg:text-sm pb-2 text-center">
@@ -73,16 +74,19 @@ const Modal = ({
                 className="max-w-full h-auto"
               />
             )}
-            {mediaType === "video" && fileUrl && (
+            {mediaType === "video" && streamUrl && (
               <video
                 controls
+                preload="metadata"
                 autoPlay
-                src={fileUrl}
+                // src={fileUrl}
                 className="max-w-full h-auto"
-              />
+              >
+                <source src={streamUrl} type="video/mp4" />
+              </video>
             )}
-            {mediaType === "audio" && fileUrl && (
-              <audio controls src={fileUrl} className="w-full" />
+            {mediaType === "audio" && streamUrl && (
+              <audio controls src={streamUrl} className="w-full" />
             )}
             {!fileUrl && <div className="text-white">Media not available.</div>}
           </div>
