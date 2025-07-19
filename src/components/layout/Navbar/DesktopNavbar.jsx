@@ -1,11 +1,11 @@
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import { useState, useEffect, useRef } from "react";
-import useColors from "../../../components/features/Colors/useColors.jsx";
-import retryScrollTo from "./RetryScrollTo.jsx";
+import useColors from "../../../components/features/Colors/useColors";
+import retryScrollTo from "./RetryScrollTo";
 
 export default function DesktopNavbar({ isModalVisible }) {
-  const { pages, isLoading } = useData();
+  const { pages } = useData();
   const [activeSection, setActiveSection] = useState("");
   const navRef = useRef();
   const lastScrollY = useRef(0); // useRef for last scroll position
@@ -69,15 +69,15 @@ export default function DesktopNavbar({ isModalVisible }) {
     <div className="flex-grow text-center flex-nowrap overflow-x-auto gap-4 px-2 scrollbar-hide flex flex-row max-w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
       {pages.map((page, index) => (
         <div
-          key={`page-${page.title}-${page.id}`}
+          key={`page-${page.id}`}
           className="flex-1 text-center text-wrap flex-wrap"
         >
           <Link
-            to={`page-${page.title}-${page.id}`}
+            to={`page-${page.id}`}
             {...dryLinkProps}
             onClick={() => {
               setShow(false);
-              retryScrollTo(`page-${page.title}-${page.id}`, {
+              retryScrollTo(`page-${page.id}`, {
                 duration: 500,
                 smooth: "easeInOutQuart",
                 offset: navbarOffset,
@@ -93,19 +93,16 @@ export default function DesktopNavbar({ isModalVisible }) {
           <div className="flex-grow flex-col flex mt-2 space-y-1 flex-1 text-center text-wrap">
             {page.contents.map((content, subIndex) => (
               <Link
-                key={`content-${page.title}-${page.id}-${content.title}${content.id}`}
-                to={`content-${page.title}-${page.id}-${content.title}${content.id}`}
+                key={`content-${page.id}-${content.id}`}
+                to={`content-${page.id}-${content.id}`}
                 {...dryLinkProps}
                 onClick={() => {
                   setShow(false);
-                  retryScrollTo(
-                    `content-${page.title}-${page.id}-${content.title}${content.id}`,
-                    {
-                      duration: 500,
-                      smooth: "easeInOutQuart",
-                      offset: navbarOffset,
-                    }
-                  );
+                  retryScrollTo(`content-${page.id}-${content.id}`, {
+                    duration: 500,
+                    smooth: "easeInOutQuart",
+                    offset: navbarOffset,
+                  });
                 }}
                 onSetActive={() => setActiveSection(content.title)}
                 className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl block ${

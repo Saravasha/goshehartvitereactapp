@@ -76,11 +76,11 @@ export default function MobileNavbar({ isModalVisible }) {
         <div className="mt-2 flex flex-col max-h-[60vh] overflow-y-auto pr-2">
           {pages.map((page, index) => (
             <Link
-              key={`page-${page.title}-${page.id}`}
-              to={`page-${page.title}-${page.id}`}
+              to={`page-${page.id}`}
+              key={`page-${page.id}`}
               spy={true}
               onClick={() => {
-                retryScrollTo(`page-${page.title}-${page.id}`, {
+                retryScrollTo(`page-${page.id}`, {
                   duration: 1000,
                   smooth: "easeInOutQuart",
                 });
