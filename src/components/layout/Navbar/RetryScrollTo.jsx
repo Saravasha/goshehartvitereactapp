@@ -4,7 +4,7 @@ export default function retryScrollTo(
   target,
   options = {},
   maxRetries = 10,
-  delay = 200
+  delay = 1000
 ) {
   let attempts = 0;
 

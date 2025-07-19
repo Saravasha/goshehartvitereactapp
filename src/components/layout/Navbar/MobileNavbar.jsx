@@ -3,6 +3,7 @@ import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
 import useColors from "../../features/Colors/useColors";
+import retryScrollTo from "./RetryScrollTo";
 
 export default function MobileNavbar({ isModalVisible }) {
   const { pages } = useData();
@@ -19,13 +20,6 @@ export default function MobileNavbar({ isModalVisible }) {
   const NavbarBgColor = useColors("Navbar Background Color") || {};
   const BurgerMenuBgColor = useColors("Hamburger Menu Background Color") || {};
 
-  const dryLinkProps = {
-    smooth: true,
-    duration: 500,
-    offset: -80,
-    spy: true,
-    onClick: () => setIsMenuOpen(false),
-  };
   const controlNavbar = () => {
     if (isMenuOpen) return; // Ignore scroll events when menu is open
 
@@ -82,9 +76,15 @@ export default function MobileNavbar({ isModalVisible }) {
         <div className="mt-2 flex flex-col max-h-[60vh] overflow-y-auto pr-2">
           {pages.map((page, index) => (
             <Link
-              key={index}
-              to={page.title}
-              {...dryLinkProps}
+              key={`page-${page.title}-${page.id}`}
+              to={`page-${page.title}-${page.id}`}
+              spy={true}
+              onClick={() => {
+                retryScrollTo(`page-${page.title}-${page.id}`, {
+                  duration: 1000,
+                  smooth: "easeInOutQuart",
+                });
+              }}
               onSetActive={() => setActiveSection(page.title)}
               className={`${baseClass} ${
                 activeSection === page.title ? activeClass : inactiveClass
@@ -97,7 +97,13 @@ export default function MobileNavbar({ isModalVisible }) {
             <Link
               key={title}
               to={title}
-              {...dryLinkProps}
+              spy={true}
+              onClick={() => {
+                retryScrollTo(title, {
+                  duration: 1000,
+                  smooth: "easeInOutQuart",
+                });
+              }}
               onSetActive={() => setActiveSection(title)}
               className={`${baseClass} ${
                 activeSection === title ? activeClass : inactiveClass
