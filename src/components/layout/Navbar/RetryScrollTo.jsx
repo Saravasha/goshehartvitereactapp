@@ -5,7 +5,7 @@ export default function retryScrollTo(
   options = {},
   maxRetries = 15,
   delay = 500,
-  environment = "Development"
+  environment = "development"
 ) {
   let attempts = 0;
 
@@ -25,7 +25,7 @@ export default function retryScrollTo(
         attempts++;
         setTimeout(scrollAttempt, delay);
       } else {
-        if (environment !== "Production") {
+        if (environment !== "production") {
           console.warn(
             `[retryScrollTo] Element "${target}" not found after ${maxRetries} attempts.`
           );
@@ -42,13 +42,13 @@ export default function retryScrollTo(
         attempts++;
         scrollAttempt();
       } else if (stillNotVisible) {
-        if (environment !== "Production") {
+        if (environment !== "production") {
           console.warn(
             `[retryScrollTo] "${target}" still not in view after ${attempts} attempts.`
           );
         }
       } else {
-        if (environment !== "Production") {
+        if (environment !== "production") {
           console.log(
             `[retryScrollTo] Scrolled to "${target}" on attempt ${attempts}.`
           );
