@@ -128,7 +128,7 @@ export default function DesktopNavbar({ isModalVisible }) {
             onClick={() => {
               setShow(false);
               retryScrollTo(title, {
-                duration: 500,
+                duration: 1000,
                 smooth: "easeInOutQuart",
                 offset: navbarOffset,
               });

@@ -3,6 +3,7 @@ import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
 import useColors from "../../features/Colors/useColors";
+import retryScrollTo from "./RetryScrollTo";
 
 export default function MobileNavbar({ isModalVisible }) {
   const { pages } = useData();
@@ -78,7 +79,12 @@ export default function MobileNavbar({ isModalVisible }) {
               key={`page-${page.title}-${page.id}`}
               to={`page-${page.title}-${page.id}`}
               spy={true}
-              onClick={() => handleRetryClick(page.title)}
+              onClick={() => {
+                retryScrollTo(`page-${page.title}-${page.id}`, {
+                  duration: 1000,
+                  smooth: "easeInOutQuart",
+                });
+              }}
               onSetActive={() => setActiveSection(page.title)}
               className={`${baseClass} ${
                 activeSection === page.title ? activeClass : inactiveClass
@@ -93,11 +99,9 @@ export default function MobileNavbar({ isModalVisible }) {
               to={title}
               spy={true}
               onClick={() => {
-                setShow(false);
                 retryScrollTo(title, {
-                  duration: 500,
+                  duration: 1000,
                   smooth: "easeInOutQuart",
-                  offset: navbarOffset,
                 });
               }}
               onSetActive={() => setActiveSection(title)}
