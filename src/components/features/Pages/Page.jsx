@@ -15,6 +15,15 @@ export const Page = ({ page }) => {
       .map((part) => String(part).replace(/^\/+|\/+$/g, ""))
       .join("/");
 
+  const isEmptyHtml = (html) => {
+    if (!html) return true;
+    const text = html
+      .replace(/<[^>]*>/g, "") // remove tags
+      .replace(/&nbsp;/g, "") // remove &nbsp;
+      .replace(/\s/g, ""); // remove whitespace
+    return text.length === 0;
+  };
+
   const prependApiUrlToMedia = (htmlContent) => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = htmlContent;
@@ -95,7 +104,7 @@ export const Page = ({ page }) => {
         {page.title}
       </h2>
       {/* page container */}
-      {page.container && (
+      {page.container && !isEmptyHtml(page.container) && (
         <div
           className="PageContainer max-w-full gap-4 italic text-center text-shadow-2xs justify-center items-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] [&_PageContainer_p_img]:w-100 flex flex-grow h-full w-full [&_*]:m-2 p-4"
           dangerouslySetInnerHTML={{
