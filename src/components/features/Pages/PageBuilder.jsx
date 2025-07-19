@@ -24,8 +24,8 @@ export default function PageBuilder() {
           {pages.map((page, index) => (
             <div
               className="PageWrapper text-gray-800 dark:text-white justify-center [&_*]justify-center [&_*]items-center items-center [&_*]:flex [&_*]:flex-col [&_*]:w-full flex flex-col w-full flex-grow  p-1  "
-              key={`page-${page.title}-${page.id}`}
-              id={`page-${page.title}-${page.id}`}
+              key={page.id}
+              id={page.title}
             >
               <Parallax
                 className="w-full flex items-center justify-center text-gray-800 dark:text-white [&_*]justify-center [&_*]items-center m-4 flex-col flex-grow  "

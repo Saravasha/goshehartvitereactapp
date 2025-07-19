@@ -84,8 +84,8 @@ export const Page = ({ page }) => {
   return (
     <div
       className="Page bg-white/30 backdrop-blur-sm flex flex-col gap-4 rounded  shadow-2xl font-thin w-full [&_*]:w-full hover:shadow-2xl flex-grow h-full "
-      key={page.id}
-      id={`${page.title}-${page.id}`}
+      key={`page-${page.id}`}
+      id={`page-${page.id}`}
     >
       {/* page title */}
       <h2
@@ -104,12 +104,16 @@ export const Page = ({ page }) => {
           style={colorInStylePageBody}
         ></div>
       )}
-      {page.contents && page.contents.length > 0 && (
-        <div className="Contents flex flex-col bg-transparent gap-4 justify-center items-center flex-grow w-full p-4">
-          {page.contents.map((content) => (
+      {
+        page.contents &&
+          page.contents.length > 0 &&
+          // <div className="Contents flex flex-col bg-transparent gap-4 justify-center items-center flex-grow w-full p-4">
+          // {
+          page.contents.map((content) => (
             <div
-              key={`content-${page.title}-${page.id}-${content.title}${content.id}`}
-              id={`content-${page.title}-${page.id}-${content.title}${content.id}`}
+              className="Contents flex flex-col bg-transparent gap-4 justify-center items-center flex-grow w-full p-4"
+              key={`content-${page.id}-${content.id}`}
+              id={`content-${page.id}-${content.id}`}
             >
               <h3
                 className="ContentTitle italic text-shadow-2xs text-center  bg-transparent/10  justify-center items-center flex flex-grow w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] p-4"
@@ -139,9 +143,10 @@ export const Page = ({ page }) => {
                 ></div>
               )}
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        // }
+        // </div>
+      }
     </div>
   );
 };
