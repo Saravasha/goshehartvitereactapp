@@ -2,6 +2,7 @@ import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import { useState, useEffect, useRef } from "react";
 import useColors from "../../../components/features/Colors/useColors.jsx";
+import retryScrollTo from "./RetryScrollTo.jsx";
 
 export default function DesktopNavbar({ isModalVisible }) {
   const { pages, isLoading } = useData();
@@ -65,18 +66,28 @@ export default function DesktopNavbar({ isModalVisible }) {
     setShow(false);
   };
 
+  const handleRetryClick = (target) => {
+    setShow(false); // hides navbar
+    retryScrollTo(target, {
+      duration: 500,
+      smooth: "easeInOutQuart",
+      offset: navbarOffset,
+    });
+  };
+
+  const dryLinkProps = {
+    spy: true,
+    style: colorInStyleText,
+  };
+
   const MappingPages = () => (
     <div className="flex-grow text-center flex-nowrap overflow-x-auto gap-4 px-2 scrollbar-hide flex flex-row max-w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
       {pages.map((page, index) => (
         <div key={index} className="flex-1 text-center text-wrap flex-wrap">
           <Link
             to={page.title}
-            onClick={handleLinkClick}
-            smooth={true}
-            duration={500}
-            offset={navbarOffset}
-            spy={true}
-            style={colorInStyleText}
+            {...dryLinkProps}
+            onClick={() => handleRetryClick(page.title)}
             onSetActive={() => setActiveSection(page.title)}
             className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl !underline block  ${
               activeSection === page.title ? activeClass : inactiveClass
@@ -87,14 +98,10 @@ export default function DesktopNavbar({ isModalVisible }) {
           <div className="flex-grow flex-col flex mt-2 space-y-1 flex-1 text-center text-wrap">
             {page.contents.map((content, subIndex) => (
               <Link
-                to={content.title}
-                onClick={handleLinkClick}
                 key={subIndex}
-                smooth={true}
-                duration={500}
-                offset={navbarOffset}
-                spy={true}
-                style={colorInStyleText}
+                to={content.title}
+                {...dryLinkProps}
+                onClick={() => handleRetryClick(content.title)}
                 onSetActive={() => setActiveSection(content.title)}
                 className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl block ${
                   activeSection === content.title ? activeClass : inactiveClass
@@ -112,12 +119,8 @@ export default function DesktopNavbar({ isModalVisible }) {
         <div key={title} className="flex-1 text-center text-wrap">
           <Link
             to={title}
-            onClick={handleLinkClick}
-            smooth={true}
-            duration={500}
-            offset={navbarOffset}
-            spy={true}
-            style={colorInStyleText}
+            {...dryLinkProps}
+            onClick={() => handleRetryClick(title)}
             onSetActive={() => setActiveSection(title)}
             className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl !underline block ${
               activeSection === title ? activeClass : inactiveClass
