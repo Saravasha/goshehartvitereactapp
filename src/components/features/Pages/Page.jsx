@@ -39,7 +39,6 @@ export const Page = ({ page }) => {
       const source = audio.querySelector("source");
       if (source) {
         const src = source.getAttribute("src");
-        console.log(src);
         if (
           src &&
           !src.startsWith("http://") &&
@@ -47,7 +46,6 @@ export const Page = ({ page }) => {
           !src.startsWith("//")
         ) {
           source.setAttribute("src", joinUrl(directApi, src));
-          console.log(source);
         }
       }
     });

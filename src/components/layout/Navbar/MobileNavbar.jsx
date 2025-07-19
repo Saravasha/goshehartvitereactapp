@@ -19,6 +19,13 @@ export default function MobileNavbar({ isModalVisible }) {
   const NavbarBgColor = useColors("Navbar Background Color") || {};
   const BurgerMenuBgColor = useColors("Hamburger Menu Background Color") || {};
 
+  const dryLinkProps = {
+    smooth: true,
+    duration: 500,
+    offset: -80,
+    spy: true,
+    onClick: () => setIsMenuOpen(false),
+  };
   const controlNavbar = () => {
     if (isMenuOpen) return; // Ignore scroll events when menu is open
 
@@ -77,11 +84,7 @@ export default function MobileNavbar({ isModalVisible }) {
             <Link
               key={index}
               to={page.title}
-              smooth={true}
-              duration={500}
-              offset={-80}
-              spy={true}
-              onClick={() => setIsMenuOpen(false)}
+              {...dryLinkProps}
               onSetActive={() => setActiveSection(page.title)}
               className={`${baseClass} ${
                 activeSection === page.title ? activeClass : inactiveClass
@@ -94,11 +97,7 @@ export default function MobileNavbar({ isModalVisible }) {
             <Link
               key={title}
               to={title}
-              smooth={true}
-              duration={500}
-              offset={-80}
-              spy={true}
-              onClick={() => setIsMenuOpen(false)}
+              {...dryLinkProps}
               onSetActive={() => setActiveSection(title)}
               className={`${baseClass} ${
                 activeSection === title ? activeClass : inactiveClass
