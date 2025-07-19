@@ -55,7 +55,10 @@ const ArtGallery = ({ isModalVisible, setIsModalVisible }) => {
   }, [searchTerm, assets]);
 
   return (
-    <div className="ArtGallery flex flex-col justify-center font-thin m-4 rounded-2xl shadow-2xl relative">
+    <div
+      id="ArtGallery"
+      className="ArtGallery flex flex-col justify-center font-thin m-4 rounded-2xl shadow-2xl relative"
+    >
       {isLoading ? (
         <h1 className="font-thin justify-center flex mx-auto p-4 dark:text-white text-white">
           Loading...
