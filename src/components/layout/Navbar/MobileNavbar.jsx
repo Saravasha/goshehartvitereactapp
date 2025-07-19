@@ -19,13 +19,6 @@ export default function MobileNavbar({ isModalVisible }) {
   const NavbarBgColor = useColors("Navbar Background Color") || {};
   const BurgerMenuBgColor = useColors("Hamburger Menu Background Color") || {};
 
-  const dryLinkProps = {
-    smooth: true,
-    duration: 500,
-    offset: -80,
-    spy: true,
-    onClick: () => setIsMenuOpen(false),
-  };
   const controlNavbar = () => {
     if (isMenuOpen) return; // Ignore scroll events when menu is open
 
@@ -82,9 +75,10 @@ export default function MobileNavbar({ isModalVisible }) {
         <div className="mt-2 flex flex-col max-h-[60vh] overflow-y-auto pr-2">
           {pages.map((page, index) => (
             <Link
-              key={index}
-              to={page.title}
-              {...dryLinkProps}
+              key={`page-${page.title}-${page.id}`}
+              to={`page-${page.title}-${page.id}`}
+              spy={true}
+              onClick={() => handleRetryClick(page.title)}
               onSetActive={() => setActiveSection(page.title)}
               className={`${baseClass} ${
                 activeSection === page.title ? activeClass : inactiveClass
@@ -97,7 +91,15 @@ export default function MobileNavbar({ isModalVisible }) {
             <Link
               key={title}
               to={title}
-              {...dryLinkProps}
+              spy={true}
+              onClick={() => {
+                setShow(false);
+                retryScrollTo(title, {
+                  duration: 500,
+                  smooth: "easeInOutQuart",
+                  offset: navbarOffset,
+                });
+              }}
               onSetActive={() => setActiveSection(title)}
               className={`${baseClass} ${
                 activeSection === title ? activeClass : inactiveClass

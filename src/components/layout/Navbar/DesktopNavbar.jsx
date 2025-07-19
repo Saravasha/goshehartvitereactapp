@@ -19,6 +19,10 @@ export default function DesktopNavbar({ isModalVisible }) {
 
   const colorInStyle = useColors("Navbar Background Color") || {};
   const colorInStyleText = useColors("Navbar Text Color") || {};
+  const dryLinkProps = {
+    spy: true,
+    style: colorInStyleText,
+  };
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       const currentScrollY = window.scrollY;
@@ -61,33 +65,24 @@ export default function DesktopNavbar({ isModalVisible }) {
     return () => window.removeEventListener("resize", updateOffset);
   }, []);
 
-  // Single handleLinkClick passed down
-  const handleLinkClick = () => {
-    setShow(false);
-  };
-
-  const handleRetryClick = (target) => {
-    setShow(false); // hides navbar
-    retryScrollTo(target, {
-      duration: 500,
-      smooth: "easeInOutQuart",
-      offset: navbarOffset,
-    });
-  };
-
-  const dryLinkProps = {
-    spy: true,
-    style: colorInStyleText,
-  };
-
   const MappingPages = () => (
     <div className="flex-grow text-center flex-nowrap overflow-x-auto gap-4 px-2 scrollbar-hide flex flex-row max-w-full drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)]">
       {pages.map((page, index) => (
-        <div key={index} className="flex-1 text-center text-wrap flex-wrap">
+        <div
+          key={`page-${page.title}-${page.id}`}
+          className="flex-1 text-center text-wrap flex-wrap"
+        >
           <Link
-            to={page.title}
+            to={`page-${page.title}-${page.id}`}
             {...dryLinkProps}
-            onClick={() => handleRetryClick(page.title)}
+            onClick={() => {
+              setShow(false);
+              retryScrollTo(`page-${page.title}-${page.id}`, {
+                duration: 500,
+                smooth: "easeInOutQuart",
+                offset: navbarOffset,
+              });
+            }}
             onSetActive={() => setActiveSection(page.title)}
             className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl !underline block  ${
               activeSection === page.title ? activeClass : inactiveClass
@@ -98,10 +93,20 @@ export default function DesktopNavbar({ isModalVisible }) {
           <div className="flex-grow flex-col flex mt-2 space-y-1 flex-1 text-center text-wrap">
             {page.contents.map((content, subIndex) => (
               <Link
-                key={subIndex}
-                to={content.title}
+                key={`content-${page.title}-${page.id}-${content.title}${content.id}`}
+                to={`content-${page.title}-${page.id}-${content.title}${content.id}`}
                 {...dryLinkProps}
-                onClick={() => handleRetryClick(content.title)}
+                onClick={() => {
+                  setShow(false);
+                  retryScrollTo(
+                    `content-${page.title}-${page.id}-${content.title}${content.id}`,
+                    {
+                      duration: 500,
+                      smooth: "easeInOutQuart",
+                      offset: navbarOffset,
+                    }
+                  );
+                }}
                 onSetActive={() => setActiveSection(content.title)}
                 className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl block ${
                   activeSection === content.title ? activeClass : inactiveClass
@@ -120,7 +125,14 @@ export default function DesktopNavbar({ isModalVisible }) {
           <Link
             to={title}
             {...dryLinkProps}
-            onClick={() => handleRetryClick(title)}
+            onClick={() => {
+              setShow(false);
+              retryScrollTo(title, {
+                duration: 500,
+                smooth: "easeInOutQuart",
+                offset: navbarOffset,
+              });
+            }}
             onSetActive={() => setActiveSection(title)}
             className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl !underline block ${
               activeSection === title ? activeClass : inactiveClass
