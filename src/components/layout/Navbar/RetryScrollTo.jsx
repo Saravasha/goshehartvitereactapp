@@ -1,13 +1,14 @@
 import { scroller } from "react-scroll";
+import useEnv from "../../hooks/useEnv";
 
 export default function retryScrollTo(
   target,
   options = {},
   maxRetries = 15,
-  delay = 500,
-  environment = "development"
+  delay = 500
 ) {
   let attempts = 0;
+  const { environment } = useEnv();
 
   function isInViewport(el) {
     const rect = el.getBoundingClientRect();
