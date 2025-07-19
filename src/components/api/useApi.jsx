@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useEnv from "../hooks/useEnv";
 
 const useApi = () => {
+  const { environment } = useEnv();
+
   const [assets, setAssets] = useState([]);
   const [pages, setPages] = useState([]);
   const [colors, setColors] = useState([]);
@@ -11,36 +14,33 @@ const useApi = () => {
   const pageUrl = import.meta.env.VITE_DOTNET_PAGE_API_URL_TARGET;
   const colorUrl = import.meta.env.VITE_DOTNET_COLOR_API_URL_TARGET;
   const directApi = import.meta.env.VITE_DOTNET_API_TARGET;
-  const environment = import.meta.env.MODE || "development"; // dev, production, etc.
 
-  // 🧠 Reusable fetcher with logging + type checks
+  const isDev = environment !== "production";
+
   const safeFetch = async (url, name) => {
     if (!url) {
-      console.warn(`⚠️ ${name} API URL is not defined`);
+      if (isDev) console.warn(`⚠️ ${name} API URL is not defined`);
       return [];
     }
 
     try {
       const res = await axios.get(url);
-      if (typeof res.data !== "object") {
-        console.error(`❌ ${name}: Invalid JSON format`, res.data);
+      const data = res.data;
+
+      if (typeof data !== "object" || data === null) {
+        if (isDev) console.error(`❌ ${name}: Invalid JSON`, data);
         return [];
       }
-      console.log(
-        `✅ ${name} loaded (${
-          Array.isArray(res.data) ? res.data.length : "object"
-        })`
-      );
-      return res.data;
+
+      return data;
     } catch (err) {
-      if (environment !== "production") {
-        console.error(`❌ ${name} fetch failed:`, err.message || err);
+      if (isDev) {
+        console.error(`❌ ${name} fetch failed:`, err?.message || err);
       }
       return [];
     }
   };
 
-  // Load all data
   useEffect(() => {
     const fetchAll = async () => {
       const [fetchedAssets, fetchedPages, fetchedColors] = await Promise.all([
@@ -58,14 +58,7 @@ const useApi = () => {
     fetchAll();
   }, [assetUrl, pageUrl, colorUrl]);
 
-  return {
-    assets,
-    pages,
-    colors,
-    directApi,
-    isLoading,
-    environment,
-  };
+  return { assets, pages, colors, directApi, isLoading };
 };
 
 export default useApi;

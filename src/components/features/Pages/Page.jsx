@@ -18,9 +18,9 @@ export const Page = ({ page }) => {
   const isEmptyHtml = (html) => {
     if (!html) return true;
     const text = html
-      .replace(/<[^>]*>/g, "") // remove tags
-      .replace(/&nbsp;/g, "") // remove &nbsp;
-      .replace(/\s/g, ""); // remove whitespace
+      .replace(/<[^>]*>/g, "")
+      .replace(/&nbsp;/g, "")
+      .replace(/\s/g, "");
     return text.length === 0;
   };
 
