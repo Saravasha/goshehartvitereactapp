@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, createContext } from "react";
+import React, { useContext, createContext } from "react";
 import useApi from "./useApi";
 import useEnv from "../hooks/useEnv";
 
@@ -7,7 +7,7 @@ const ApiContext = createContext();
 export const ApiProvider = ({ children }) => {
   const { assets, pages, colors, directApi, isLoading } = useApi();
   const { environment } = useEnv();
-  if (environment !== "production")
+  if (environment == "production" || environment == "staging")
     // Dev or Staging => log
     console.log(
       { Environment: environment },
