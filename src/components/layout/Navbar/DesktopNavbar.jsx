@@ -2,7 +2,7 @@ import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import { useState, useEffect, useRef } from "react";
 import useColors from "../../../components/features/Colors/useColors";
-import retryScrollTo from "./RetryScrollTo";
+import useRetryScrollTo from "./useRetryScrollTo";
 
 export default function DesktopNavbar({ isModalVisible }) {
   const { pages } = useData();
@@ -11,6 +11,7 @@ export default function DesktopNavbar({ isModalVisible }) {
   const lastScrollY = useRef(0); // useRef for last scroll position
   const [navbarOffset, setNavbarOffset] = useState(0);
   const [show, setShow] = useState(true);
+  const retryScrollTo = useRetryScrollTo();
 
   const baseClass =
     "flex mt-4 justify-center cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]";

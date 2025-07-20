@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
 import useColors from "../../features/Colors/useColors";
-import retryScrollTo from "./RetryScrollTo";
+import retryScrollTo from "./useRetryScrollTo";
 
 export default function MobileNavbar({ isModalVisible }) {
   const { pages } = useData();
