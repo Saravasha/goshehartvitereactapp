@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { useData } from "../../api/ApiContext";
 import Hamburger from "hamburger-react";
 import useColors from "../../features/Colors/useColors";
-import retryScrollTo from "./useRetryScrollTo";
-
+import useRetryScrollTo from "./useRetryScrollTo";
+import { scroller } from "react-scroll";
 export default function MobileNavbar({ isModalVisible }) {
   const { pages } = useData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState("");
+  const retryScrollTo = useRetryScrollTo();
+  const navRef = useRef(null); // ← Add this
 
   const baseClass =
     "italic  sm:text-1xl md:text-xl lg:text-2xl xl:text-3xl block text-white font-thin transition flex transform cursor-pointer hover:animate-pulse text-shadow-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] no-underline";
@@ -19,6 +21,12 @@ export default function MobileNavbar({ isModalVisible }) {
     "text-white !text-white hover:text-gray-700 hover:shadow-2xl";
   const NavbarBgColor = useColors("Navbar Background Color") || {};
   const BurgerMenuBgColor = useColors("Hamburger Menu Background Color") || {};
+  const colorInStyleText = useColors("Navbar Text Color") || {};
+
+  const dryLinkProps = {
+    spy: true,
+    style: colorInStyleText,
+  };
 
   const controlNavbar = () => {
     if (isMenuOpen) return; // Ignore scroll events when menu is open
@@ -43,9 +51,24 @@ export default function MobileNavbar({ isModalVisible }) {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, [isModalVisible, lastScrollY, isMenuOpen]); // Added isMenuOpen here
+  const [navbarHeight, setNavbarHeight] = useState(0);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (navRef.current) {
+        setNavbarHeight(navRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
 
   return (
     <nav
+      ref={navRef}
       style={NavbarBgColor}
       className={` top-0 left-0 w-full z-50 p-4 shadow-md transition-transform duration-1000 ease-in-out transform sticky flex-wrap  ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
@@ -78,12 +101,19 @@ export default function MobileNavbar({ isModalVisible }) {
             <Link
               to={`page-${page.id}`}
               key={`page-${page.id}`}
-              spy={true}
+              {...dryLinkProps}
               onClick={() => {
-                retryScrollTo(`page-${page.id}`, {
-                  duration: 1000,
-                  smooth: "easeInOutQuart",
-                });
+                setIsMenuOpen(!isMenuOpen);
+                setTimeout(() => {
+                  const currentNavbarHeight = navRef.current
+                    ? navRef.current.offsetHeight
+                    : 0;
+                  retryScrollTo(`page-${page.id}`, {
+                    duration: 500,
+                    smooth: "easeInOutQuart",
+                    offset: -currentNavbarHeight,
+                  });
+                }, 500); // 300ms matches your animation duration roughly
               }}
               onSetActive={() => setActiveSection(page.title)}
               className={`${baseClass} ${
@@ -97,12 +127,19 @@ export default function MobileNavbar({ isModalVisible }) {
             <Link
               key={title}
               to={title}
-              spy={true}
+              {...dryLinkProps}
               onClick={() => {
-                retryScrollTo(title, {
-                  duration: 1000,
-                  smooth: "easeInOutQuart",
-                });
+                setIsMenuOpen(!isMenuOpen);
+                setTimeout(() => {
+                  const currentNavbarHeight = navRef.current
+                    ? navRef.current.offsetHeight
+                    : 0;
+                  retryScrollTo(title, {
+                    duration: 500,
+                    smooth: "easeInOutQuart",
+                    offset: -currentNavbarHeight,
+                  });
+                }, 500); // 300ms matches your animation duration roughly
               }}
               onSetActive={() => setActiveSection(title)}
               className={`${baseClass} ${
