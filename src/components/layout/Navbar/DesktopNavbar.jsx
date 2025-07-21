@@ -91,29 +91,33 @@ export default function DesktopNavbar({ isModalVisible }) {
           >
             {page.title}
           </Link>
-          <div className="flex-grow flex-col flex mt-2 space-y-1 flex-1 text-center text-wrap">
-            {page.contents.map((content, subIndex) => (
-              <Link
-                key={`content-${page.id}-${content.id}`}
-                to={`content-${page.id}-${content.id}`}
-                {...dryLinkProps}
-                onClick={() => {
-                  setShow(false);
-                  retryScrollTo(`content-${page.id}-${content.id}`, {
-                    duration: 500,
-                    smooth: "easeInOutQuart",
-                    offset: navbarOffset,
-                  });
-                }}
-                onSetActive={() => setActiveSection(content.title)}
-                className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl block ${
-                  activeSection === content.title ? activeClass : inactiveClass
-                }`}
-              >
-                {content.title}
-              </Link>
-            ))}
-          </div>
+          {page.contents.length > 0 && (
+            <div className="flex-grow flex-col flex mt-2 space-y-1 flex-1 text-center text-wrap">
+              {page.contents.map((content, subIndex) => (
+                <Link
+                  key={`content-${page.id}-${content.id}`}
+                  to={`content-${page.id}-${content.id}`}
+                  {...dryLinkProps}
+                  onClick={() => {
+                    setShow(false);
+                    retryScrollTo(`content-${page.id}-${content.id}`, {
+                      duration: 500,
+                      smooth: "easeInOutQuart",
+                      offset: navbarOffset,
+                    });
+                  }}
+                  onSetActive={() => setActiveSection(content.title)}
+                  className={`${baseClass} text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl block ${
+                    activeSection === content.title
+                      ? activeClass
+                      : inactiveClass
+                  }`}
+                >
+                  {content.title}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       ))}
 
@@ -126,7 +130,7 @@ export default function DesktopNavbar({ isModalVisible }) {
             onClick={() => {
               setShow(false);
               retryScrollTo(title, {
-                duration: 1000,
+                duration: 500,
                 smooth: "easeInOutQuart",
                 offset: navbarOffset,
               });
