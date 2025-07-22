@@ -17,11 +17,21 @@ export const Page = ({ page }) => {
 
   const isEmptyHtml = (html) => {
     if (!html) return true;
-    const text = html
-      .replace(/<[^>]*>/g, "")
-      .replace(/&nbsp;/g, "")
-      .replace(/\s/g, "");
-    return text.length === 0;
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    // Check for meaningful text
+    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const cleanedText = text.replace(/\s|&nbsp;/g, "");
+    if (cleanedText.length > 0) return false;
+
+    // Check for meaningful non-text content
+    const hasMedia = tempDiv.querySelector(
+      "img, video, audio, iframe, object, embed"
+    );
+
+    return !hasMedia;
   };
 
   const prependApiUrlToMedia = (htmlContent) => {
@@ -98,7 +108,7 @@ export const Page = ({ page }) => {
     >
       {/* page title */}
       <h2
-        className="PageTitle italic text-shadow-2xs w-full flex text-center justify-center items-center align-middle bg-transparent/10 drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin flex-grow h-full"
+        className="PageTitle italic text-ellipsis text-shadow-2xs w-full flex text-center justify-center items-center align-middle bg-transparent/10 drop-shadow-[0_1.2px_1.2px_rgba(0,3,3,0.8)] font-thin flex-grow h-full"
         style={colorInStyle}
       >
         {page.title}
