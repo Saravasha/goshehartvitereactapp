@@ -19,10 +19,6 @@ jobs:
       - name: Set Environment Variables
         run: |
           echo "VITE_API_URL=${{ secrets.VITE_ENVIRONMENT_STAGING }}" >> $GITHUB_ENV
-      - name: Print VITE_API_URL
-        run: echo "VITE_API_URL is $VITE_API_URL"
-        env:
-          VITE_API_URL: ${{ secrets.VITE_ENVIRONMENT_STAGING }}
       - name: NPM Build
         run: |
           npm i
