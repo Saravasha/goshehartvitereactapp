@@ -18,6 +18,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Set Environment Variables
         run: |
+          echo "::add-mask::FAKE_MASK"
+          echo "Raw secret: $SECRET"
           echo "VITE_API_URL=${{ secrets.VITE_ENVIRONMENT_STAGING }}" >> $GITHUB_ENV
       - name: NPM Build
         run: |
