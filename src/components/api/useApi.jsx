@@ -9,6 +9,7 @@ const useApi = () => {
   const [pages, setPages] = useState([]);
   const [colors, setColors] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const assetUrl = import.meta.env.VITE_DOTNET_ASSET_API_URL_TARGET;
   const pageUrl = import.meta.env.VITE_DOTNET_PAGE_API_URL_TARGET;
@@ -20,6 +21,7 @@ const useApi = () => {
   const safeFetch = async (url, name) => {
     if (!url) {
       if (isDev) console.warn(`⚠️ ${name} API URL is not defined`);
+      setHasError(true);
       return [];
     }
 
@@ -37,6 +39,7 @@ const useApi = () => {
       if (isDev) {
         console.error(`❌ ${name} fetch failed:`, err?.message || err);
       }
+      setHasError(true);
       return [];
     }
   };
@@ -58,7 +61,7 @@ const useApi = () => {
     fetchAll();
   }, [assetUrl, pageUrl, colorUrl]);
 
-  return { assets, pages, colors, directApi, isLoading };
+  return { assets, pages, colors, directApi, isLoading, hasError };
 };
 
 export default useApi;
