@@ -13,10 +13,11 @@ import { useData } from "./components/api/ApiContext.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
 import useColors from "./components/features/Colors/useColors.jsx";
 import LifecycleHeader from "./components/lifecycle/LifecycleHeader.jsx";
+import ErrorScreen from "./components/ErrorScreen.jsx";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { environment, isLoading } = useData();
+  const { environment, isLoading, hasError } = useData();
   const bgColor = useColors("Background Color") || {};
 
   return (
@@ -25,6 +26,8 @@ function App() {
         <AnimatePresence>
           <LoadingScreen key="loading" />
         </AnimatePresence>
+      ) : hasError ? (
+        <ErrorScreen />
       ) : (
         <div key="main" style={bgColor}>
           <LifecycleHeader environment={environment} />
